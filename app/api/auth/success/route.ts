@@ -1,16 +1,19 @@
 import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
-import {NextResponse} from "next/server";
 import { prisma } from "@/lib/db";
 
+const redirectUrl = process.env.NEXT_PUBLIC_APP_URL as string || "http://localhost:3000";
+
 export async function GET() {
-    const {getUser} = getKindeServerSession();
+    const { getUser } = getKindeServerSession();
     const user = await getUser();
 
-    if (!user || user == null || !user.id)
-        throw new Error("something went wrong with authentication" + user);
+    if (!user) {
+        return Response.redirect(redirectUrl)
+    }
+
 
     let dbUser = await prisma.user.findUnique({
-        where: {kindeId: user.id}
+        where: { kindeId: user?.id }
     });
 
     if (!dbUser) {
@@ -19,10 +22,10 @@ export async function GET() {
                 kindeId: user.id,
                 firstName: user.given_name ?? "",
                 lastName: user.family_name ?? "",
-                email: user.email ?? "" // Using nullish coalescing operator to provide a default empty string value
+                email: user.email ?? "",
             }
         });
     }
 
-    return NextResponse.redirect("http://localhost:3000/");
+    return Response.redirect(redirectUrl)
 }
