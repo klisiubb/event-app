@@ -12,9 +12,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         <Sidebar />
       </div>
       <main className="md:pl-56 pt-[80px] h-full ">
-        <div className="flex flex-col min-h-[calc(100vh-160px)]">
-          {children}
-        </div>
+        <div className="min-h-[calc(100vh-160px)]">{children}</div>
       </main>
       <Footer />
     </div>
