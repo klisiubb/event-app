@@ -9,10 +9,11 @@ import { ZodError } from "zod";
 export async function CreateLecture(
   data: TopicFormSchemaType
 ): Promise<ActionReturnType> {
+  let lecture;
   try {
     await TopicFormSchema.parseAsync(data);
 
-    await prisma.lecture.create({
+    lecture = await prisma.lecture.create({
       data: {
         topic: data.topic,
       },
@@ -39,6 +40,7 @@ export async function CreateLecture(
     }
   }
   return {
+    id: lecture?.id,
     status: 201,
     message: "Lecture created. Redirecting...",
   };

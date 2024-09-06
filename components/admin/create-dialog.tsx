@@ -57,7 +57,7 @@ const CreateDialog: FC<CreateFormProps> = ({
     } else {
       form.resetField(fieldName, { defaultValue: "" });
       toast.success(data.message);
-      router.push(`/admin/${route}/edit/`);
+      router.push(`/admin/${route}/edit/${data.id}`);
     }
   };
 
