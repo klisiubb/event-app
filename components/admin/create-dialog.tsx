@@ -70,9 +70,11 @@ const CreateDialog: FC<CreateFormProps> = ({
           {buttonText}
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="w-3/4 md:mx-28">
         <DialogHeader>
-          <DialogTitle>{titleText}</DialogTitle>
+          <DialogTitle className="font-bold md:text-xl">
+            {titleText}
+          </DialogTitle>
           <DialogDescription>{underTitleText}</DialogDescription>
         </DialogHeader>
         <Form {...form}>
