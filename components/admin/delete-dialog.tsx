@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { DeleteFormProps } from "@/interfaces/admin/deleteFormProps";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Trash2 } from "lucide-react";
 
 const DeleteDialog: FC<DeleteFormProps> = ({
   buttonText,
@@ -38,7 +39,14 @@ const DeleteDialog: FC<DeleteFormProps> = ({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline">{buttonText}</Button>
+        <Button
+          variant="destructive"
+          className="flex items-center gap-2 hover:animate-bounce hover:font-bold"
+        >
+          {" "}
+          <Trash2 className="h-4 w-4" />
+          {buttonText}
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
