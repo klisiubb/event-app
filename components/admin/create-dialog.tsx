@@ -28,6 +28,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { CreateFormProps } from "@/interfaces/admin/createFormProps";
 import { toast } from "sonner";
+import { PlusCircle } from "lucide-react";
 
 const CreateDialog: FC<CreateFormProps> = ({
   titleText,
@@ -63,11 +64,16 @@ const CreateDialog: FC<CreateFormProps> = ({
 
   const { isSubmitting, isSubmitSuccessful } = form.formState;
 
+  let errors = Object.keys(form.formState.errors).length;
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="mt-2 md:mt-4 hover:animate-bounce hover:font-bold">
-          {buttonText}
+        <Button
+          className="hover:animate-bounce hover:font-bold flex items-center gap-2"
+          size="lg"
+        >
+          <PlusCircle className="w-5 h-5" /> {buttonText}
         </Button>
       </DialogTrigger>
       <DialogContent className="w-3/4 md:mx-28">
@@ -118,13 +124,9 @@ const CreateDialog: FC<CreateFormProps> = ({
               ) : (
                 <Button
                   className="col-start-3 col-span-2"
-                  disabled={isSubmitting || isSubmitSuccessful}
+                  disabled={isSubmitting || isSubmitSuccessful || errors > 0}
                   type="submit"
-                  variant={
-                    Object.keys(form.formState.errors).length > 0
-                      ? "destructive"
-                      : "default"
-                  }
+                  variant={errors > 0 ? "destructive" : "default"}
                 >
                   Create
                 </Button>
