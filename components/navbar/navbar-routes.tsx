@@ -6,6 +6,9 @@ export const NavbarRoutes = () => {
   return (
     <>
       <div className="flex items-center text-xs md:text-sm gap-x-4 ml-auto ">
+        <Link href="/" className="hover:text-primary">
+          Go home
+        </Link>
         <Link
           href="/api/auth/logout"
           prefetch={false}

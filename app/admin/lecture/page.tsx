@@ -2,7 +2,6 @@
 import { CreateLecture } from "@/actions/admin/lecture/create";
 import CreateDialog from "@/components/admin/create-dialog";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { TopicFormSchema } from "@/schemas/admin/topic";
 import { List } from "lucide-react";
 import Link from "next/link";
@@ -37,7 +36,7 @@ const Page = () => {
           <Button
             asChild
             variant="outline"
-            className="flex items-center gap-2 hover:animate-bounce hover:font-bold"
+            className="flex items-center gap-2  hover:font-bold"
             size="lg"
           >
             <Link href="/admin/lecture/view">

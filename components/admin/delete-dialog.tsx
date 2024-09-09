@@ -41,7 +41,7 @@ const DeleteDialog: FC<DeleteFormProps> = ({
       <AlertDialogTrigger asChild>
         <Button
           variant="destructive"
-          className="flex items-center gap-2 hover:animate-bounce hover:font-bold"
+          className="flex items-center gap-2 hover:font-bold"
         >
           {" "}
           <Trash2 className="h-4 w-4" />

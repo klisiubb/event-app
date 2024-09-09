@@ -24,4 +24,8 @@ model Lecture {
     createdAt    DateTime   @default(now())
     updatedAt    DateTime   @updatedAt
     isPublished  Boolean    @default(false)
+    startDate    DateTime?
+    endDate      DateTime?
+    imageUrl     String?
+    
 }

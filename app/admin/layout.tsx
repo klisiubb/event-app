@@ -1,6 +1,12 @@
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar/navbar";
 import { Sidebar } from "@/components/navbar/sidebar";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Event App - Admin Panel",
+  description: "Event App - Admin Panel",
+};
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
