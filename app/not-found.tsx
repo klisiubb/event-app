@@ -1,6 +1,8 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { useRouter } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Event App - 404",
@@ -8,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function NotFound() {
+  const router = useRouter();
   return (
     <div className="h-screen flex flex-col items-center justify-center">
       <div className="animate-shake animate-once animate-duration-[2000ms] animate-ease-in-out text-center">
@@ -19,10 +22,10 @@ export default function NotFound() {
           Sorry, the page you are looking for does not exist.
         </p>
         <Button
-          asChild
           className="w-3/4 md:w-1/3 animate-bounce animate-infinite hover:animate-pulse"
+          onClick={() => router.back()}
         >
-          <Link href="/">Go home!</Link>
+          Go back!
         </Button>
       </div>
     </div>
