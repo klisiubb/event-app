@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { TopicFormSchema } from "@/schemas/admin/topic";
 import { List } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const Page = () => {
@@ -34,12 +35,15 @@ const Page = () => {
             placeholderText="e.g. 'React for beginners'"
           />
           <Button
+            asChild
             variant="outline"
             className="flex items-center gap-2 hover:animate-bounce hover:font-bold"
             size="lg"
           >
-            <List className="w-5 h-5" />
-            Manage Lectures
+            <Link href="/admin/lecture/view">
+              <List className="w-5 h-5" />
+              Manage Lectures
+            </Link>
           </Button>
         </div>
 
