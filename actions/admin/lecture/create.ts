@@ -2,27 +2,29 @@
 
 import { ActionReturnType } from "@/interfaces/actionReturnType";
 import { prisma } from "@/lib/db";
-import { TopicFormSchema, TopicFormSchemaType } from "@/schemas/admin/topic";
+import { LectureFormSchema } from "@/schemas/admin/lecture";
 import { Prisma } from "@prisma/client";
 import { ZodError } from "zod";
 
-export async function CreateLecture(
-  data: TopicFormSchemaType
-): Promise<ActionReturnType> {
+export async function CreateLecture({
+  topic,
+}: {
+  topic: string;
+}): Promise<ActionReturnType> {
   let lecture;
   try {
-    await TopicFormSchema.parseAsync(data);
+    await LectureFormSchema.pick({ topic: true }).parseAsync({ topic });
 
     lecture = await prisma.lecture.create({
       data: {
-        topic: data.topic,
+        topic,
       },
     });
   } catch (e) {
     if (e instanceof ZodError) {
       return {
         status: 400,
-        message: `${e.message}`,
+        message: `${e.issues[0].message}`,
       };
     }
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
@@ -33,6 +35,7 @@ export async function CreateLecture(
         };
       }
     } else {
+      console.log(e);
       return {
         status: 400,
         message: "Error. Try again later.",

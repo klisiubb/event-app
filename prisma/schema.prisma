@@ -27,5 +27,17 @@ model Lecture {
     startDate    DateTime?
     endDate      DateTime?
     imageUrl     String?
-    
+}
+model Workshop {
+    id           String     @id @default(uuid())
+    topic        String     @unique()
+    description  String?
+    room         String?
+    createdAt    DateTime   @default(now())
+    updatedAt    DateTime   @updatedAt
+    isPublished  Boolean    @default(false)
+    startDate    DateTime?
+    endDate      DateTime?
+    imageUrl     String?
+    maxAttenders Int?
 }

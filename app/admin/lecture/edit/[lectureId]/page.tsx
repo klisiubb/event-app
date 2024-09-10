@@ -7,7 +7,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 import { TopicForm } from "../../_components/topic-form";
-
+import { DescriptionForm } from "../../_components/description-form";
+import { RoomForm } from "../../_components/room-form";
+import { StartDateForm } from "../../_components/start-date-form";
+import { EndDateForm } from "../../_components/end-date-form";
 const Page = async ({ params }: { params: { lectureId: string } }) => {
   const { lectureId } = params;
   const lecture = await prisma.lecture.findUnique({
@@ -39,6 +42,13 @@ const Page = async ({ params }: { params: { lectureId: string } }) => {
       {lecture.isPublished ? "Retract to edit" : "Edit"}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
         <TopicForm topic={lecture.topic} lectureId={lecture.id} />
+        <RoomForm room={lecture.room} lectureId={lecture.id} />
+        <StartDateForm startDate={lecture.startDate} lectureId={lecture.id} />
+        <EndDateForm endDate={lecture.endDate} lectureId={lecture.id} />
+        <DescriptionForm
+          description={lecture.description}
+          lectureId={lecture.id}
+        />
         <Button asChild className="flex items-center gap-2 hover:font-bold">
           <Link href="/admin/lecture/view">
             {" "}

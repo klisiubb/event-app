@@ -21,31 +21,31 @@ import {
 } from "@/schemas/admin/lecture";
 import { useRouter } from "next/navigation";
 
-interface TopicFormProps {
-  topic: string;
+interface roomFormProps {
+  room: string | null;
   lectureId: string;
 }
 
-export const TopicForm = ({ topic, lectureId }: TopicFormProps) => {
+export const RoomForm = ({ room, lectureId }: roomFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((prev) => !prev);
 
   const form = useForm<Partial<LectureFormSchemaType>>({
-    resolver: zodResolver(LectureFormSchema.pick({ topic: true })),
+    resolver: zodResolver(LectureFormSchema.pick({ room: true })),
     defaultValues: {
-      topic: topic,
+      room: room ? room : "",
     },
   });
 
-  const { isSubmitting } = form.formState;
-
   const router = useRouter();
 
+  const { isSubmitting } = form.formState;
+
   const onSubmit: SubmitHandler<Partial<LectureFormSchemaType>> = async (
-    topic
+    room
   ) => {
-    const data = await UpdateLecture(lectureId, topic);
+    const data = await UpdateLecture(lectureId, room);
     if (data.status === 400) {
       toast.error(data.message);
     } else {
@@ -57,19 +57,30 @@ export const TopicForm = ({ topic, lectureId }: TopicFormProps) => {
   return (
     <div className="mt-6 border rounded-md p-4">
       <div className=" font-medium flex items-center justify-between">
-        <div className="text-primary">Topic:</div>
+        <div className="text-primary">Room:</div>
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
             <span className="hover:font-bold">Cancel</span>
           ) : (
             <span className="flex hover:font-bold">
               <Pencil className="h-4 w-4 mr-2" />
-              Edit topic
+              Edit room
             </span>
           )}
         </Button>
       </div>
-      {!isEditing && <p className="text-sm mt-2">{topic}</p>}
+      {!isEditing && (
+        <p className="text-sm mt-2">
+          {room ? (
+            room
+          ) : (
+            <span className="text-sm text-muted-foreground">
+              {" "}
+              Please set up the room.
+            </span>
+          )}
+        </p>
+      )}
       {isEditing && (
         <Form {...form}>
           <form
@@ -78,7 +89,7 @@ export const TopicForm = ({ topic, lectureId }: TopicFormProps) => {
           >
             <FormField
               control={form.control}
-              name="topic"
+              name="room"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>

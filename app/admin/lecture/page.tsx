@@ -2,7 +2,7 @@
 import { CreateLecture } from "@/actions/admin/lecture/create";
 import CreateDialog from "@/components/admin/create-dialog";
 import { Button } from "@/components/ui/button";
-import { TopicFormSchema } from "@/schemas/admin/topic";
+import { LectureFormSchema } from "@/schemas/admin/lecture";
 import { List } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -25,7 +25,7 @@ const Page = () => {
             buttonText="Create new lecture"
             titleText="Add new lecture"
             underTitleText="Setup lecture topic. You'll fill the rest later."
-            formSchema={TopicFormSchema}
+            formSchema={LectureFormSchema.pick({ topic: true })}
             fieldName="topic"
             route="lecture"
             createAction={CreateLecture}

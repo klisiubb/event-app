@@ -2,49 +2,41 @@
 
 import { ActionReturnType } from "@/interfaces/actionReturnType";
 import { prisma } from "@/lib/db";
-import { TopicFormSchema } from "@/schemas/admin/topic";
-import { Prisma } from "@prisma/client";
+import { LectureFormSchema } from "@/schemas/admin/lecture";
+import { Lecture, Prisma } from "@prisma/client";
 import { ZodError } from "zod";
 
 export async function UpdateLecture(
   id: string,
-  topic: string
+  data: Partial<Lecture>
 ): Promise<ActionReturnType> {
-  let lecture;
   try {
-    await TopicFormSchema.parseAsync({ topic });
+    await LectureFormSchema.partial().safeParseAsync(data);
 
-    lecture = await prisma.lecture.update({
+    await prisma.lecture.update({
       where: {
         id,
       },
       data: {
-        topic,
+        ...data,
       },
     });
   } catch (e) {
     if (e instanceof ZodError) {
       return {
         status: 400,
-        message: `${e.errors[0].message}`,
+        message: `${e.issues[0].message}`,
       };
     }
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === "P2002") {
-        return {
-          status: 400,
-          message: "Lecture with this topic already exist.",
-        };
-      }
-    } else {
       return {
         status: 400,
-        message: "Error. Try again later.",
+        message: `Database error.${e.message}`,
       };
     }
   }
   return {
-    id: lecture?.id,
+    id,
     status: 200,
     message: "Lecture updated! Refreshing...",
   };
