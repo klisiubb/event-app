@@ -12,7 +12,7 @@ const Page = async () => {
       {(await isAuthenticated()) ? (
         <>
           <Button className="my-4">
-            <LogoutLink>Log out</LogoutLink>
+            <LogoutLink>Log out </LogoutLink>
           </Button>
         </>
       ) : (
