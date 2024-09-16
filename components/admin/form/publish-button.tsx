@@ -14,7 +14,6 @@ const PublishButton = ({
   const router = useRouter();
   return (
     <Button
-      className="my-4"
       onClick={() => {
         updateAction(objectId, { isPublished: !isPublished });
         router.refresh();
