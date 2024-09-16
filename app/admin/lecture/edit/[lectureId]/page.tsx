@@ -2,7 +2,12 @@ import { DeleteLecture } from "@/actions/admin/lecture/delete";
 import DeleteDialog from "@/components/admin/delete-dialog";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/db";
-import { SlidersHorizontal, Undo2 } from "lucide-react";
+import {
+  CalendarIcon,
+  ClockIcon,
+  SlidersHorizontal,
+  Undo2Icon,
+} from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -11,6 +16,18 @@ import { DescriptionForm } from "../../_components/description-form";
 import { RoomForm } from "../../_components/room-form";
 import { StartDateForm } from "../../_components/start-date-form";
 import { EndDateForm } from "../../_components/end-date-form";
+import { ImageForm } from "../../_components/image-form";
+
+import PublishButton from "../../_components/publish-button";
+import Image from "next/image";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Separator } from "@radix-ui/react-separator";
 const Page = async ({ params }: { params: { lectureId: string } }) => {
   const { lectureId } = params;
   const lecture = await prisma.lecture.findUnique({
@@ -19,11 +36,18 @@ const Page = async ({ params }: { params: { lectureId: string } }) => {
   if (!lecture) {
     notFound();
   }
-  const requiredFields = [lecture.topic, lecture.description, lecture.imageUrl];
+  const requiredFields = [
+    lecture.topic,
+    lecture.description,
+    lecture.imageUrl,
+    lecture.startDate,
+    lecture.endDate,
+    lecture.room,
+  ];
 
   const totalFields = requiredFields.length;
   const completedFields = requiredFields.filter(Boolean).length;
-
+  const isCompleted = Boolean(completedFields === totalFields);
   const completionText = `(${completedFields}/${totalFields})`;
 
   return (
@@ -36,33 +60,110 @@ const Page = async ({ params }: { params: { lectureId: string } }) => {
           </h1>
         </div>
       </div>
-      <p className="text-sm pt-4 font-bold">
-        Please complete all fields {completionText}
-      </p>
-      {lecture.isPublished ? "Retract to edit" : "Edit"}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-        <TopicForm topic={lecture.topic} lectureId={lecture.id} />
-        <RoomForm room={lecture.room} lectureId={lecture.id} />
-        <StartDateForm startDate={lecture.startDate} lectureId={lecture.id} />
-        <EndDateForm endDate={lecture.endDate} lectureId={lecture.id} />
-        <DescriptionForm
-          description={lecture.description}
-          lectureId={lecture.id}
-        />
-        <Button asChild className="flex items-center gap-2 hover:font-bold">
-          <Link href="/admin/lecture/view">
-            {" "}
-            <Undo2 className="h-4 w-4" /> Go back
-          </Link>
-        </Button>
-        <DeleteDialog
-          route="lecture"
-          id={lecture.id}
-          buttonText="Delete"
-          text="this lecture"
-          deleteAction={DeleteLecture}
-        />
+      <div>
+        {isCompleted ? (
+          <PublishButton
+            isPublished={lecture.isPublished}
+            lectureId={lectureId}
+          />
+        ) : (
+          <>
+            <p className="text-sm pt-4 font-bold">
+              Please complete all fields {completionText}
+            </p>
+          </>
+        )}
       </div>
+      {lecture.isPublished ? (
+        <>
+          <Card className="w-full max-w-2xl mx-auto overflow-hidden">
+            <CardHeader className="relative">
+              <CardTitle className="text-3xl font-bold text-center text-primary">
+                {lecture.topic}
+              </CardTitle>
+              <p className="mt-2 text-sm text-center text-muted-foreground">
+                {lecture.description}
+              </p>
+            </CardHeader>
+            <CardContent className="relative space-y-6">
+              {lecture.imageUrl && (
+                <div className="relative w-full h-64 overflow-hidden rounded-lg">
+                  <Image
+                    src={lecture.imageUrl}
+                    fill
+                    alt={lecture.topic}
+                    className="transition-transform duration-300 hover:scale-105 object-cover"
+                  />
+                </div>
+              )}
+              <div className="flex justify-center space-x-6 text-sm text-muted-foreground">
+                <div className="flex items-center">
+                  <CalendarIcon className="w-4 h-4 mr-2" />
+                  <span>
+                    {lecture.startDate?.toLocaleString("pl-PL", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <ClockIcon className="w-4 h-4 mr-2" />
+                  <span>
+                    {lecture.startDate?.toLocaleString("pl-PL", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: false,
+                    })}
+                    {" - "}
+                    {lecture.endDate?.toLocaleString("pl-PL", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: false,
+                    })}
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+            <Separator className="my-4" />
+            <CardFooter className="relative flex justify-center space-x-4">
+              <Button asChild variant="outline" className="w-32">
+                <Link
+                  href="/admin/lecture/view"
+                  className="flex items-center justify-center"
+                >
+                  <Undo2Icon className="w-4 h-4 mr-2" />
+                  Go back
+                </Link>
+              </Button>
+              <DeleteDialog
+                route="lecture"
+                id={lecture.id}
+                text="this lecture"
+                deleteAction={DeleteLecture}
+                buttonText="Delete"
+              />
+            </CardFooter>
+          </Card>
+        </>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+            <TopicForm topic={lecture.topic} lectureId={lecture.id} />
+            <RoomForm room={lecture.room} lectureId={lecture.id} />
+            <StartDateForm
+              startDate={lecture.startDate}
+              lectureId={lecture.id}
+            />
+            <EndDateForm endDate={lecture.endDate} lectureId={lecture.id} />
+            <ImageForm imageUrl={lecture.imageUrl} lectureId={lecture.id} />
+            <DescriptionForm
+              description={lecture.description}
+              lectureId={lecture.id}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

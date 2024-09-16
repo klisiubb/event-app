@@ -98,7 +98,7 @@ export const DescriptionForm = ({
                   <FormControl>
                     <Textarea
                       {...field}
-                      placeholder="e.g `React for beginners!`"
+                      placeholder="e.g `Next.js App Router tutorial that will blow your mind!`"
                       disabled={isSubmitting}
                     />
                   </FormControl>

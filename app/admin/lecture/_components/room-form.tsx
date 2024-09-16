@@ -95,7 +95,7 @@ export const RoomForm = ({ room, lectureId }: roomFormProps) => {
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder="e.g `React for beginners!`"
+                      placeholder="e.g `A204`"
                       disabled={isSubmitting}
                     />
                   </FormControl>
