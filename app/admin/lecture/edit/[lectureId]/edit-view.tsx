@@ -2,11 +2,11 @@
 import { Lecture } from "@prisma/client";
 import React from "react";
 import { ImageForm } from "../../_components/image-form";
-import { TextForm } from "@/components/admin/form/text";
+import { TextForm } from "@/components/admin/form/text-input";
 import { LectureFormSchema } from "@/schemas/admin/lecture";
 import { UpdateLecture } from "@/actions/admin/lecture/update";
-import { TextAreaForm } from "@/components/admin/form/text-area";
-import { DateForm } from "@/components/admin/form/date";
+import { TextAreaForm } from "@/components/admin/form/text-area-input";
+import { DateForm } from "@/components/admin/form/date-picker";
 export const EditView = ({ lecture }: { lecture: Lecture }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">

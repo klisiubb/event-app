@@ -12,7 +12,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
-import PublishButton from "../../_components/publish-button";
 import Image from "next/image";
 import {
   Card,
@@ -23,6 +22,8 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@radix-ui/react-separator";
 import { EditView } from "./edit-view";
+import PublishButton from "@/components/admin/form/publish-button";
+import { UpdateLecture } from "@/actions/admin/lecture/update";
 const Page = async ({ params }: { params: { lectureId: string } }) => {
   const { lectureId } = params;
   const lecture = await prisma.lecture.findUnique({
@@ -59,7 +60,9 @@ const Page = async ({ params }: { params: { lectureId: string } }) => {
         {isCompleted ? (
           <PublishButton
             isPublished={lecture.isPublished}
-            lectureId={lectureId}
+            objectId={lectureId}
+            updateAction={UpdateLecture}
+            objectName="lecture"
           />
         ) : (
           <>
