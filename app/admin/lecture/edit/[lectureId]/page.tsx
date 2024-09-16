@@ -11,12 +11,6 @@ import {
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
-import { TopicForm } from "../../_components/topic-form";
-import { DescriptionForm } from "../../_components/description-form";
-import { RoomForm } from "../../_components/room-form";
-import { StartDateForm } from "../../_components/start-date-form";
-import { EndDateForm } from "../../_components/end-date-form";
-import { ImageForm } from "../../_components/image-form";
 
 import PublishButton from "../../_components/publish-button";
 import Image from "next/image";
@@ -28,6 +22,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Separator } from "@radix-ui/react-separator";
+import { EditView } from "./edit-view";
 const Page = async ({ params }: { params: { lectureId: string } }) => {
   const { lectureId } = params;
   const lecture = await prisma.lecture.findUnique({
@@ -148,20 +143,7 @@ const Page = async ({ params }: { params: { lectureId: string } }) => {
         </>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-            <TopicForm topic={lecture.topic} lectureId={lecture.id} />
-            <RoomForm room={lecture.room} lectureId={lecture.id} />
-            <StartDateForm
-              startDate={lecture.startDate}
-              lectureId={lecture.id}
-            />
-            <EndDateForm endDate={lecture.endDate} lectureId={lecture.id} />
-            <ImageForm imageUrl={lecture.imageUrl} lectureId={lecture.id} />
-            <DescriptionForm
-              description={lecture.description}
-              lectureId={lecture.id}
-            />
-          </div>
+          <EditView lecture={lecture} />
         </>
       )}
     </div>

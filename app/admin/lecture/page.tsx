@@ -10,8 +10,8 @@ import React from "react";
 const Page = () => {
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10 flex flex-col justify-center items-center">
-      <div className="max-w-3xl w-full space-y-8">
-        <h1 className="text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
+      <div className="max-w-4xl w-full space-y-8">
+        <h1 className="pb-2 text-6xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
           Lecture Management Panel
         </h1>
 

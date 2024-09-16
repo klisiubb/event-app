@@ -1,22 +1,23 @@
 "use client";
 
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
+import { DateFormProps } from "@/interfaces/admin/form";
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
@@ -24,56 +25,52 @@ import {
 } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "sonner";
-import { useState } from "react";
-import {
-  LectureFormSchema,
-  LectureFormSchemaType,
-} from "@/schemas/admin/lecture";
-import { useRouter } from "next/navigation";
-import { UpdateLecture } from "@/actions/admin/lecture/update";
 
-interface EndDateFormProps {
-  endDate: Date | null;
-  lectureId: string;
-}
-
-export function EndDateForm({ endDate, lectureId }: EndDateFormProps) {
+export const DateForm = ({
+  editText,
+  dateFieldName,
+  dateValue,
+  objectId,
+  fieldName,
+  validationSchema,
+  updateAction,
+}: DateFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((prev) => !prev);
 
-  const router = useRouter();
-
-  const form = useForm<Partial<LectureFormSchemaType>>({
-    resolver: zodResolver(LectureFormSchema.pick({ endDate: true })),
+  const form = useForm<Partial<z.infer<typeof validationSchema>>>({
+    resolver: zodResolver(validationSchema),
     defaultValues: {
-      endDate: endDate || new Date(), // Default to current date if no endDate
+      [fieldName]: dateValue || new Date(),
     },
   });
 
   const { isSubmitting } = form.formState;
+  const router = useRouter();
 
-  const onSubmit: SubmitHandler<Partial<LectureFormSchemaType>> = async (
-    data
-  ) => {
-    const response = await UpdateLecture(lectureId, data);
-    if (response.status === 400) {
-      toast.error(response.message);
+  const onSubmit: SubmitHandler<
+    Partial<z.infer<typeof validationSchema>>
+  > = async (dateValue) => {
+    const data = await updateAction(objectId, dateValue);
+
+    if (data.status === 400) {
+      toast.error(data.message);
     } else {
-      toast.success(response.message);
+      toast.success(data.message);
       setIsEditing(false);
       router.refresh();
     }
   };
 
-  function handleDateSelect(date: Date | undefined) {
+  const handleDateSelect = (date: Date | undefined) => {
     if (date) {
-      form.setValue("endDate", date);
+      form.setValue(fieldName, date);
     }
-  }
+  };
 
-  function handleTimeChange(type: "hour" | "minute", value: string) {
-    const currentDate = form.getValues("endDate") || new Date();
+  const handleTimeChange = (type: "hour" | "minute", value: string) => {
+    const currentDate = form.getValues(fieldName) || new Date();
     const newDate = new Date(currentDate);
 
     if (type === "hour") {
@@ -82,35 +79,33 @@ export function EndDateForm({ endDate, lectureId }: EndDateFormProps) {
       newDate.setMinutes(parseInt(value, 10));
     }
 
-    form.setValue("endDate", newDate);
-  }
+    form.setValue(fieldName, newDate);
+  };
 
   return (
     <div className="mt-6 border rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        <div className="text-primary">End Date & Time:</div>
+        <div className="text-primary">{dateFieldName}</div>
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
             <span className="hover:font-bold">Cancel</span>
           ) : (
             <span className="flex hover:font-bold">
               <CalendarIcon className="h-4 w-4 mr-2" />
-              Edit date & time
+              {editText}
             </span>
           )}
         </Button>
       </div>
+
       {!isEditing && (
         <p className="text-sm mt-2">
-          {endDate ? (
-            format(endDate, "MM/dd/yyyy HH:mm")
-          ) : (
-            <span className="text-sm text-muted-foreground">
-              Please set up the end date & time.
-            </span>
-          )}
+          {dateValue
+            ? format(dateValue, "MM/dd/yyyy HH:mm")
+            : "Set date & time"}
         </p>
       )}
+
       {isEditing && (
         <Form {...form}>
           <form
@@ -119,7 +114,7 @@ export function EndDateForm({ endDate, lectureId }: EndDateFormProps) {
           >
             <FormField
               control={form.control}
-              name="endDate"
+              name={fieldName}
               render={({ field }) => (
                 <FormItem>
                   <Popover>
@@ -127,16 +122,13 @@ export function EndDateForm({ endDate, lectureId }: EndDateFormProps) {
                       <FormControl>
                         <Button
                           variant="outline"
-                          className={cn(
-                            "w-full pl-3 text-left font-normal",
+                          className={`w-full pl-3 text-left font-normal ${
                             !field.value && "text-muted-foreground"
-                          )}
+                          }`}
                         >
-                          {field.value ? (
-                            format(field.value, "MM/dd/yyyy HH:mm")
-                          ) : (
-                            <span>MM/DD/YYYY HH:mm</span>
-                          )}
+                          {field.value
+                            ? format(field.value, "MM/dd/yyyy HH:mm")
+                            : "MM/DD/YYYY HH:mm"}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
                       </FormControl>
@@ -159,8 +151,7 @@ export function EndDateForm({ endDate, lectureId }: EndDateFormProps) {
                                     key={hour}
                                     size="icon"
                                     variant={
-                                      field.value &&
-                                      field.value.getHours() === hour
+                                      field.value?.getHours() === hour
                                         ? "default"
                                         : "ghost"
                                     }
@@ -182,8 +173,7 @@ export function EndDateForm({ endDate, lectureId }: EndDateFormProps) {
                                     key={minute}
                                     size="icon"
                                     variant={
-                                      field.value &&
-                                      field.value.getMinutes() === minute
+                                      field.value?.getMinutes() === minute
                                         ? "default"
                                         : "ghost"
                                     }
@@ -219,4 +209,4 @@ export function EndDateForm({ endDate, lectureId }: EndDateFormProps) {
       )}
     </div>
   );
-}
+};

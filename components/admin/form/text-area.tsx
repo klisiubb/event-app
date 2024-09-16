@@ -1,7 +1,12 @@
 "use client";
 
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { TextFormProps } from "@/interfaces/admin/form";
+
 import {
   Form,
   FormControl,
@@ -10,31 +15,28 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Pencil } from "lucide-react";
-import { useState } from "react";
 import { toast } from "sonner";
-import { UpdateLecture } from "@/actions/admin/lecture/update";
-import {
-  LectureFormSchema,
-  LectureFormSchemaType,
-} from "@/schemas/admin/lecture";
-import { useRouter } from "next/navigation";
+import { Textarea } from "@/components/ui/textarea";
 
-interface TopicFormProps {
-  topic: string;
-  lectureId: string;
-}
-
-export const TopicForm = ({ topic, lectureId }: TopicFormProps) => {
+export const TextAreaForm = ({
+  editText,
+  textFieldName,
+  textValue,
+  objectId,
+  fieldName,
+  validationSchema,
+  updateAction,
+  placeholderText,
+}: TextFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((prev) => !prev);
 
-  const form = useForm<Partial<LectureFormSchemaType>>({
-    resolver: zodResolver(LectureFormSchema.pick({ topic: true })),
+  const form = useForm<Partial<z.infer<typeof validationSchema>>>({
+    resolver: zodResolver(validationSchema),
     defaultValues: {
-      topic: topic,
+      [fieldName]: textValue || null,
     },
   });
 
@@ -42,10 +44,11 @@ export const TopicForm = ({ topic, lectureId }: TopicFormProps) => {
 
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<Partial<LectureFormSchemaType>> = async (
-    topic
-  ) => {
-    const data = await UpdateLecture(lectureId, topic);
+  const onSubmit: SubmitHandler<
+    Partial<z.infer<typeof validationSchema>>
+  > = async (textValue) => {
+    const data = await updateAction(objectId, textValue);
+
     if (data.status === 400) {
       toast.error(data.message);
     } else {
@@ -54,22 +57,25 @@ export const TopicForm = ({ topic, lectureId }: TopicFormProps) => {
       router.refresh();
     }
   };
+
   return (
     <div className="mt-6 border rounded-md p-4">
-      <div className=" font-medium flex items-center justify-between">
-        <div className="text-primary">Topic:</div>
+      <div className="font-medium flex items-center justify-between">
+        <div className="text-primary">{textFieldName}</div>
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
             <span className="hover:font-bold">Cancel</span>
           ) : (
             <span className="flex hover:font-bold">
               <Pencil className="h-4 w-4 mr-2" />
-              Edit topic
+              {editText}
             </span>
           )}
         </Button>
       </div>
-      {!isEditing && <p className="text-sm mt-2">{topic}</p>}
+
+      {!isEditing && <p className="text-sm mt-2">{textValue}</p>}
+
       {isEditing && (
         <Form {...form}>
           <form
@@ -78,13 +84,13 @@ export const TopicForm = ({ topic, lectureId }: TopicFormProps) => {
           >
             <FormField
               control={form.control}
-              name="topic"
+              name={fieldName}
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
+                    <Textarea
                       {...field}
-                      placeholder="e.g `React for beginners!`"
+                      placeholder={placeholderText}
                       disabled={isSubmitting}
                     />
                   </FormControl>

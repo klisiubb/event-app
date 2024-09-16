@@ -1,7 +1,12 @@
 "use client";
 
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { TextFormProps } from "@/interfaces/admin/form";
+
 import {
   Form,
   FormControl,
@@ -10,45 +15,40 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Pencil } from "lucide-react";
-import { useState } from "react";
 import { toast } from "sonner";
-import { UpdateLecture } from "@/actions/admin/lecture/update";
-import {
-  LectureFormSchema,
-  LectureFormSchemaType,
-} from "@/schemas/admin/lecture";
-import { Textarea } from "@/components/ui/textarea";
-import { useRouter } from "next/navigation";
 
-interface DescriptionFormProps {
-  description: string | null;
-  lectureId: string;
-}
-
-export const DescriptionForm = ({
-  description,
-  lectureId,
-}: DescriptionFormProps) => {
+export const TextForm = ({
+  editText,
+  textFieldName,
+  textValue,
+  objectId,
+  fieldName,
+  validationSchema,
+  updateAction,
+  placeholderText,
+}: TextFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
-
-  const router = useRouter();
 
   const toggleEdit = () => setIsEditing((prev) => !prev);
 
-  const form = useForm<Partial<LectureFormSchemaType>>({
-    resolver: zodResolver(LectureFormSchema.pick({ description: true })),
+  const form = useForm<Partial<z.infer<typeof validationSchema>>>({
+    resolver: zodResolver(validationSchema),
     defaultValues: {
-      description: description ? description : "",
+      [fieldName]: textValue || null,
     },
   });
 
   const { isSubmitting } = form.formState;
 
-  const onSubmit: SubmitHandler<Partial<LectureFormSchemaType>> = async (
-    description
-  ) => {
-    const data = await UpdateLecture(lectureId, description);
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<
+    Partial<z.infer<typeof validationSchema>>
+  > = async (textValue) => {
+    const data = await updateAction(objectId, textValue);
+
     if (data.status === 400) {
       toast.error(data.message);
     } else {
@@ -57,33 +57,25 @@ export const DescriptionForm = ({
       router.refresh();
     }
   };
+
   return (
     <div className="mt-6 border rounded-md p-4">
-      <div className=" font-medium flex items-center justify-between">
-        <div className="text-primary">Description:</div>
+      <div className="font-medium flex items-center justify-between">
+        <div className="text-primary">{textFieldName}</div>
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
             <span className="hover:font-bold">Cancel</span>
           ) : (
             <span className="flex hover:font-bold">
               <Pencil className="h-4 w-4 mr-2" />
-              Edit description
+              {editText}
             </span>
           )}
         </Button>
       </div>
-      {!isEditing && (
-        <p className="text-sm mt-2">
-          {description ? (
-            description
-          ) : (
-            <span className="text-sm text-muted-foreground">
-              {" "}
-              Please set up the description.
-            </span>
-          )}
-        </p>
-      )}
+
+      {!isEditing && <p className="text-sm mt-2">{textValue}</p>}
+
       {isEditing && (
         <Form {...form}>
           <form
@@ -92,13 +84,13 @@ export const DescriptionForm = ({
           >
             <FormField
               control={form.control}
-              name="description"
+              name={fieldName}
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea
+                    <Input
                       {...field}
-                      placeholder="e.g `Next.js App Router tutorial that will blow your mind!`"
+                      placeholder={placeholderText}
                       disabled={isSubmitting}
                     />
                   </FormControl>
