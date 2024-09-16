@@ -1,6 +1,4 @@
 "use client";
-
-import * as z from "zod";
 import { Pencil, PlusCircle, ImageIcon } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -9,14 +7,13 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { UploadButton } from "@/lib/uploadthing";
-import { UpdateLecture } from "@/actions/admin/lecture/update";
+import { ImageFormProps } from "@/interfaces/admin/form/image-form.interface";
 
-interface ImageFormProps {
-  imageUrl: string | null;
-  lectureId: string;
-}
-
-export const ImageForm = ({ imageUrl, lectureId }: ImageFormProps) => {
+export const ImageForm = ({
+  imageUrl,
+  objectId,
+  updateAction,
+}: ImageFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((current) => !current);
@@ -49,13 +46,15 @@ export const ImageForm = ({ imageUrl, lectureId }: ImageFormProps) => {
             <ImageIcon className="h-10 w-10" />
           </div>
         ) : (
-          <div className="relative w-full max-w-xl h-60 mt-2">
-            <Image
-              alt="Lecture image"
-              fill
-              className="object-contain rounded-md"
-              src={imageUrl}
-            />
+          <div className="flex items-center justify-center w-full h-60 mt-2">
+            <div className="relative w-full max-w-xl h-full">
+              <Image
+                alt="Image"
+                fill
+                className="object-contain rounded-md"
+                src={imageUrl}
+              />
+            </div>
           </div>
         ))}
       {isEditing && (
@@ -64,7 +63,7 @@ export const ImageForm = ({ imageUrl, lectureId }: ImageFormProps) => {
             endpoint="imageUploader"
             onClientUploadComplete={(res) => {
               const imageUrl = res[0].appUrl;
-              UpdateLecture(lectureId, { imageUrl });
+              updateAction(objectId, { imageUrl });
               toast.success("Image uploaded successfully");
               setIsEditing(false);
               router.refresh();

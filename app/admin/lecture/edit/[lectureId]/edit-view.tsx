@@ -1,12 +1,12 @@
 "use client";
 import { Lecture } from "@prisma/client";
 import React from "react";
-import { ImageForm } from "../../_components/image-form";
 import { TextForm } from "@/components/admin/form/text-input";
 import { LectureFormSchema } from "@/schemas/admin/lecture";
 import { UpdateLecture } from "@/actions/admin/lecture/update";
 import { TextAreaForm } from "@/components/admin/form/text-area-input";
 import { DateForm } from "@/components/admin/form/date-picker";
+import { ImageForm } from "@/components/admin/form/image-form";
 export const EditView = ({ lecture }: { lecture: Lecture }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
@@ -48,7 +48,11 @@ export const EditView = ({ lecture }: { lecture: Lecture }) => {
         validationSchema={LectureFormSchema.pick({ endDate: true })}
         updateAction={UpdateLecture}
       />
-      <ImageForm imageUrl={lecture.imageUrl} lectureId={lecture.id} />
+      <ImageForm
+        imageUrl={lecture.imageUrl}
+        objectId={lecture.id}
+        updateAction={UpdateLecture}
+      />
       <TextAreaForm
         textFieldName="Description:"
         editText="Edit description"
