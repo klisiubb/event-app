@@ -7,11 +7,10 @@ import React from "react";
 const Page = async () => {
   const { isAuthenticated, getPermission } = getKindeServerSession();
   const isAdmin = await getPermission("admin");
-
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-6xl font-bold">Event App</h1>
-      <p className="text-muted mt-2">More info soon.</p>
+      <p className="mt-2">More info soon.</p>
       {(await isAuthenticated()) ? (
         <>
           <Button className="my-4">
