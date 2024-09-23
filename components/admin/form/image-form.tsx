@@ -43,7 +43,7 @@ export const ImageForm = ({
       {!isEditing &&
         (!imageUrl ? (
           <div className="flex items-center justify-center h-10 rounded-md">
-            <ImageIcon className="h-10 w-10" />
+            <ImageIcon className="h-10 w-10 text-primary" />
           </div>
         ) : (
           <div className="flex items-center justify-center w-full h-60 mt-2">
