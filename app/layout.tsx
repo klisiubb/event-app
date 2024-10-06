@@ -7,10 +7,33 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_WEBSITE_URL as string),
   title: "Event App",
-  description: "Event App by klisiubb",
+  description:
+    "Event App - sign up for your local event. Create and manage your workshops and lectures!",
+  keywords: [
+    "Mateusz Kliś",
+    "klisiubb",
+    "Event",
+    "Event App",
+    "Lectures",
+    "Workshops",
+  ],
+  openGraph: {
+    title: "Event App",
+    description:
+      "Event App - sign up for your local event. Create and manage your workshops and lectures!",
+    type: "website",
+    locale: "en-GB",
+    images: [
+      {
+        url: `/opengraph-image.png`,
+      },
+    ],
+    url: process.env.NEXT_PUBLIC_WEBSITE_URL,
+    siteName: "Event App",
+  },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
