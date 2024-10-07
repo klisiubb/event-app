@@ -39,9 +39,12 @@ export const WorkshopFormSchema = z.object({
     message: "End date must be in the future.",
   }),
   imageUrl: z.string().url(),
-  maxAttenders: z
+  maxAttenders: z.coerce
     .number({
       message: "Max attenders must be a number.",
+    })
+    .int({
+      message: "Max attenders must be an integer.",
     })
     .gte(10, {
       message: "Max attenders must be greater or equal to ten.",
