@@ -1,30 +1,30 @@
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import React from "react";
-
 import PublishButton from "@/components/admin/form/publish-button";
-import { UpdateLecture } from "@/actions/admin/lecture/update";
 import GoBackButton from "@/components/admin/go-back-button";
-import LectureView from "@/components/admin/lecture/lecture-view";
 import DeleteDialog from "@/components/admin/delete-dialog";
-import { DeleteLecture } from "@/actions/admin/lecture/delete";
-import { LectureEditView } from "@/components/admin/lecture/edit-view";
+import { WorkshopEditView } from "@/components/admin/workshop/edit-view";
+import WorkshopView from "@/components/admin/workshop/workshop-view";
+import { DeleteWorkshop } from "@/actions/admin/workshop/delete";
+import { UpdateWorkshop } from "@/actions/admin/workshop/update";
 
-const Page = async ({ params }: { params: { lectureId: string } }) => {
-  const { lectureId } = params;
-  const lecture = await prisma.lecture.findUnique({
-    where: { id: lectureId },
+const Page = async ({ params }: { params: { workshopId: string } }) => {
+  const { workshopId } = params;
+  const workshop = await prisma.workshop.findUnique({
+    where: { id: workshopId },
   });
-  if (!lecture) {
+  if (!workshop) {
     notFound();
   }
   const requiredFields = [
-    lecture.topic,
-    lecture.description,
-    lecture.imageUrl,
-    lecture.startDate,
-    lecture.endDate,
-    lecture.room,
+    workshop.topic,
+    workshop.description,
+    workshop.imageUrl,
+    workshop.startDate,
+    workshop.endDate,
+    workshop.room,
+    workshop.maxAttenders,
   ];
 
   const totalFields = requiredFields.length;
@@ -36,7 +36,7 @@ const Page = async ({ params }: { params: { lectureId: string } }) => {
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10">
       <div className="flex items-center flex-col">
         <h1 className="text-4xl font-medium bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
-          Lecture setup
+          Workshop setup
         </h1>
         {!isCompleted ? (
           <>
@@ -47,10 +47,10 @@ const Page = async ({ params }: { params: { lectureId: string } }) => {
         ) : (
           <>
             <p className="text-base pt-2 font-bold">You&apos;re all set!</p>
-            {lecture.isPublished ? (
+            {workshop.isPublished ? (
               <>
                 <p className="text-sm pt-2 text-zinc-400">
-                  To edit this lecture you have to unpublish it first.
+                  To edit this workshop you have to unpublish it first.
                 </p>
               </>
             ) : (
@@ -60,34 +60,34 @@ const Page = async ({ params }: { params: { lectureId: string } }) => {
         )}
       </div>
       <div className="flex gap-4 mt-4 items-center justify-center">
-        <GoBackButton href="/admin/lecture/view" />
+        <GoBackButton href="/admin/workshop/view" />
         {isCompleted ? (
           <>
             <PublishButton
-              isPublished={lecture.isPublished}
-              objectId={lectureId}
-              updateAction={UpdateLecture}
-              objectName="lecture"
+              isPublished={workshop.isPublished}
+              objectId={workshopId}
+              updateAction={UpdateWorkshop}
+              objectName="workshop"
             />
           </>
         ) : (
           <></>
         )}
         <DeleteDialog
-          route="lecture"
-          id={lecture.id}
-          text="this lecture"
-          deleteAction={DeleteLecture}
+          route="workshop"
+          id={workshop.id}
+          text="this workshop"
+          deleteAction={DeleteWorkshop}
           buttonText="Delete"
         />
       </div>
-      {lecture.isPublished ? (
+      {workshop.isPublished ? (
         <>
-          <LectureView lecture={lecture} />
+          <WorkshopView workshop={workshop} />
         </>
       ) : (
         <>
-          <LectureEditView lecture={lecture} />
+          <WorkshopEditView workshop={workshop} />
         </>
       )}
     </div>
