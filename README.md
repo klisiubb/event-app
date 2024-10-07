@@ -19,8 +19,8 @@ For more details, feel free to ask during interviews.
 
 ## Demo
 
-Check out the live demo of the Event App: [event.klisiu.me](https://event.klisiu.me).  
-Most of the content is accessible with an admin role. You can request access, watch the upcoming YouTube project showcase (soon), or view it during an interview.
+Explore the live demo of the Event App at [event.klisiu.me](https://event.klisiu.me).  
+Please note that most of the content requires an admin role for full access. If you'd like to see additional features, feel free to request access. Additionally, a YouTube project showcase will be available soon, or you can view the app during an interview.
 ## Screenshots
 
 Screenshots coming soon.
