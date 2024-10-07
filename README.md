@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Event App (Engineering Thesis)
 
-## Getting Started
+The **Event App** was my engineering thesis project, developed to manage and streamline IT conferences. It was successfully used during one of the largest IT conferences in my region, showcasing its real-world application and scalability. The app allows to:
 
-First, run the development server:
+- Create, edit, and manage lectures and workshops.
+- Sign up for event and receive news about it.
+- Engage participants through rewards for active involvement.
+- Generate customized/branded QR codes.
+- Showcase sponsors and partners.
+- Manage volunteers.
+
+In this rewrite, I am modernizing the original version from the ground up. Once the web application is complete, I will begin redevelopment of the mobile application (scanning QR codes & drawing rewards) from scratch.
+
+The original code is securely stored in private repositories.
+
+For more details, feel free to ask during interviews. 
+
+**This project is currently a work in progress.**
+
+## Demo
+
+Check out the live demo of the Event App: [event.klisiu.me](https://event.klisiu.me).  
+Most of the content is accessible with an admin role. You can request access, watch the upcoming YouTube project showcase (soon), or view it during an interview.
+## Screenshots
+
+Screenshots coming soon.
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your `.env` file:
+
+- `KINDE_CLIENT_ID`: Your Kinde application's client ID used for authentication.
+- `KINDE_CLIENT_SECRET`: Your Kinde application's client secret used for authentication.
+- `KINDE_ISSUER_URL`: The URL for your Kinde issuer, which handles the OpenID Connect (OIDC) authorization flow.
+- `KINDE_SITE_URL`: The base URL of your application (usually `http://localhost:3000` for local development).
+- `KINDE_POST_LOGOUT_REDIRECT_URL`: The URL to redirect users to after logging out of the application. Should end in `/success` to grab user data.
+- `KINDE_POST_LOGIN_REDIRECT_URL`: The URL to redirect users to after a successful login.
+- `DATABASE_URL`: The URL to connect to your PostgreSQL database (contains credentials, host, and port information).
+- `UPLOADTHING_SECRET`: Your secret key for using the UploadThing API.
+- `UPLOADTHING_APP_ID`: Your application ID for using the UploadThing API.
+- `NEXT_PUBLIC_WEBSITE_URL`: The publicly accessible URL for your application.
+
+## Run Locally
+
+To get started with the project locally, follow these steps:
+
+**Clone the repository:**
+```bash
+git clone https://github.com/klisiubb/event-app.git
+```
+
+**Navigate to the project directory:**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+cd event-app
+```
+
+**Set up environment variables:**
+
+Fill out the `.env` file with the necessary environment variables.
+
+
+**Install dependencies:**
+```bash
+bun install
+```
+
+**Start the development server:**
+
+```bash
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Access the application:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+localhost:3000
+```
+> **Note:** Ensure you assign the admin role to your account in Kinde to access full features.
+## Lessons Learned
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Throughout this project, I gained valuable experience with new technologies, including Next.js 14, Zod, and React Hook Form. This was my first significant project built from the ground up, diverging from the typical approach of following a tutorial-based project. It presented numerous challenges commonly associated with large-scale applications, such as debugging and managing complexity.
 
-## Learn More
+Some of the key challenges I faced included:
 
-To learn more about Next.js, take a look at the following resources:
+- **Date Formatting:** Handling the start and finish dates for workshops and lectures.
+- **Reward Algorithm:** Developing an effective algorithm for drawing rewards.
+- **Time Management:** Working under pressure to ensure timely completion for university requirements.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+These experiences have greatly enhanced my problem-solving skills and understanding of project management.
+## Roadmap
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [ ]  Finish project to restore the previous version state.
+- [ ]  Add quizzes for workshops.
+- [ ]  Build a statistics page for overall performance metrics.
+- [ ]  Enhance email and notification features.
+- [ ]  Implement a countdown timer for the start of events.
+- [ ]  Explore additional features and improvements.
 
-## Deploy on Vercel
+## Authors
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [klisiubb](https://www.github.com/klisiubb)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## License
+
+This project is licensed under [MIT](https://choosealicense.com/licenses/mit/).
+
