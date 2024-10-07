@@ -13,9 +13,8 @@ export default function LectureView({ lecture }: { lecture: Lecture }) {
             <Image
               src={lecture.imageUrl}
               alt={lecture.topic}
-              layout="fill"
-              objectFit="cover"
-              className="transition-transform duration-300 hover:scale-105"
+              fill
+              className="transition-transform duration-300 hover:scale-105 object-cover"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-muted">
