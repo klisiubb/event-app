@@ -17,8 +17,10 @@ export function useFilter<T>(
       })
     );
 
-    setFilteredItems(filtered);
-  }, [searchTerm, items, filterKeys]);
+    if (JSON.stringify(filtered) !== JSON.stringify(filteredItems)) {
+      setFilteredItems(filtered);
+    }
+  }, [searchTerm, items, filterKeys, filteredItems]);
 
   return filteredItems;
 }

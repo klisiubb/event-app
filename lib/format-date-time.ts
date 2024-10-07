@@ -3,6 +3,7 @@ export function formatDate(date: Date): string {
     day: "2-digit",
     month: "long",
     year: "numeric",
+    timeZone: "UTC",
   });
 }
 
@@ -11,6 +12,7 @@ export function formatTime(start: Date, end: Date): string {
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
+    timeZone: "UTC",
   };
   return `${start.toLocaleTimeString(
     "en",
