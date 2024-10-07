@@ -14,7 +14,7 @@ export const LecturesView = ({ lectures }: { lectures: Lecture[] }) => {
   ]);
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10">
-      <div className="flex justify-center mb-4">
+      <div className="flex justify-center mb-16">
         <div className="relative w-full max-w-xl">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
