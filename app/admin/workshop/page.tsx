@@ -1,13 +1,11 @@
 "use client";
-import { CreateLecture } from "@/actions/admin/lecture/create";
+import { CreateWorkshop } from "@/actions/admin/workshop/create";
 import CreateDialog from "@/components/admin/create-dialog";
 import { Button } from "@/components/ui/button";
-import { LectureFormSchema } from "@/schemas/admin/lecture";
+import { WorkshopFormSchema } from "@/schemas/admin/workshop";
 import { List } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-
-//TODO SWAP Action and Schema  later
 
 const Page = () => {
   return (
@@ -27,10 +25,10 @@ const Page = () => {
             buttonText="Create new workshop"
             titleText="Add new workshop"
             underTitleText="Setup workshop topic. You'll fill the rest later."
-            formSchema={LectureFormSchema.pick({ topic: true })}
+            formSchema={WorkshopFormSchema.pick({ topic: true })}
             fieldName="topic"
             route="workshop"
-            createAction={CreateLecture}
+            createAction={CreateWorkshop}
             labelText="Workshop name:"
             descriptionText="You can change it later."
             placeholderText="e.g. 'React for beginners'"
