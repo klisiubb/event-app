@@ -7,7 +7,7 @@ import { UpdateLecture } from "@/actions/admin/lecture/update";
 import { TextAreaForm } from "@/components/admin/form/text-area-input";
 import { DateForm } from "@/components/admin/form/date-picker";
 import { ImageForm } from "@/components/admin/form/image-form";
-export const EditView = ({ lecture }: { lecture: Lecture }) => {
+export const LectureEditView = ({ lecture }: { lecture: Lecture }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
       <TextForm
