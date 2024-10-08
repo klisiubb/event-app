@@ -44,7 +44,6 @@ export async function CreateQRCode({
   }
 
   let base64 = await QRCode.toDataURL(qrcode?.id);
-  console.log(base64);
   await prisma.qrCode.update({
     where: { id: qrcode?.id },
     data: { base64 },
