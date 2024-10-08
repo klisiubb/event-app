@@ -8,12 +8,13 @@ datasource db {
 }
 
 model User {
-  id        String  @unique
+  id        String  @unique @id
   email     String   @unique
   firstName String
   lastName  String
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
+  QrCode              QrCode[]  @relation(name: "ScannedQRCodes")
 }
 
 model Lecture {
@@ -27,6 +28,8 @@ model Lecture {
     startDate    DateTime?
     endDate      DateTime?
     imageUrl     String?
+    qrCode       QrCode?    @relation(name: "LectureQRCode", fields: [qrCodeId], references: [id])
+    qrCodeId     String?    @unique
 }
 model Workshop {
     id           String     @id @default(uuid())
@@ -40,6 +43,8 @@ model Workshop {
     endDate      DateTime?
     imageUrl     String?
     maxAttenders Int?
+    qrCode       QrCode?    @relation(name: "WorkshopQRCode", fields: [qrCodeId], references: [id])
+    qrCodeId     String?    @unique
 }
 model QrCode {
   id          String    @id @default(uuid())
@@ -50,4 +55,9 @@ model QrCode {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   isPublished Boolean   @default(false)
+  scannedBy   User[]    @relation(name: "ScannedQRCodes")
+  Workshop    Workshop? @relation(name: "WorkshopQRCode")
+  workshopId  String?
+  Lecture    Lecture? @relation(name: "LectureQRCode")
+  LectureId  String?
 }
