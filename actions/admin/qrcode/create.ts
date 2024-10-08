@@ -5,6 +5,7 @@ import { prisma } from "@/lib/db";
 import { QRCodeFormSchema } from "@/schemas/admin/qrcode";
 import { Prisma } from "@prisma/client";
 import { ZodError } from "zod";
+import QRCode from "easyqrcodejs-nodejs";
 
 export async function CreateQRCode({
   name,
@@ -42,6 +43,21 @@ export async function CreateQRCode({
       };
     }
   }
+  var options = {
+    CorrectLevel: QRCode.CorrectLevel.H,
+    width: 2048,
+    height: 2048,
+    text: qrcode?.id,
+    //logo: "https://utfs.io/f/eafed944-abd4-49e8-9155-2a0d5e8e90d6-dwktz.png",
+  };
+  let qrCode = await new QRCode(options);
+  let base64 = await qrCode.toDataURL();
+
+  await prisma.qrCode.update({
+    where: { id: qrcode?.id },
+    data: { base64 },
+  });
+
   return {
     id: qrcode?.id,
     status: 201,
