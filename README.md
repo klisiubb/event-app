@@ -40,6 +40,9 @@ To run this project, you will need to add the following environment variables to
 - `UPLOADTHING_SECRET`: Your secret key for using the UploadThing API.
 - `UPLOADTHING_APP_ID`: Your application ID for using the UploadThing API.
 - `NEXT_PUBLIC_WEBSITE_URL`: The publicly accessible URL for your application.
+- `APP_WORKSHOP_POINTS_VALUE`: Number of points awarded upon scanning the workshop QR code.
+- `APP_LECTURE_POINTS_VALUE`: Number of points awarded upon scanning the lecture QR code.
+- `APP_SPONSOR_PARTNER_POINTS_VALUE`: Number of points awarded upon scanning the sponsor/partner QR code.
 
 ## Tech Stack
 
