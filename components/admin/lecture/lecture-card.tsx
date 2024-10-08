@@ -5,23 +5,35 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "@/components/ui/card";
 import { Lecture } from "@prisma/client";
-import DeleteDialog from "./delete-dialog";
+import DeleteDialog from "../delete-dialog";
 import { DeleteLecture } from "@/actions/admin/lecture/delete";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { CalendarIcon, ClockIcon, Edit, ImageIcon } from "lucide-react";
+import {
+  CalendarIcon,
+  ClockIcon,
+  Edit,
+  ImageIcon,
+  MapPinIcon,
+} from "lucide-react";
 import { formatDate, formatTime } from "@/lib/format-date-time";
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 
-const LectureCard = ({ lecture }: { lecture: Lecture }) => {
+export default function LectureCard({ lecture }: { lecture: Lecture }) {
   return (
     <Card className="flex flex-col h-full">
       <CardHeader className="pb-4">
-        <CardTitle className="text-lg font-semibold text-primary line-clamp-2">
-          {lecture.topic}
-        </CardTitle>
+        <div className="flex justify-between items-start">
+          <CardTitle className="text-lg font-semibold text-primary line-clamp-2 flex-grow pr-2">
+            {lecture.topic}
+          </CardTitle>
+          <Badge variant={lecture.isPublished ? "default" : "destructive"}>
+            {lecture.isPublished ? "Published" : "Not Published"}
+          </Badge>
+        </div>
       </CardHeader>
       <CardContent className="flex-grow space-y-4 pb-4">
         <div className="relative w-full aspect-video overflow-hidden rounded-md">
@@ -40,9 +52,11 @@ const LectureCard = ({ lecture }: { lecture: Lecture }) => {
           )}
         </div>
 
-        <p className="text-sm text-muted-foreground line-clamp-3">
-          {lecture.description || "Description not yet set"}
-        </p>
+        <div className="min-h-[4.5rem]">
+          <p className="text-sm text-muted-foreground line-clamp-3 max-w-[300px] text-center">
+            {lecture.description || "Description not yet set"}
+          </p>
+        </div>
 
         <div className="flex flex-col space-y-2 text-sm text-muted-foreground">
           <div className="flex items-center space-x-2">
@@ -59,6 +73,12 @@ const LectureCard = ({ lecture }: { lecture: Lecture }) => {
               {lecture.startDate && lecture.endDate
                 ? formatTime(lecture.startDate, lecture.endDate)
                 : "Time not yet set"}
+            </span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <MapPinIcon className="w-4 h-4 flex-shrink-0" />
+            <span className="truncate">
+              {lecture.room || "Room not yet set"}
             </span>
           </div>
         </div>
@@ -83,6 +103,4 @@ const LectureCard = ({ lecture }: { lecture: Lecture }) => {
       </CardFooter>
     </Card>
   );
-};
-
-export default LectureCard;
+}

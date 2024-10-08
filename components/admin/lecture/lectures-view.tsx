@@ -2,7 +2,7 @@
 import { Input } from "@/components/ui/input";
 import { Lecture } from "@prisma/client";
 import React, { useState } from "react";
-import LectureCard from "../lecture-card";
+import LectureCard from "./lecture-card";
 import { Search } from "lucide-react";
 import { useFilter } from "@/lib/use-filter";
 
@@ -26,7 +26,7 @@ export const LecturesView = ({ lectures }: { lectures: Lecture[] }) => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
         {filteredLectures.map((lecture) => (
           <LectureCard key={lecture.id} lecture={lecture} />
         ))}

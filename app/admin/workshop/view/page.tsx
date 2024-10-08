@@ -1,4 +1,4 @@
-import LectureCard from "@/components/admin/lecture-card";
+import LectureCard from "@/components/admin/lecture/lecture-card";
 import { prisma } from "@/lib/db";
 import React from "react";
 
