@@ -24,7 +24,7 @@ export const adminRoutes = [
   {
     icon: QrCode,
     label: "QR codes",
-    href: "/admin/qr",
+    href: "/admin/qrcode",
   },
   {
     icon: Trophy,
