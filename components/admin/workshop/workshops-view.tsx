@@ -21,9 +21,6 @@ export const WorkshopsView = ({
     searchTerm,
     ["topic", "description", "room"]
   );
-  if (!filteredWorkshops) {
-    <></>;
-  }
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10">
       <div className="flex justify-center mb-4">
@@ -53,9 +50,20 @@ export const WorkshopsView = ({
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-        {filteredWorkshops.map((workshop) => (
-          <WorkshopCard key={workshop.id} workshop={workshop} />
-        ))}
+        {filteredWorkshops ? (
+          filteredWorkshops.map((workshop) => (
+            <WorkshopCard key={workshop.id} workshop={workshop} />
+          ))
+        ) : (
+          <div className="col-span-full grid place-items-center my-4 md:my-16">
+            <h1 className="font-bold text-4xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
+              Workshops not found!
+            </h1>
+            <p className="md:text-xl mt-4">
+              Change your search term or create new Workshop.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

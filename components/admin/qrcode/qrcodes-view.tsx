@@ -4,7 +4,6 @@ import React, { useState } from "react";
 
 import { Search } from "lucide-react";
 import { useFilter } from "@/lib/use-filter";
-import { WorkshopWithQRCode } from "@/types/workshop-qrcode.type";
 import CreateDialog from "../create-dialog";
 
 import { QRCodeFormSchema } from "@/schemas/admin/qrcode";
@@ -15,9 +14,6 @@ import QRCodeCard from "./qrcode-card";
 export const QRCodesView = ({ qrcodes }: { qrcodes: QrCode[] }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const filteredQRs = useFilter<QrCode>(qrcodes, searchTerm, ["name"]);
-  if (!filteredQRs) {
-    <></>;
-  }
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10">
       <div className="flex justify-center mb-4">
@@ -47,9 +43,18 @@ export const QRCodesView = ({ qrcodes }: { qrcodes: QrCode[] }) => {
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-        {filteredQRs.map((qr) => (
-          <QRCodeCard key={qr.id} qrcode={qr} />
-        ))}
+        {filteredQRs.length > 0 ? (
+          filteredQRs.map((qr) => <QRCodeCard key={qr.id} qrcode={qr} />)
+        ) : (
+          <div className="col-span-full grid place-items-center my-4 md:my-16">
+            <h1 className="font-bold text-4xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
+              QRCodes not found!
+            </h1>
+            <p className="md:text-xl mt-4">
+              Change your search term or create new QRCode.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

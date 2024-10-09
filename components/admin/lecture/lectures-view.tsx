@@ -20,9 +20,6 @@ export const LecturesView = ({
     "description",
     "room",
   ]);
-  if (!filteredLectures) {
-    <></>;
-  }
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10">
       <div className="flex justify-center mb-4">
@@ -52,9 +49,20 @@ export const LecturesView = ({
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-        {filteredLectures.map((lecture) => (
-          <LectureCard key={lecture.id} lecture={lecture} />
-        ))}
+        {filteredLectures ? (
+          filteredLectures.map((lecture) => (
+            <LectureCard key={lecture.id} lecture={lecture} />
+          ))
+        ) : (
+          <div className="col-span-full grid place-items-center my-4 md:my-16">
+            <h1 className="font-bold text-4xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
+              Lectures not found!
+            </h1>
+            <p className="md:text-xl mt-4">
+              Change your search term or create new Lecture.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
