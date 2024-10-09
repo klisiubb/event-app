@@ -29,7 +29,6 @@ export default function WorkshopCard({
 }: {
   workshop: WorkshopWithQRCode;
 }) {
-  console.log(window);
   return (
     <Card className="flex flex-col h-full">
       <CardHeader className="pb-4">
