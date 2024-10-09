@@ -43,6 +43,7 @@ To run this project, you will need to add the following environment variables to
 - `APP_WORKSHOP_POINTS_VALUE`: Number of points awarded upon scanning the workshop QR code.
 - `APP_LECTURE_POINTS_VALUE`: Number of points awarded upon scanning the lecture QR code.
 - `APP_SPONSOR_PARTNER_POINTS_VALUE`: Number of points awarded upon scanning the sponsor/partner QR code.
+- `APP_WORKSHOP_MAXIMUM_PARTICIPANTS_VALUE`: Number of users eligible to sign up for the workshop.
 
 ## Tech Stack
 
