@@ -5,7 +5,6 @@ import { prisma } from "@/lib/db";
 import { Prisma } from "@prisma/client";
 
 export async function DeleteQRCode(id: string): Promise<ActionReturnType> {
-  console.log(id);
   try {
     await prisma.qrCode.delete({
       where: {
