@@ -9,6 +9,10 @@ const Page = async () => {
     },
   });
 
+  if (!workshops) {
+    return <></>;
+  }
+
   return <WorkshopsView workshops={workshops} />;
 };
 

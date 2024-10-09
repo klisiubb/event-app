@@ -6,6 +6,9 @@ const Page = async () => {
   const lectures = await prisma.lecture.findMany({
     include: { qrcode: true },
   });
+  if (!lectures) {
+    return <></>;
+  }
 
   return <LecturesView lectures={lectures} />;
 };
