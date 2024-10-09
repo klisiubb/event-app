@@ -5,6 +5,7 @@ import { prisma } from "@/lib/db";
 import { LectureFormSchema } from "@/schemas/admin/lecture";
 import { Prisma } from "@prisma/client";
 import { ZodError } from "zod";
+var QRCode = require("qrcode");
 
 export async function CreateLecture({
   topic,
@@ -12,13 +13,22 @@ export async function CreateLecture({
   topic: string;
 }): Promise<ActionReturnType> {
   let lecture;
+  let qrcode;
+  let base64;
+  let value = Number(process.env.APP_LECTURE_POINTS_VALUE) || 10;
+
   try {
     await LectureFormSchema.pick({ topic: true }).parseAsync({ topic });
 
-    lecture = await prisma.lecture.create({
+    qrcode = await prisma.qrCode.create({
       data: {
-        topic,
+        name: topic,
+        value,
       },
+    });
+
+    lecture = await prisma.lecture.create({
+      data: { topic, qrcode: { connect: { id: qrcode.id } } },
     });
   } catch (e) {
     if (e instanceof ZodError) {
@@ -31,19 +41,51 @@ export async function CreateLecture({
       if (e.code === "P2002") {
         return {
           status: 400,
-          message: "Lecture with this topic already exist.",
+          message: "Lecture with this topic already exists.",
         };
       }
     } else {
-      console.log(e);
       return {
         status: 400,
         message: "Error. Try again later.",
       };
     }
   }
+
+  if (!lecture) {
+    return {
+      status: 500,
+      message: "Lecture creation failed.",
+    };
+  }
+
+  try {
+    base64 = await QRCode.toDataURL(lecture.id);
+
+    if (!qrcode) {
+      return {
+        status: 500,
+        message: "QR code creation failed.",
+      };
+    }
+
+    await prisma.qrCode.update({
+      where: {
+        id: qrcode.id,
+      },
+      data: {
+        base64,
+      },
+    });
+  } catch (e) {
+    return {
+      status: 500,
+      message: "Error generating QR code.",
+    };
+  }
+
   return {
-    id: lecture?.id,
+    id: lecture.id,
     status: 201,
     message: "Lecture created. Redirecting...",
   };
