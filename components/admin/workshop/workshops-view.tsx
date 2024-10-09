@@ -1,19 +1,23 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import { Workshop } from "@prisma/client";
 import React, { useState } from "react";
 
 import { Search } from "lucide-react";
 import { useFilter } from "@/lib/use-filter";
 import WorkshopCard from "./workshop-card";
+import { WorkshopWithQRCode } from "@/types/workshop-qrcode.type";
 
-export const WorkshopsView = ({ workshops }: { workshops: Workshop[] }) => {
+export const WorkshopsView = ({
+  workshops,
+}: {
+  workshops: WorkshopWithQRCode[];
+}) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const filteredWorkshops = useFilter<Workshop>(workshops, searchTerm, [
-    "topic",
-    "description",
-    "room",
-  ]);
+  const filteredWorkshops = useFilter<WorkshopWithQRCode>(
+    workshops,
+    searchTerm,
+    ["topic", "description", "room"]
+  );
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10">
       <div className="flex justify-center mb-16">

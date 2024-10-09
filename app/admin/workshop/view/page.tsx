@@ -3,7 +3,11 @@ import { prisma } from "@/lib/db";
 import React from "react";
 
 const Page = async () => {
-  const workshops = await prisma.workshop.findMany();
+  const workshops = await prisma.workshop.findMany({
+    include: {
+      qrcode: true,
+    },
+  });
 
   return <WorkshopsView workshops={workshops} />;
 };
