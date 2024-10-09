@@ -3,7 +3,9 @@ import { prisma } from "@/lib/db";
 import React from "react";
 
 const Page = async () => {
-  const lectures = await prisma.lecture.findMany();
+  const lectures = await prisma.lecture.findMany({
+    include: { qrcode: true },
+  });
 
   return <LecturesView lectures={lectures} />;
 };

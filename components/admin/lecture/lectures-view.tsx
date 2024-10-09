@@ -5,17 +5,26 @@ import React, { useState } from "react";
 import LectureCard from "./lecture-card";
 import { Search } from "lucide-react";
 import { useFilter } from "@/lib/use-filter";
+import { LectureWithQRCode } from "@/types/lecture-qrcode.type";
+import GoBackButton from "../go-back-button";
+import CreateDialog from "../create-dialog";
+import { LectureFormSchema } from "@/schemas/admin/lecture";
+import { CreateLecture } from "@/actions/admin/lecture/create";
 
-export const LecturesView = ({ lectures }: { lectures: Lecture[] }) => {
+export const LecturesView = ({
+  lectures,
+}: {
+  lectures: LectureWithQRCode[];
+}) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const filteredLectures = useFilter<Lecture>(lectures, searchTerm, [
+  const filteredLectures = useFilter<LectureWithQRCode>(lectures, searchTerm, [
     "topic",
     "description",
     "room",
   ]);
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10">
-      <div className="flex justify-center mb-16">
+      <div className="flex justify-center mb-4">
         <div className="relative w-full max-w-xl">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
@@ -26,6 +35,20 @@ export const LecturesView = ({ lectures }: { lectures: Lecture[] }) => {
             className="pl-10 pr-4 py-2 w-full rounded-full"
           />
         </div>
+      </div>
+      <div className="mb-4 flex justify-center md:justify-start">
+        <CreateDialog
+          buttonText="Create new lecture"
+          titleText="Add new lecture"
+          underTitleText="Setup lecture topic. You'll fill the rest later."
+          formSchema={LectureFormSchema.pick({ topic: true })}
+          fieldName="topic"
+          route="lecture"
+          createAction={CreateLecture}
+          labelText="Lecture name:"
+          descriptionText="You can change it later."
+          placeholderText="e.g. 'React for beginners'"
+        />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
         {filteredLectures.map((lecture) => (

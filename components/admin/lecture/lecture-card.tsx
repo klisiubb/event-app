@@ -6,7 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Lecture } from "@prisma/client";
 import DeleteDialog from "../delete-dialog";
 import { DeleteLecture } from "@/actions/admin/lecture/delete";
 import { Button } from "@/components/ui/button";
@@ -21,8 +20,14 @@ import {
 import { formatDate, formatTime } from "@/lib/format-date-time";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import { LectureWithQRCode } from "@/types/lecture-qrcode.type";
+import { QRDownloader } from "../qrcode-downloader";
 
-export default function LectureCard({ lecture }: { lecture: Lecture }) {
+export default function LectureCard({
+  lecture,
+}: {
+  lecture: LectureWithQRCode;
+}) {
   return (
     <Card className="flex flex-col h-full">
       <CardHeader className="pb-4">
@@ -58,28 +63,47 @@ export default function LectureCard({ lecture }: { lecture: Lecture }) {
           </p>
         </div>
 
-        <div className="flex flex-col space-y-2 text-sm text-muted-foreground">
-          <div className="flex items-center space-x-2">
-            <CalendarIcon className="w-4 h-4 flex-shrink-0" />
-            <span className="truncate">
-              {lecture.startDate
-                ? formatDate(lecture.startDate)
-                : "Date not yet set"}
-            </span>
+        <div className="flex justify-between">
+          <div className="flex flex-col space-y-2 text-sm text-muted-foreground">
+            <div className="flex items-center space-x-2">
+              <CalendarIcon className="w-4 h-4 flex-shrink-0" />
+              <span className="truncate">
+                {lecture.startDate
+                  ? formatDate(lecture.startDate)
+                  : "Date not yet set"}
+              </span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <ClockIcon className="w-4 h-4 flex-shrink-0" />
+              <span className="truncate">
+                {lecture.startDate && lecture.endDate
+                  ? formatTime(lecture.startDate, lecture.endDate)
+                  : "Time not yet set"}
+              </span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <MapPinIcon className="w-4 h-4 flex-shrink-0" />
+              <span className="truncate">
+                {lecture.room || "Room not yet set"}
+              </span>
+            </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <ClockIcon className="w-4 h-4 flex-shrink-0" />
-            <span className="truncate">
-              {lecture.startDate && lecture.endDate
-                ? formatTime(lecture.startDate, lecture.endDate)
-                : "Time not yet set"}
-            </span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <MapPinIcon className="w-4 h-4 flex-shrink-0" />
-            <span className="truncate">
-              {lecture.room || "Room not yet set"}
-            </span>
+
+          <div className="flex flex-col items-center space-y-2">
+            <div className="w-24 h-24 bg-muted rounded-md flex items-center justify-center">
+              {lecture.qrcode.base64 ? (
+                <Image
+                  src={lecture.qrcode.base64}
+                  alt="QR Code"
+                  width={96}
+                  height={96}
+                  className="rounded-md"
+                />
+              ) : (
+                <ImageIcon className="w-8 h-8 text-muted-foreground" />
+              )}
+            </div>
+            <QRDownloader base64={lecture.qrcode.base64} name={lecture.topic} />
           </div>
         </div>
       </CardContent>
