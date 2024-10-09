@@ -10,7 +10,11 @@ const Page = async () => {
     return <></>;
   }
 
-  return <LecturesView lectures={lectures} />;
+  return (
+    <>
+      <LecturesView lectures={lectures} />
+    </>
+  );
 };
 
 export default Page;

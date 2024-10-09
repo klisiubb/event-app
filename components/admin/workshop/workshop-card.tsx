@@ -16,7 +16,6 @@ import {
   Edit,
   ImageIcon,
   MapPinIcon,
-  Users,
 } from "lucide-react";
 import { formatDate, formatTime } from "@/lib/format-date-time";
 import Image from "next/image";
@@ -30,6 +29,7 @@ export default function WorkshopCard({
 }: {
   workshop: WorkshopWithQRCode;
 }) {
+  console.log(window);
   return (
     <Card className="flex flex-col h-full">
       <CardHeader className="pb-4">

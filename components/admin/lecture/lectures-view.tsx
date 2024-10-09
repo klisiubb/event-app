@@ -1,12 +1,10 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import { Lecture } from "@prisma/client";
 import React, { useState } from "react";
 import LectureCard from "./lecture-card";
 import { Search } from "lucide-react";
 import { useFilter } from "@/lib/use-filter";
 import { LectureWithQRCode } from "@/types/lecture-qrcode.type";
-import GoBackButton from "../go-back-button";
 import CreateDialog from "../create-dialog";
 import { LectureFormSchema } from "@/schemas/admin/lecture";
 import { CreateLecture } from "@/actions/admin/lecture/create";
@@ -22,6 +20,9 @@ export const LecturesView = ({
     "description",
     "room",
   ]);
+  if (!filteredLectures) {
+    <></>;
+  }
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10">
       <div className="flex justify-center mb-4">

@@ -18,6 +18,9 @@ export const WorkshopsView = ({
     searchTerm,
     ["topic", "description", "room"]
   );
+  if (!filteredWorkshops) {
+    <></>;
+  }
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10">
       <div className="flex justify-center mb-16">

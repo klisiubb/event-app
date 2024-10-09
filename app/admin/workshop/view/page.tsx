@@ -13,7 +13,11 @@ const Page = async () => {
     return <></>;
   }
 
-  return <WorkshopsView workshops={workshops} />;
+  return (
+    <>
+      <WorkshopsView workshops={workshops} />
+    </>
+  );
 };
 
 export default Page;
