@@ -77,6 +77,7 @@ export async function CreateWorkshop({
       },
       data: {
         base64,
+        isPublished: true,
       },
     });
   } catch (e) {

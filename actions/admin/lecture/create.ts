@@ -75,6 +75,7 @@ export async function CreateLecture({
       },
       data: {
         base64,
+        isPublished: true,
       },
     });
   } catch (e) {
