@@ -74,7 +74,15 @@ export const TextAreaForm = ({
         </Button>
       </div>
 
-      {!isEditing && <p className="text-sm mt-2">{textValue}</p>}
+      {!isEditing && (
+        <p className="text-sm mt-2">
+          {textValue ? (
+            textValue
+          ) : (
+            <span className="font-bold text-red-500">Not yet set</span>
+          )}
+        </p>
+      )}
 
       {isEditing && (
         <Form {...form}>

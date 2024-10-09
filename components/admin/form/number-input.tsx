@@ -74,7 +74,15 @@ export const NumberForm = ({
         </Button>
       </div>
 
-      {!isEditing && <p className="text-sm mt-2">{numberValue}</p>}
+      {!isEditing && (
+        <p className="text-sm mt-2">
+          {numberValue ? (
+            numberValue
+          ) : (
+            <span className="font-bold text-red-500">Not yet set</span>
+          )}
+        </p>
+      )}
 
       {isEditing && (
         <Form {...form}>
