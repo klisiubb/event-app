@@ -15,6 +15,7 @@ model User {
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
   QrCode              QrCode[]  @relation(name: "ScannedQRCodes")
+  Reward              Reward[]  @relation(name: "RewardWinners")
 }
 
 model Lecture {
@@ -58,4 +59,15 @@ model QrCode {
   scannedBy   User[]    @relation(name: "ScannedQRCodes")
   lecture Lecture?
   workshop Workshop?
+}
+model Reward {
+  id          String   @id @default(uuid())
+  name        String   @unique()
+  description String?
+  quantity    Int      @default(1)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  isPublished Boolean  @default(false)
+  winners     User[]   @relation(name: "RewardWinners")
+  imageUrl     String?
 }
