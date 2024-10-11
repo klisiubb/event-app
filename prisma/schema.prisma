@@ -13,7 +13,12 @@ enum Role {
   VOLUNTEER
   LECTURER
 }
-
+enum SponsorType {
+  DIAMOND
+  GOLD
+  SILVER
+  PARTNER
+}
 model User {
   id        String  @unique @id
   email     String   @unique
@@ -70,6 +75,7 @@ model QrCode {
   scannedBy   User[]    @relation(name: "ScannedQRCodes")
   lecture Lecture?
   workshop Workshop?
+  Sponsor     Sponsor?  @relation(name: "SponsorQRCode")
 }
 model Reward {
   id          String   @id @default(uuid())
@@ -81,4 +87,17 @@ model Reward {
   isPublished Boolean  @default(false)
   winners     User[]   @relation(name: "RewardWinners")
   imageUrl     String?
+}
+model Sponsor {
+  id          String      @id @default(uuid())
+  name        String
+  description String      @default("Opis sponsora")
+  logo        String      @default("https://utfs.io/f/535bdb80-8554-4be0-9dee-fb3925319652-xjabas.png")
+  url         String      @default("https://www.bitad.ubb.edu.pl")
+  isPublished Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  type        SponsorType @default(PARTNER)
+  qrCode      QrCode?     @relation(name: "SponsorQRCode", fields: [qrCodeId], references: [id], onDelete: Cascade)
+  qrCodeId    String?     @unique
 }
