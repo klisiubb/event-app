@@ -29,7 +29,7 @@ model Lecture {
     startDate    DateTime?
     endDate      DateTime?
     imageUrl     String?
-    qrcode       QrCode @relation(fields: [ qrCodeId], references: [id])
+    qrcode       QrCode @relation(fields: [ qrCodeId], references: [id], onDelete: Cascade)
     qrCodeId     String @unique
 }
 model Workshop {
@@ -44,7 +44,7 @@ model Workshop {
     endDate      DateTime?
     imageUrl     String?
     maxAttenders Int?
-    qrcode       QrCode @relation(fields: [ qrCodeId], references: [id])
+    qrcode       QrCode @relation(fields: [ qrCodeId], references: [id], onDelete: Cascade)
     qrCodeId     String @unique
 }
 model QrCode {
