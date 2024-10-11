@@ -2,7 +2,6 @@
 import React from "react";
 import { TextForm } from "@/components/admin/form/text-input";
 import { TextAreaForm } from "@/components/admin/form/text-area-input";
-import { DateForm } from "@/components/admin/form/date-picker";
 import { ImageForm } from "@/components/admin/form/image-form";
 import { NumberForm } from "../form/number-input";
 import { Reward } from "@prisma/client";
