@@ -91,9 +91,9 @@ model Reward {
 model Sponsor {
   id          String      @id @default(uuid())
   name        String
-  description String      @default("Opis sponsora")
-  logo        String      @default("https://utfs.io/f/535bdb80-8554-4be0-9dee-fb3925319652-xjabas.png")
-  url         String      @default("https://www.bitad.ubb.edu.pl")
+  description String?
+  imageUrl     String?
+  websiteUrl         String?
   isPublished Boolean     @default(false)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
