@@ -7,10 +7,10 @@ import { DeleteUser } from "@/actions/admin/user/delete";
 import { UserEditView } from "@/components/admin/user/edit-view";
 import { Role } from "@prisma/client";
 
-const Page = async ({ params }: { params: { lecturerId: string } }) => {
-  const { lecturerId } = params;
-  const user = await prisma.user.findUnique({
-    where: { id: lecturerId, role: Role.LECTURER },
+const Page = async ({ params }: { params: { stuffId: string } }) => {
+  const { stuffId } = params;
+  const user = await prisma.user.findFirst({
+    where: { id: stuffId, role: Role.LECTURER },
   });
   if (!user) {
     notFound();

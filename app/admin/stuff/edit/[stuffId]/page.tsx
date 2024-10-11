@@ -9,7 +9,7 @@ import { Role } from "@prisma/client";
 
 const Page = async ({ params }: { params: { stuffId: string } }) => {
   const { stuffId } = params;
-  const user = await prisma.user.findUnique({
+  const user = await prisma.user.findFirst({
     where: { id: stuffId, role: Role.VOLUNTEER },
   });
   if (!user) {
