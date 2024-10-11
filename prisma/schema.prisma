@@ -7,6 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  USER
+  VOLUNTEER
+  LECTURER
+}
+
 model User {
   id        String  @unique @id
   email     String   @unique
@@ -16,6 +23,9 @@ model User {
   updatedAt           DateTime  @updatedAt
   QrCode              QrCode[]  @relation(name: "ScannedQRCodes")
   Reward              Reward[]  @relation(name: "RewardWinners")
+  role                Role      @default(USER)
+  workshopToAttend    Workshop? @relation(name: "WorkshopAttenders", fields: [workshopToAttendId], references: [id], onDelete: Cascade)
+  workshopToAttendId  String?
 }
 
 model Lecture {
@@ -46,6 +56,7 @@ model Workshop {
     maxAttenders Int?
     qrcode       QrCode @relation(fields: [ qrCodeId], references: [id], onDelete: Cascade)
     qrCodeId     String @unique
+    attenders    User[]     @relation(name: "WorkshopAttenders")
 }
 model QrCode {
   id          String    @id @default(uuid())
