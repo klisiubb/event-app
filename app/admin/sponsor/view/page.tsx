@@ -1,3 +1,4 @@
+import { SponsorsView } from "@/components/admin/sponsor/sponsors-view";
 import { prisma } from "@/lib/db";
 import React from "react";
 
