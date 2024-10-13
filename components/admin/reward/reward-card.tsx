@@ -10,7 +10,7 @@ import {
 import DeleteDialog from "../delete-dialog";
 import { Button } from "@/components/ui/button";
 import { Link } from "next-view-transitions";
-import { Edit, ImageIcon, RewindIcon } from "lucide-react";
+import { Edit, ImageIcon, TrophyIcon } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Reward } from "@prisma/client";
@@ -54,9 +54,9 @@ export default function RewardCard({ reward }: { reward: Reward }) {
         <div className="flex justify-between">
           <div className="flex flex-col space-y-2 text-sm text-muted-foreground">
             <div className="flex items-center space-x-2">
-              <RewindIcon className="w-4 h-4 flex-shrink-0" />
+              <TrophyIcon className="w-4 h-4 flex-shrink-0" />
               <span className="truncate">
-                {reward.quantity || "Quantity not yet set"}
+                {`Quantity: ${reward.quantity}` || "Quantity not yet set"}
               </span>
             </div>
           </div>
