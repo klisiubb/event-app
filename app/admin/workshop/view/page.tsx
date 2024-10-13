@@ -1,7 +1,7 @@
 import { WorkshopsView } from "@/components/admin/workshop/workshops-view";
 import { prisma } from "@/lib/db";
 import React from "react";
-
+export const dynamic = "force-dynamic";
 const Page = async () => {
   const workshops = await prisma.workshop.findMany({
     include: {

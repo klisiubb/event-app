@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import UserStats from "@/components/admin/stats/users-stats";
 import WorkshopStats from "@/components/admin/stats/workshop-stats";
 import LecturesStats from "@/components/admin/stats/lectures-stats";
+export const dynamic = "force-dynamic";
 
 const Page = () => {
   return (
