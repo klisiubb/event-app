@@ -7,9 +7,14 @@ import LecturesStats from "@/components/admin/stats/lectures-stats";
 const Page = () => {
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10">
-      <h1 className="pb-2 text-6xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
-        View stats of your Event:
-      </h1>
+      <div className="max-w-3xl mx-auto mb-10 text-center">
+        <h1 className="pb-2 text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-primary to-destructive">
+          Event Statistics
+        </h1>
+        <p className="mt-4 text-lg text-muted-foreground">
+          Explore detailed insights across various categories
+        </p>
+      </div>
       <Tabs defaultValue="users" className="space-y-4 py-4">
         <TabsList className="flex py-6 bg-secondary ">
           <TabsTrigger value="users">Users</TabsTrigger>
