@@ -31,6 +31,8 @@ model User {
   role                Role      @default(USER)
   workshopToAttend    Workshop? @relation(name: "WorkshopAttenders", fields: [workshopToAttendId], references: [id], onDelete: Cascade)
   workshopToAttendId  String?
+  isPresentAtEvent Boolean  @default(false)
+  isPresentAtWorkshop Boolean  @default(false)
 }
 
 model Lecture {
