@@ -1,6 +1,6 @@
 "use client";
 import { CalendarCheck } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 export const Logo = () => {
   return (
     <Link

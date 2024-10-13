@@ -2,7 +2,7 @@ import { CalendarIcon, ClockIcon, ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sponsor } from "@prisma/client";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 export default function sponsorView({ sponsor }: { sponsor: Sponsor }) {
   return (

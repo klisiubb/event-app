@@ -11,7 +11,7 @@ import {
 import { User } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal, Trash2 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import DeleteDialog from "../delete-dialog";
 import { DeleteUser } from "@/actions/admin/user/delete";
 

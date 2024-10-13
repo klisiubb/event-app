@@ -15,7 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { DeleteFormProps } from "@/interfaces/admin/deleteFormProps";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 import { Trash2 } from "lucide-react";
 
 const DeleteDialog: FC<DeleteFormProps> = ({
@@ -25,7 +25,7 @@ const DeleteDialog: FC<DeleteFormProps> = ({
   deleteAction,
   route,
 }) => {
-  const router = useRouter();
+  const router = useTransitionRouter();
   const onClick = async () => {
     const data = await deleteAction(id);
     if (data.status === 400) {

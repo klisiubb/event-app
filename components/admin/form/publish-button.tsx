@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { PublishButtonProps } from "@/interfaces/admin/form";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 import React from "react";
 import { toast } from "sonner";
 
@@ -11,7 +11,7 @@ const PublishButton = ({
   updateAction,
   objectName,
 }: PublishButtonProps) => {
-  const router = useRouter();
+  const router = useTransitionRouter();
   return (
     <Button
       onClick={() => {

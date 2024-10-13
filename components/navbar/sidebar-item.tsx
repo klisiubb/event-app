@@ -1,13 +1,13 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { SidebarItemProps } from "./misc/interface";
-
+import { useTransitionRouter } from "next-view-transitions";
 //TODO Fix isActive is not working on mobile (bg and border!!!)
 
 export const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
   const pathname = usePathname();
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   const isActive = pathname === href || pathname.startsWith(`${href}/`);
 

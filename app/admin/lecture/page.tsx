@@ -4,7 +4,7 @@ import CreateDialog from "@/components/admin/create-dialog";
 import { Button } from "@/components/ui/button";
 import { LectureFormSchema } from "@/schemas/admin/lecture";
 import { List } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import React from "react";
 
 const Page = () => {

@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import type { Metadata } from "next";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 
 export const metadata: Metadata = {
   title: "Event App - 404",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function NotFound() {
-  const router = useRouter();
+  const router = useTransitionRouter();
   return (
     <div className="h-screen flex flex-col items-center justify-center">
       <div className="animate-shake animate-once animate-duration-[2000ms] animate-ease-in-out text-center">

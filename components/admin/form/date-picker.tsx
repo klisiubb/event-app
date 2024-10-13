@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 import { useState } from "react";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
@@ -47,7 +47,7 @@ export const DateForm = ({
   });
 
   const { isSubmitting } = form.formState;
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   const onSubmit: SubmitHandler<
     Partial<z.infer<typeof validationSchema>>

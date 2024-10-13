@@ -2,7 +2,7 @@
 import CreateDialog from "@/components/admin/create-dialog";
 import { Button } from "@/components/ui/button";
 import { List } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import React from "react";
 import { QRCodeFormSchema } from "@/schemas/admin/qrcode";
 import { CreateQRCode } from "@/actions/admin/qrcode/create";

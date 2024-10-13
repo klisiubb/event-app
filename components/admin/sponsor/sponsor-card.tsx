@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import DeleteDialog from "../delete-dialog";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Edit, ImageIcon, MapPinIcon } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";

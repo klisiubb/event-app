@@ -1,7 +1,7 @@
 "use client";
 import { Pencil, PlusCircle, ImageIcon } from "lucide-react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,7 @@ export const ImageForm = ({
 
   const toggleEdit = () => setIsEditing((current) => !current);
 
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   return (
     <div className="mt-6 border rounded-md p-4">

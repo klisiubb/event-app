@@ -24,7 +24,7 @@ import {
 import { Input } from "../ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 import { useForm } from "react-hook-form";
 import { CreateFormProps } from "@/interfaces/admin/createFormProps";
 import { toast } from "sonner";
@@ -48,7 +48,7 @@ const CreateDialog: FC<CreateFormProps> = ({
     resolver: zodResolver(formSchema),
   });
 
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   const onSubmit = async (values: FormType) => {
     const data = await createAction(values);

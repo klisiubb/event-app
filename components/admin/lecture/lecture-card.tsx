@@ -10,7 +10,7 @@ import {
 import DeleteDialog from "../delete-dialog";
 import { DeleteLecture } from "@/actions/admin/lecture/delete";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import {
   CalendarIcon,
   ClockIcon,
