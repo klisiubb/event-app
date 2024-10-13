@@ -17,6 +17,7 @@ import { DeleteFormProps } from "@/interfaces/admin/deleteFormProps";
 import { toast } from "sonner";
 import { useTransitionRouter } from "next-view-transitions";
 import { Trash2 } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const DeleteDialog: FC<DeleteFormProps> = ({
   buttonText,
@@ -26,16 +27,24 @@ const DeleteDialog: FC<DeleteFormProps> = ({
   route,
 }) => {
   const router = useTransitionRouter();
+  const pathname = usePathname();
+  const isActive =
+    pathname === `/admin/${route}/view` ||
+    pathname.startsWith(`/admin/${route}/view`);
   const onClick = async () => {
     const data = await deleteAction(id);
     if (data.status === 400) {
       toast.error(data.message);
     } else {
       toast.success(data.message);
-      router.push(`/admin/${route}/view`);
+
+      if (isActive) {
+        router.refresh();
+      } else {
+        router.push(`/admin/${route}/view`);
+      }
     }
   };
-
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
