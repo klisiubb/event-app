@@ -69,7 +69,10 @@ const CreateDialog: FC<CreateFormProps> = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className=" hover:font-bold flex items-center gap-2" size="lg">
+        <Button
+          className=" hover:font-bold flex items-center gap-2 z-10"
+          size="lg"
+        >
           <PlusCircle className="w-5 h-5" /> {buttonText}
         </Button>
       </DialogTrigger>

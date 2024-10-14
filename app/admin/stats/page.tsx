@@ -1,12 +1,24 @@
 "use client";
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { List } from "lucide-react";
 import { Link } from "next-view-transitions";
 import React from "react";
 
 const Page = () => {
   return (
-    <div className="min-h-[calc(100vh-160px)] p-6 md:p-10 flex flex-col justify-center items-center">
+    <div className="min-h-[calc(100vh-160px)] p-6 md:p-10 flex flex-col justify-center items-center relative overflow-hidden">
+      <AnimatedGridPattern
+        numSquares={30}
+        maxOpacity={0.1}
+        duration={3}
+        repeatDelay={1}
+        className={cn(
+          "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
+          "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12"
+        )}
+      />
       <div className="max-w-4xl w-full space-y-8">
         <h1 className="pb-2 text-6xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
           Stats Panel
@@ -20,7 +32,7 @@ const Page = () => {
           <Button
             asChild
             variant="outline"
-            className="flex items-center gap-2  hover:font-bold"
+            className="flex items-center gap-2  hover:font-bold z-10"
             size="lg"
           >
             <Link href="/admin/stats/view">
