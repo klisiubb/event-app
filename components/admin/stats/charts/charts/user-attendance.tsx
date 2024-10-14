@@ -12,7 +12,6 @@ import {
 import { ChartContainer } from "@/components/ui/chart";
 import { BorderBeam } from "@/components/ui/border-beam";
 
-// Props type definition
 type UserAttendanceChartProps = {
   totalUsers: number;
   presentUsers: number;
@@ -65,7 +64,7 @@ export default function UserAttendanceChart({
   };
 
   return (
-    <Card className="w-full max-w-3xl relative overflow-hidden">
+    <Card className="w-full relative overflow-hidden">
       <BorderBeam />
       <CardHeader>
         <CardTitle>User Attendance Overview</CardTitle>
@@ -85,7 +84,7 @@ export default function UserAttendanceChart({
               color: COLORS[1],
             },
           }}
-          className="h-[300px]"
+          className="min-h-[300px] w-full"
         >
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
@@ -110,8 +109,8 @@ export default function UserAttendanceChart({
             </PieChart>
           </ResponsiveContainer>
         </ChartContainer>
-        <div className="mt-4 text-center">
-          <p className="text-sm font-medium ">
+        <div className="mt-4 text-left">
+          <p className="text-sm font-medium">
             Total Registered Users: {totalUsers} | Confirmed Attendees:{" "}
             {presentUsers}
           </p>
