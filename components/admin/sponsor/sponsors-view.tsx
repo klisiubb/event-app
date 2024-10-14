@@ -58,7 +58,7 @@ export const SponsorsView = ({
       </div>
       <BlurFade inView delay={0.1}>
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mt-6">
-          {statusFilteredSponsors ? (
+          {statusFilteredSponsors.length > 0 ? (
             statusFilteredSponsors.map((sponsor) => (
               <SponsorCard key={sponsor.id} sponsor={sponsor} />
             ))

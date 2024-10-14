@@ -57,7 +57,7 @@ export const WorkshopsView = ({
       </div>
       <BlurFade inView delay={0.1}>
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mt-6">
-          {statusFilteredWorkshops ? (
+          {statusFilteredWorkshops.length > 0 ? (
             statusFilteredWorkshops.map((workshop) => (
               <WorkshopCard key={workshop.id} workshop={workshop} />
             ))

@@ -52,7 +52,7 @@ export const RewardsView = ({ rewards }: { rewards: Reward[] }) => {
       </div>
       <BlurFade inView delay={0.1}>
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mt-6">
-          {statusFilteredRewards ? (
+          {statusFilteredRewards.length > 0 ? (
             statusFilteredRewards.map((reward) => (
               <RewardCard key={reward.id} reward={reward} />
             ))

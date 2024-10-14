@@ -57,7 +57,7 @@ export const LecturesView = ({
       </div>
       <BlurFade inView delay={0.1}>
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mt-6">
-          {statusFilteredLectures ? (
+          {statusFilteredLectures.length > 0 ? (
             statusFilteredLectures.map((lecture) => (
               <LectureCard key={lecture.id} lecture={lecture} />
             ))
