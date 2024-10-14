@@ -10,6 +10,7 @@ import { OverviewItem } from "./overview-item";
 import { prisma } from "@/lib/db";
 import { Role } from "@prisma/client";
 import { BlurFade } from "@/components/ui/blur-fade";
+import UserAttendanceChart from "./charts/charts/user-attendance";
 
 const UserStats = async () => {
   const users = await prisma.user.findMany();
@@ -81,6 +82,24 @@ const UserStats = async () => {
           subTitle="Users that confirmed theirs presence on Workshop."
           icon={PresentationIcon}
           number={usersPresentAtWorkshop.length}
+        />
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 py-2">
+        <UserAttendanceChart
+          totalUsers={usersWithUserRole.length}
+          presentUsers={usersPresentAtEvent.length}
+        />
+        <UserAttendanceChart
+          totalUsers={usersWithUserRole.length}
+          presentUsers={usersPresentAtEvent.length}
+        />
+        <UserAttendanceChart
+          totalUsers={usersWithUserRole.length}
+          presentUsers={usersPresentAtEvent.length}
+        />
+        <UserAttendanceChart
+          totalUsers={usersWithUserRole.length}
+          presentUsers={usersPresentAtEvent.length}
         />
       </div>
     </BlurFade>
