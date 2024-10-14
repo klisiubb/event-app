@@ -27,7 +27,7 @@ export const OverviewItem = ({
         <TypingAnimation
           text={title}
           className="text-lg font-bold text-primary"
-          duration={100}
+          duration={50}
         />
         <Icon className="w-5 h-5 text-primary" />
       </CardHeader>

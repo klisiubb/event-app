@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { ChartContainer } from "@/components/ui/chart";
 import { BorderBeam } from "@/components/ui/border-beam";
+import { TypingAnimation } from "@/components/ui/typing-animation";
 
 type UserAttendanceChartProps = {
   value1Name: string;
@@ -73,9 +74,11 @@ export default function DualPieChart({
     <Card className="w-full relative overflow-hidden">
       <BorderBeam />
       <CardHeader>
-        <CardTitle className="text-lg font-bold text-primary">
-          {title}
-        </CardTitle>
+        <TypingAnimation
+          text={title}
+          className="text-lg font-bold text-primary text-left"
+          duration={50}
+        />
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
