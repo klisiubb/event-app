@@ -29,21 +29,6 @@ export const columns: ColumnDef<User>[] = [
     header: "Email address",
   },
   {
-    accessorKey: "role",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          className="p-0 m-0 flex items-center justify-center"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Role
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
-  {
     accessorKey: "id",
     header: "Actions",
     cell: ({ row }) => {
