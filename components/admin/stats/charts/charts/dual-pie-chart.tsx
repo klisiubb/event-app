@@ -13,19 +13,25 @@ import { ChartContainer } from "@/components/ui/chart";
 import { BorderBeam } from "@/components/ui/border-beam";
 
 type UserAttendanceChartProps = {
-  totalUsers: number;
-  presentUsers: number;
+  value1Name: string;
+  value1: number;
+  value2Name: string;
+  value2: number;
+  title: string;
+  description: string;
 };
 
-export default function UserAttendanceChart({
-  totalUsers,
-  presentUsers,
+export default function DualPieChart({
+  value1,
+  value1Name,
+  value2,
+  value2Name,
+  title,
+  description,
 }: UserAttendanceChartProps) {
-  const absentUsers = totalUsers - presentUsers;
-
   const data = [
-    { name: "Present", value: presentUsers },
-    { name: "Not Confirmed", value: absentUsers },
+    { name: value1Name, value: value1 },
+    { name: value2Name, value: value2 },
   ];
 
   const COLORS = ["hsl(var(--chart-1))", "hsl(var(--chart-5))"];
@@ -67,10 +73,10 @@ export default function UserAttendanceChart({
     <Card className="w-full relative overflow-hidden">
       <BorderBeam />
       <CardHeader>
-        <CardTitle>User Attendance Overview</CardTitle>
-        <CardDescription>
-          Comparison of registered users vs. confirmed attendees
-        </CardDescription>
+        <CardTitle className="text-lg font-bold text-primary">
+          {title}
+        </CardTitle>
+        <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer
@@ -109,10 +115,9 @@ export default function UserAttendanceChart({
             </PieChart>
           </ResponsiveContainer>
         </ChartContainer>
-        <div className="mt-4 text-left">
+        <div className="mt-4 flex justify-center">
           <p className="text-sm font-medium">
-            Total Registered Users: {totalUsers} | Confirmed Attendees:{" "}
-            {presentUsers}
+            {value1Name}: {value1} | {value2Name}: {value2}
           </p>
         </div>
       </CardContent>

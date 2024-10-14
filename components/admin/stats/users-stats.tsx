@@ -10,7 +10,7 @@ import { OverviewItem } from "./overview-item";
 import { prisma } from "@/lib/db";
 import { Role } from "@prisma/client";
 import { BlurFade } from "@/components/ui/blur-fade";
-import UserAttendanceChart from "./charts/charts/user-attendance";
+import DualPieChart from "./charts/charts/dual-pie-chart";
 
 const UserStats = async () => {
   const users = await prisma.user.findMany();
@@ -37,6 +37,9 @@ const UserStats = async () => {
       users.isPresentAtWorkshop === true &&
       users.workshopToAttendId !== null
   );
+
+  const totalUsersWithoutPresence =
+    usersWithUserRole.length - usersPresentAtEvent.length;
 
   return (
     <BlurFade inView delay={0.1}>
@@ -85,21 +88,37 @@ const UserStats = async () => {
         />
       </div>
       <div className="grid gap-4 grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 py-2">
-        <UserAttendanceChart
-          totalUsers={usersWithUserRole.length}
-          presentUsers={usersPresentAtEvent.length}
+        <DualPieChart
+          value1={totalUsersWithoutPresence}
+          value1Name="Registered Users"
+          value2={usersPresentAtEvent.length}
+          value2Name="Confirmed Attendees"
+          title="User Attendance Overview"
+          description="Comparison of registered users vs. confirmed attendees"
         />
-        <UserAttendanceChart
-          totalUsers={usersWithUserRole.length}
-          presentUsers={usersPresentAtEvent.length}
+        <DualPieChart
+          value1={totalUsersWithoutPresence}
+          value1Name="Registered Users"
+          value2={usersPresentAtEvent.length}
+          value2Name="Confirmed Attendees"
+          title="User Attendance Overview"
+          description="Comparison of registered users vs. confirmed attendees"
         />
-        <UserAttendanceChart
-          totalUsers={usersWithUserRole.length}
-          presentUsers={usersPresentAtEvent.length}
+        <DualPieChart
+          value1={totalUsersWithoutPresence}
+          value1Name="Registered Users"
+          value2={usersPresentAtEvent.length}
+          value2Name="Confirmed Attendees"
+          title="User Attendance Overview"
+          description="Comparison of registered users vs. confirmed attendees"
         />
-        <UserAttendanceChart
-          totalUsers={usersWithUserRole.length}
-          presentUsers={usersPresentAtEvent.length}
+        <DualPieChart
+          value1={totalUsersWithoutPresence}
+          value1Name="Registered Users"
+          value2={usersPresentAtEvent.length}
+          value2Name="Confirmed Attendees"
+          title="User Attendance Overview"
+          description="Comparison of registered users vs. confirmed attendees"
         />
       </div>
     </BlurFade>
