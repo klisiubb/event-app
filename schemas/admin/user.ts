@@ -9,6 +9,26 @@ export const UserFormSchema = z.object({
     })
     .uuid()
     .optional(),
+  lectureToLecture: z
+    .array(
+      z
+        .string({
+          required_error: "At least one lecture is required.",
+          invalid_type_error: "Lecture id must be a string.",
+        })
+        .uuid()
+    )
+    .optional(),
+  workshopToLecture: z
+    .array(
+      z
+        .string({
+          required_error: "At least one workshop is required.",
+          invalid_type_error: "Workshop id must be a string.",
+        })
+        .uuid()
+    )
+    .optional(),
   firstName: z
     .string({
       required_error: "First name is required.",

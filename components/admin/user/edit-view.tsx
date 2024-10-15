@@ -2,18 +2,20 @@
 import React from "react";
 import { TextForm } from "@/components/admin/form/text-input";
 import { UserFormSchema } from "@/schemas/admin/user";
-import { Role, User, Workshop } from "@prisma/client";
+import { Lecture, Role, Workshop } from "@prisma/client";
 import { UpdateUser } from "@/actions/admin/user/update";
-import { WorkshopSelectForm } from "../form/workshop-select";
-import { RoleSelectForm } from "../form/role-select";
 import { SelectForm } from "../form/universal-select";
+import { MultipleSelectForm } from "../form/multi-select";
+import { UserLW } from "@/types/user.type";
 
 export const UserEditView = ({
   user,
   workshops,
+  lectures,
 }: {
-  user: User;
+  user: UserLW;
   workshops: Workshop[];
+  lectures: Lecture[];
 }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
@@ -67,6 +69,40 @@ export const UserEditView = ({
           updateAction={UpdateUser}
           placeholderText="Select workshop from list..."
         />
+      ) : (
+        <></>
+      )}
+      {user.role === Role.LECTURER ? (
+        <>
+          <MultipleSelectForm
+            textFieldName="Lectures:"
+            editText="Edit lectures"
+            fieldName="lectureToLecture"
+            currentValue={user.lectureToLecture.map((lecture) => lecture.id)}
+            initialData={lectures.map((lecture) => ({
+              id: lecture.id,
+              name: lecture.topic,
+            }))}
+            objectId={user.id}
+            validationSchema={UserFormSchema.pick({ lectureToLecture: true })}
+            updateAction={UpdateUser}
+            placeholderText="Select lectures..."
+          />
+          <MultipleSelectForm
+            textFieldName="Workshops:"
+            editText="Edit workshop"
+            fieldName="workshopToLecture"
+            currentValue={user.workshopToLecture.map((workshop) => workshop.id)}
+            initialData={workshops.map((workshop) => ({
+              id: workshop.id,
+              name: workshop.topic,
+            }))}
+            objectId={user.id}
+            validationSchema={UserFormSchema.pick({ workshopToLecture: true })}
+            updateAction={UpdateUser}
+            placeholderText="Select workshops..."
+          />
+        </>
       ) : (
         <></>
       )}

@@ -31,10 +31,8 @@ model User {
   role                Role      @default(USER)
   workshopToAttend    Workshop? @relation(name: "WorkshopAttenders", fields: [workshopToAttendId], references: [id], onDelete: Cascade)
   workshopToAttendId  String?
-  workshopToLecture    Workshop? @relation(name: "WorkshopLecturers", fields: [workshopToLectureId], references: [id], onDelete: Cascade)
-  workshopToLectureId  String?
-  lectureToLecture    Lecture? @relation(name: "LectureLecturers", fields: [lectureToLectureId], references: [id], onDelete: Cascade)
-  lectureToLectureId  String?
+  workshopToLecture    Workshop[]  @relation(name: "WorkshopLecturers")
+  lectureToLecture    Lecture[] @relation(name: "LectureLecturers")
   isPresentAtEvent Boolean  @default(false)
   isPresentAtWorkshop Boolean  @default(false)
   points Int @default(0)

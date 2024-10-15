@@ -10,6 +10,11 @@ const Page = async ({ params }: { params: { userId: string } }) => {
   const { userId } = params;
   const user = await prisma.user.findUnique({
     where: { id: userId },
+    include: {
+      workshopToAttend: true,
+      lectureToLecture: true,
+      workshopToLecture: true,
+    },
   });
   const workshops = await prisma.workshop.findMany({
     where: {
@@ -17,7 +22,11 @@ const Page = async ({ params }: { params: { userId: string } }) => {
     },
     include: { attenders: true },
   });
-
+  const lectures = await prisma.lecture.findMany({
+    where: {
+      isPublished: true,
+    },
+  });
   const filteredWorkshops = workshops.filter(
     (workshop) =>
       workshop.attenders.length <
@@ -44,7 +53,11 @@ const Page = async ({ params }: { params: { userId: string } }) => {
           buttonText="Delete"
         />
       </div>
-      <UserEditView user={user} workshops={filteredWorkshops} />
+      <UserEditView
+        user={user}
+        workshops={filteredWorkshops}
+        lectures={lectures}
+      />
     </div>
   );
 };
