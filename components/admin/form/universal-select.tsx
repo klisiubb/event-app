@@ -5,8 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTransitionRouter } from "next-view-transitions";
 import { useState } from "react";
-import { TextFormProps } from "@/interfaces/admin/form";
-
+import { ZodSchema } from "zod";
 import {
   Form,
   FormControl,
@@ -26,32 +25,34 @@ import { Pencil } from "lucide-react";
 import { toast } from "sonner";
 
 import { ActionReturnType } from "@/interfaces/actionReturnType";
-import { ZodSchema } from "zod";
-import { Workshop } from "@prisma/client";
 
-export interface WorkshopSelectFormProps {
-  data: Workshop[];
+interface SelectFormProps<T> {
+  items: T[];
+  itemValue: (item: T) => string;
+  itemLabel: (item: T) => string;
+  value: string | null;
   editText: string;
   placeholderText: string;
   textFieldName: string;
   fieldName: string;
-  workshopToAttendId: string | null;
   objectId: string;
   validationSchema: ZodSchema;
   updateAction: (id: string, data: any) => Promise<ActionReturnType>;
 }
 
-export const WorkshopSelectForm = ({
+export const SelectForm = <T extends string | object>({
+  items,
+  itemValue,
+  itemLabel,
+  value,
   editText,
+  placeholderText,
   textFieldName,
-  workshopToAttendId,
-  objectId,
   fieldName,
+  objectId,
   validationSchema,
   updateAction,
-  placeholderText,
-  data,
-}: WorkshopSelectFormProps) => {
+}: SelectFormProps<T>) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleEdit = () => setIsEditing((prev) => !prev);
@@ -59,12 +60,11 @@ export const WorkshopSelectForm = ({
   const form = useForm<Partial<z.infer<typeof validationSchema>>>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
-      workshopToAttendId: workshopToAttendId || null,
+      [fieldName]: value || null,
     },
   });
 
   const { isSubmitting } = form.formState;
-
   const router = useTransitionRouter();
 
   const onSubmit: SubmitHandler<
@@ -99,12 +99,12 @@ export const WorkshopSelectForm = ({
 
       {!isEditing && (
         <p className="text-sm mt-2">
-          {workshopToAttendId ? (
-            data
-              .filter((workshop) => workshop.id === workshopToAttendId)
-              .map((workshop) => workshop.topic)
+          {value ? (
+            itemLabel(items.find((item) => itemValue(item) === value)!)
           ) : (
-            <span className="font-bold text-red-500">Workshop not yet set</span>
+            <span className="font-bold text-red-500">
+              {textFieldName} not yet set
+            </span>
           )}
         </p>
       )}
@@ -123,17 +123,30 @@ export const WorkshopSelectForm = ({
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      value={field.value || ""}
                     >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={placeholderText} />
-                        </SelectTrigger>
-                      </FormControl>
+                      <SelectTrigger>
+                        {field.value ? (
+                          <SelectValue>
+                            {itemLabel(
+                              items.find(
+                                (item) => itemValue(item) === field.value
+                              )!
+                            )}
+                          </SelectValue>
+                        ) : (
+                          <span className="text-gray-500">
+                            {placeholderText}
+                          </span>
+                        )}
+                      </SelectTrigger>
                       <SelectContent>
-                        {data.map((entry) => (
-                          <SelectItem key={entry.id} value={entry.id}>
-                            {entry.topic}
+                        {items.map((item) => (
+                          <SelectItem
+                            key={itemValue(item)}
+                            value={itemValue(item)}
+                          >
+                            {itemLabel(item)}
                           </SelectItem>
                         ))}
                       </SelectContent>

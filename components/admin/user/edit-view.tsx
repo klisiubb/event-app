@@ -5,6 +5,8 @@ import { UserFormSchema } from "@/schemas/admin/user";
 import { Role, User, Workshop } from "@prisma/client";
 import { UpdateUser } from "@/actions/admin/user/update";
 import { WorkshopSelectForm } from "../form/workshop-select";
+import { RoleSelectForm } from "../form/role-select";
+import { SelectForm } from "../form/universal-select";
 
 export const UserEditView = ({
   user,
@@ -35,13 +37,31 @@ export const UserEditView = ({
         updateAction={UpdateUser}
         placeholderText="E.g. `Nowak`"
       />
+      <SelectForm
+        items={Object.values(Role)}
+        itemValue={(role) => role}
+        itemLabel={(role) =>
+          role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()
+        }
+        value={user.role}
+        textFieldName="Role"
+        editText="Change role"
+        fieldName="role"
+        objectId={user.id}
+        validationSchema={UserFormSchema.pick({ role: true })}
+        updateAction={UpdateUser}
+        placeholderText="Select role from list..."
+      />
+
       {user.role === Role.USER ? (
-        <WorkshopSelectForm
-          data={workshops}
+        <SelectForm
+          items={workshops}
+          itemValue={(workshop) => workshop.id}
+          itemLabel={(workshop) => workshop.topic}
+          value={user.workshopToAttendId}
           textFieldName="Workshop"
           editText="Change workshop"
           fieldName="workshopToAttendId"
-          workshopToAttendId={user.workshopToAttendId}
           objectId={user.id}
           validationSchema={UserFormSchema.pick({ workshopToAttendId: true })}
           updateAction={UpdateUser}
