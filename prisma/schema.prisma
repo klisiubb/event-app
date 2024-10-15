@@ -33,6 +33,7 @@ model User {
   workshopToAttendId  String?
   isPresentAtEvent Boolean  @default(false)
   isPresentAtWorkshop Boolean  @default(false)
+  points Int @default(0)
 }
 
 model Lecture {
