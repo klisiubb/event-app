@@ -5,15 +5,12 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { User } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, Trash2 } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { Link } from "next-view-transitions";
-import DeleteDialog from "../delete-dialog";
-import { DeleteUser } from "@/actions/admin/user/delete";
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -27,6 +24,14 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "email",
     header: "Email address",
+  },
+  {
+    accessorKey: "role",
+    header: "Role",
+    cell: ({ row }) => {
+      const role: string = row.getValue("role");
+      return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
+    },
   },
   {
     accessorKey: "id",

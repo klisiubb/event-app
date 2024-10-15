@@ -1,10 +1,8 @@
 import {
   BookOpen,
   CircleDollarSign,
-  GraduationCap,
   LineChart,
   PencilRuler,
-  PersonStanding,
   QrCode,
   Trophy,
   Users,
@@ -37,19 +35,9 @@ export const adminRoutes = [
     href: "/admin/user",
   },
   {
-    icon: PersonStanding,
-    label: "Stuff",
-    href: "/admin/stuff",
-  },
-  {
     icon: CircleDollarSign,
     label: "Sponsors",
     href: "/admin/sponsor",
-  },
-  {
-    icon: GraduationCap,
-    label: "Lecturers",
-    href: "/admin/lecturer",
   },
   {
     icon: LineChart,

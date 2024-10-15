@@ -11,6 +11,19 @@ const Page = async ({ params }: { params: { userId: string } }) => {
   const user = await prisma.user.findUnique({
     where: { id: userId },
   });
+  const workshops = await prisma.workshop.findMany({
+    where: {
+      isPublished: true,
+    },
+    include: { attenders: true },
+  });
+
+  const filteredWorkshops = workshops.filter(
+    (workshop) =>
+      workshop.attenders.length <
+      (workshop.maxAttenders ? workshop.maxAttenders : 1)
+  ); //Only published workshops with free space
+
   if (!user) {
     notFound();
   }
@@ -31,7 +44,7 @@ const Page = async ({ params }: { params: { userId: string } }) => {
           buttonText="Delete"
         />
       </div>
-      <UserEditView user={user} />
+      <UserEditView user={user} workshops={filteredWorkshops} />
     </div>
   );
 };

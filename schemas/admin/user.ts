@@ -2,6 +2,13 @@ import { Role } from "@prisma/client";
 import { z } from "zod";
 
 export const UserFormSchema = z.object({
+  workshopToAttendId: z
+    .string({
+      required_error: "Workshop is required.",
+      invalid_type_error: "Workshop id must be a string.",
+    })
+    .uuid()
+    .optional(),
   firstName: z
     .string({
       required_error: "First name is required.",
