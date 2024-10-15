@@ -1,8 +1,9 @@
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import UserStats from "@/components/admin/stats/users-stats";
+import UserStats from "@/components/admin/stats/attendance-stats";
 import WorkshopStats from "@/components/admin/stats/workshop-stats";
 import LecturesStats from "@/components/admin/stats/lectures-stats";
+import AttendanceStats from "@/components/admin/stats/attendance-stats";
 export const dynamic = "force-dynamic";
 
 const Page = () => {
@@ -16,14 +17,14 @@ const Page = () => {
           Explore detailed insights across various categories
         </p>
       </div>
-      <Tabs defaultValue="users" className="space-y-4 py-4">
+      <Tabs defaultValue="attendance" className="space-y-4">
         <TabsList className="flex py-6 bg-secondary ">
-          <TabsTrigger value="users">Users</TabsTrigger>
+          <TabsTrigger value="attendance">Event attendance</TabsTrigger>
           <TabsTrigger value="workshops">Workshop</TabsTrigger>
           <TabsTrigger value="lectures">Lectures</TabsTrigger>
         </TabsList>
-        <TabsContent value="users" className="space-y-4">
-          <UserStats />
+        <TabsContent value="attendance" className="space-y-4">
+          <AttendanceStats />
         </TabsContent>
         <TabsContent value="workshops" className="space-y-4">
           <WorkshopStats />
