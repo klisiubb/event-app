@@ -3,6 +3,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { SidebarMain } from "@/components/navbar/sidebar-main";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
+import { BlurFade } from "@/components/ui/blur-fade";
+import { TypingAnimation } from "@/components/ui/typing-animation";
 
 const Page = async () => {
   const { getUser } = getKindeServerSession();
@@ -22,11 +24,15 @@ const Page = async () => {
       <h1 className="text-4xl md:text-6xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive mb-8">
         Hello, {user?.given_name}!
       </h1>
-      <p className=" text-sm lg:text-xl text-center md:mt-4">
-        Here you can manage all of the things. Choose must suitable option from
-        menu below.
-      </p>
-      <SidebarMain />
+      <TypingAnimation
+        text=" Here you can manage all of the things. Choose must suitable option from
+        menu below."
+        className="text-sm lg:text-lg text-center md:mt-4 font-normal"
+        duration={25}
+      />
+      <BlurFade inView delay={0.1}>
+        <SidebarMain />
+      </BlurFade>
     </div>
   );
 };
