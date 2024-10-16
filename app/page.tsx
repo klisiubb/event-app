@@ -8,7 +8,6 @@ const Page = async () => {
   const { isAuthenticated, getPermission } = getKindeServerSession();
   const text = `Welcome to the Event App, your one-stop solution for managing and
             attending events.`;
-  const isAdmin = await getPermission("admin");
   return (
     <div className="flex flex-col items-center justify-center min-h-screen  bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
       <section>
