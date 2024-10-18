@@ -17,6 +17,9 @@ For more details, feel free to ask during interviews.
 
 **This project is currently a work in progress.**
 
+Mobile app repository:
+[Click here](https://github.com/klisiubb/event-app-mobile)
+
 ## Demo
 
 Explore the live demo of the Event App at [event.klisiu.me](https://event.klisiu.me).
@@ -103,9 +106,9 @@ These experiences have greatly enhanced my problem-solving skills and understand
 
 ## Roadmap
 
-- [ ] Finish project to restore the previous version state.
+- [x] Finish project to restore the previous version state.
 - [ ] Add quizzes for workshops.
-- [ ] Build a statistics page for overall performance metrics.
+- [x] Build a statistics page for overall performance metrics.
 - [ ] Enhance email and notification features.
 - [ ] Implement a countdown timer for the start of events.
 - [ ] Explore additional features and improvements.
