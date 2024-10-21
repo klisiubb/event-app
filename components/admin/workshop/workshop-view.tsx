@@ -13,9 +13,9 @@ export default function WorkshopView({ workshop }: { workshop: Workshop }) {
             <Image
               src={workshop.imageUrl}
               alt={workshop.topic}
-              layout="fill"
-              objectFit="cover"
-              className="transition-transform duration-300 hover:scale-105"
+              width={1600}
+              height={900}
+              className="transition-transform duration-300 hover:scale-105 object-contain"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-muted">

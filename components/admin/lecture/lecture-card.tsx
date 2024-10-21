@@ -47,7 +47,7 @@ export default function LectureCard({
             <Image
               src={lecture.imageUrl}
               alt={lecture.topic}
-              className="transition-transform duration-300 hover:scale-105 object-cover"
+              className="transition-transform duration-300 hover:scale-105 object-contain"
               fill
             />
           ) : (

@@ -40,7 +40,7 @@ export default function sponsorCard({
             <Image
               src={sponsor.imageUrl}
               alt={sponsor.name}
-              className="transition-transform duration-300 hover:scale-105 object-cover"
+              className="transition-transform duration-300 hover:scale-105 object-contain"
               fill
             />
           ) : (

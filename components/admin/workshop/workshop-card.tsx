@@ -47,7 +47,7 @@ export default function WorkshopCard({
             <Image
               src={workshop.imageUrl}
               alt={workshop.topic}
-              className="transition-transform duration-300 hover:scale-105 object-cover"
+              className="transition-transform duration-300 hover:scale-105 object-contain"
               fill
             />
           ) : (

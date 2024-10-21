@@ -1,4 +1,4 @@
-import { CalendarIcon, ClockIcon, ImageIcon } from "lucide-react";
+import { ClockIcon, ImageIcon } from "lucide-react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sponsor } from "@prisma/client";
@@ -13,9 +13,9 @@ export default function sponsorView({ sponsor }: { sponsor: Sponsor }) {
             <Image
               src={sponsor.imageUrl}
               alt={sponsor.name}
-              layout="fill"
-              objectFit="cover"
-              className="transition-transform duration-300 hover:scale-105"
+              width={1600}
+              height={900}
+              className="transition-transform duration-300 hover:scale-105 object-contain"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-muted">
