@@ -27,7 +27,27 @@ Please note that most of the content requires an admin role for full access. If 
 
 ## Screenshots
 
-Screenshots coming soon.
+Some screenshots of admin panel. Video showing every functionality is coming soon.
+
+### Main admin panel view:
+
+[![Screenshot-1.png](https://i.postimg.cc/d1HLXzVf/Screenshot-1.png)](https://postimg.cc/cg3xtkY7)
+
+### Event attendance stats panel:
+
+[![Screenshot-2.png](https://i.postimg.cc/FHy1mfK3/Screenshot-2.png)](https://postimg.cc/PCqdQ5Y5)
+
+### Users management:
+
+[![Screenshot-3.png](https://i.postimg.cc/VLyC8PRy/Screenshot-3.png)](https://postimg.cc/3WBRX6V9)
+
+### Workshop setup:
+
+[![Screenshot-4.png](https://i.postimg.cc/kXFBP6G8/Screenshot-4.png)](https://postimg.cc/bsrzQvQN)
+
+### Workshops view with filtering by text/status:
+
+[![Screenshot-5.png](https://i.postimg.cc/2S0y3s4S/Screenshot-5.png)](https://postimg.cc/QFWhyn42)
 
 ## Environment Variables
 
@@ -112,6 +132,7 @@ These experiences have greatly enhanced my problem-solving skills and understand
 - [ ] Enhance email and notification features.
 - [ ] Implement a countdown timer for the start of events.
 - [ ] Explore additional features and improvements.
+- [ ] Build outstanding landing page
 
 ## Authors
 
