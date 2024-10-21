@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme";
 import { Toaster } from "sonner";
 import { ViewTransitions } from "next-view-transitions";
+import Navbar from "@/components/lading-page/navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -49,6 +50,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Navbar />
             {children}
             <Toaster richColors />
           </ThemeProvider>
