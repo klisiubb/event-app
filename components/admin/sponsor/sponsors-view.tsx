@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Search } from "lucide-react";
 import { useFilter } from "@/lib/use-filter";
 import CreateDialog from "../create-dialog";
-import { SponsorWithQRCode } from "@/types/sponsor-qrcode.type";
+import { SponsorWithQRCode } from "@/types/sponsor-types";
 import { SponsorFormSchema } from "@/schemas/admin/sponsor";
 import { CreateSponsor } from "@/actions/admin/sponsor/create";
 import SponsorCard from "./sponsor-card";

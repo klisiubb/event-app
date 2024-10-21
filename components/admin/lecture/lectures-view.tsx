@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import LectureCard from "./lecture-card";
 import { useFilter } from "@/lib/use-filter";
-import { LectureWithQRCode } from "@/types/lecture-qrcode.type";
+import { LectureWithQRCode } from "@/types/lecture-types";
 import CreateDialog from "../create-dialog";
 import { LectureFormSchema } from "@/schemas/admin/lecture";
 import { CreateLecture } from "@/actions/admin/lecture/create";

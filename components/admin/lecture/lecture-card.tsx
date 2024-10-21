@@ -21,7 +21,7 @@ import {
 import { formatDate, formatTime } from "@/lib/format-date-time";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { LectureWithQRCode } from "@/types/lecture-qrcode.type";
+import { LectureWithQRCode } from "@/types/lecture-types";
 import { QRDownloader } from "../qrcode-downloader";
 
 export default function LectureCard({

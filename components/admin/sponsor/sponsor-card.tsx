@@ -14,7 +14,7 @@ import { Edit, ImageIcon, MapPinIcon } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { DeleteSponsor } from "@/actions/admin/sponsor/delete";
-import { SponsorWithQRCode } from "@/types/sponsor-qrcode.type";
+import { SponsorWithQRCode } from "@/types/sponsor-types";
 import { QRDownloader } from "../qrcode-downloader";
 
 export default function sponsorCard({

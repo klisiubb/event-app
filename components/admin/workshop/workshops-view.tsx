@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useFilter } from "@/lib/use-filter";
 import WorkshopCard from "./workshop-card";
-import { WorkshopWithQRCode } from "@/types/workshop-qrcode.type";
+import { WorkshopWithQRCode } from "@/types/workshop-types";
 import CreateDialog from "../create-dialog";
 import { WorkshopFormSchema } from "@/schemas/admin/workshop";
 import { CreateWorkshop } from "@/actions/admin/workshop/create";

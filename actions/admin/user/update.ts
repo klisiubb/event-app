@@ -3,7 +3,7 @@
 import { ActionReturnType } from "@/interfaces/actionReturnType";
 import { prisma } from "@/lib/db";
 import { UserFormSchema } from "@/schemas/admin/user";
-import { UserLW } from "@/types/user.type";
+import { UserLW } from "@/types/user-types";
 import { Prisma, Role } from "@prisma/client";
 import { ZodError } from "zod";
 

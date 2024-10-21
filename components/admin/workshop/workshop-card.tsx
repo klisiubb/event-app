@@ -21,7 +21,7 @@ import { formatDate, formatTime } from "@/lib/format-date-time";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { DeleteWorkshop } from "@/actions/admin/workshop/delete";
-import { WorkshopWithQRCode } from "@/types/workshop-qrcode.type";
+import { WorkshopWithQRCode } from "@/types/workshop-types";
 import { QRDownloader } from "../qrcode-downloader";
 
 export default function WorkshopCard({

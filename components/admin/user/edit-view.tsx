@@ -6,7 +6,7 @@ import { Lecture, Role, Workshop } from "@prisma/client";
 import { UpdateUser } from "@/actions/admin/user/update";
 import { SelectForm } from "../form/universal-select";
 import { MultipleSelectForm } from "../form/multi-select";
-import { UserLW } from "@/types/user.type";
+import { UserLW } from "@/types/user-types";
 
 export const UserEditView = ({
   user,
