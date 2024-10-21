@@ -5,36 +5,37 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import React from "react";
 
 const Page = async () => {
-  const { isAuthenticated, getPermission } = getKindeServerSession();
+  const { isAuthenticated } = getKindeServerSession();
   const text = `Welcome to the Event App, your one-stop solution for managing and
             attending events.`;
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen  bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
-      <section>
-        <div className="flex max-w-[64rem] flex-col justify-center items-center gap-4">
-          <h1 className="font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
-            Event App
-          </h1>
-          <TypingAnimation
-            className="leading-normal text-muted-foreground sm:text-xl sm:leading-8 text-center"
-            text={text}
-            duration={50}
-          />
+    <>
+      <section
+        className="h-screen flex flex-col justify-center items-center gap-4"
+        id="landing"
+      >
+        <h1 className="font-bold text-6xl sm:text-6xl md:text-7xl lg:text-8xl bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
+          Event App
+        </h1>
+        <TypingAnimation
+          className="leading-normal text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground text-center px-4"
+          text={text}
+          duration={50}
+        />
 
-          <div className="space-x-4">
-            {(await isAuthenticated()) ? (
-              <Button asChild size="lg">
-                <LogoutLink>Log out </LogoutLink>
-              </Button>
-            ) : (
-              <Button asChild size="lg">
-                <LoginLink>Join us </LoginLink>
-              </Button>
-            )}
-          </div>
+        <div className="space-x-4 mt-4">
+          {(await isAuthenticated()) ? (
+            <Button asChild size="lg">
+              <LogoutLink>Log out</LogoutLink>
+            </Button>
+          ) : (
+            <Button asChild size="lg">
+              <LoginLink>Join us</LoginLink>
+            </Button>
+          )}
         </div>
       </section>
-    </div>
+    </>
   );
 };
 
