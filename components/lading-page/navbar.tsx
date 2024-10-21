@@ -7,6 +7,7 @@ import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { ModeToggle } from "../mode-toggle";
 const NavLink = ({
   href,
   children,
@@ -71,6 +72,7 @@ export default function Navbar() {
               Log out
             </NavLink>
           )}
+          <ModeToggle />
         </div>
 
         <div className="md:hidden">
@@ -90,7 +92,7 @@ export default function Navbar() {
 
       {isMenuOpen && (
         <div className="container md:hidden">
-          <div className="flex flex-col space-y-4 pb-4">
+          <div className="flex flex-col space-y-4 pb-4 ms-4">
             <NavLink prefetch href="/agenda">
               Agenda
             </NavLink>
@@ -113,6 +115,7 @@ export default function Navbar() {
                 Log out
               </NavLink>
             )}
+            <ModeToggle />
           </div>
         </div>
       )}
