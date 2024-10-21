@@ -23,7 +23,7 @@ export const ImageForm = ({
   return (
     <div className="mt-6 border rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        <div className="text-primary">Lecture image:</div>
+        <div className="text-primary">Image:</div>
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing && <span className="hover:font-bold">Cancel</span>}
           {!isEditing && !imageUrl && (
