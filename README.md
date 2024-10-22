@@ -29,6 +29,10 @@ Please note that most of the content requires an admin role for full access. If 
 
 Some screenshots of admin panel. Video showing every functionality is coming soon.
 
+#### Animated agenda for users:
+
+[![Screenshot-1.png](https://i.postimg.cc/fTNLkXRH/Screenshot-1.png)](https://postimg.cc/yWLBbD99)
+
 ### Main admin panel view:
 
 [![Screenshot-1.png](https://i.postimg.cc/d1HLXzVf/Screenshot-1.png)](https://postimg.cc/cg3xtkY7)
