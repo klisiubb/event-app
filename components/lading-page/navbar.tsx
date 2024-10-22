@@ -49,11 +49,11 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex md:items-center md:gap-6">
+          <NavLink prefetch href="/">
+            Home
+          </NavLink>
           <NavLink prefetch href="/agenda">
             Agenda
-          </NavLink>
-          <NavLink prefetch href="/about">
-            About
           </NavLink>
           {isAdmin ? (
             <NavLink prefetch href="/admin">
