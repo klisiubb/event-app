@@ -22,36 +22,37 @@ Mobile app repository:
 
 ## Demo
 
-Explore the live demo of the Event App at [event.klisiu.me](https://event.klisiu.me).
-Please note that most of the content requires an admin role for full access. If you'd like to see additional features, feel free to request access. Additionally, a YouTube project showcase will be available soon, or you can view the app during an interview.
+Explore the live demo [click here](https://event.klisiu.me).
+
+Please note that most of the content requires an admin role for full access. Feel free to request access. Additionally, a YouTube project showcase will be available soon, or you can view the app during an interview.
 
 ## Screenshots
 
-Some screenshots of admin panel. Video showing every functionality is coming soon.
+Some screenshots of website, mostly of hidden admin panel. Video showing every functionality is coming soon.
 
-#### Animated agenda for users:
+### Animated agenda for users:
 
-[![Screenshot-1.png](https://i.postimg.cc/fTNLkXRH/Screenshot-1.png)](https://postimg.cc/yWLBbD99)
+[![Animated agenda for users](https://i.postimg.cc/fTNLkXRH/Screenshot-1.png)](https://postimg.cc/yWLBbD99)
 
 ### Main admin panel view:
 
-[![Screenshot-1.png](https://i.postimg.cc/d1HLXzVf/Screenshot-1.png)](https://postimg.cc/cg3xtkY7)
+[![Main admin panel view](https://i.postimg.cc/d1HLXzVf/Screenshot-1.png)](https://postimg.cc/cg3xtkY7)
 
 ### Event attendance stats panel:
 
-[![Screenshot-2.png](https://i.postimg.cc/FHy1mfK3/Screenshot-2.png)](https://postimg.cc/PCqdQ5Y5)
+[![Event attendance stats panel](https://i.postimg.cc/FHy1mfK3/Screenshot-2.png)](https://postimg.cc/PCqdQ5Y5)
 
 ### Users management:
 
-[![Screenshot-3.png](https://i.postimg.cc/VLyC8PRy/Screenshot-3.png)](https://postimg.cc/3WBRX6V9)
+[![Users management](https://i.postimg.cc/VLyC8PRy/Screenshot-3.png)](https://postimg.cc/3WBRX6V9)
 
 ### Workshop setup:
 
-[![Screenshot-4.png](https://i.postimg.cc/kXFBP6G8/Screenshot-4.png)](https://postimg.cc/bsrzQvQN)
+[![Workshop setup](https://i.postimg.cc/kXFBP6G8/Screenshot-4.png)](https://postimg.cc/bsrzQvQN)
 
 ### Workshops view with filtering by text/status:
 
-[![Screenshot-5.png](https://i.postimg.cc/2S0y3s4S/Screenshot-5.png)](https://postimg.cc/QFWhyn42)
+[![Workshops view with filtering by text/status](https://i.postimg.cc/2S0y3s4S/Screenshot-5.png)](https://postimg.cc/QFWhyn42)
 
 ## Environment Variables
 
@@ -96,10 +97,18 @@ cd event-app
 
 Fill out the `.env` file with the necessary environment variables.
 
+You need Kinde & UploadThing accounts and PostgreSQL db.
+
 **Install dependencies:**
 
 ```bash
 bun install
+```
+
+**Migrate db:**
+
+```bash
+bunx prisma migrate dev
 ```
 
 **Start the development server:**
@@ -134,13 +143,9 @@ These experiences have greatly enhanced my problem-solving skills and understand
 - [ ] Add quizzes for workshops.
 - [x] Build a statistics page for overall performance metrics.
 - [ ] Enhance email and notification features.
-- [ ] Implement a countdown timer for the start of events.
+- [x] Implement a countdown timer for the start of events.
 - [ ] Explore additional features and improvements.
 - [ ] Build outstanding landing page
-
-## Authors
-
-- [klisiubb](https://www.github.com/klisiubb)
 
 ## License
 
