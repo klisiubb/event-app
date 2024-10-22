@@ -1,13 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { ModeToggle } from "../mode-toggle";
+import { Link } from "next-view-transitions";
 const NavLink = ({
   href,
   children,
