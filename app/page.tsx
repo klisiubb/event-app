@@ -28,20 +28,22 @@ const Page = async () => {
           text={text}
           duration={25}
         />
-        <div className="space-x-4 mt-4">
-          {(await isAuthenticated()) ? (
-            <Button asChild size="lg">
-              <LogoutLink>Log out</LogoutLink>
+        <BlurFade inView duration={1}>
+          <div className="space-x-4 mt-4">
+            {(await isAuthenticated()) ? (
+              <Button asChild size="lg">
+                <LogoutLink>Log out</LogoutLink>
+              </Button>
+            ) : (
+              <Button asChild size="lg">
+                <LoginLink>Join the wait list</LoginLink>
+              </Button>
+            )}
+            <Button variant="outline" asChild size="lg">
+              <Link href="/agenda">Explore agenda</Link>
             </Button>
-          ) : (
-            <Button asChild size="lg">
-              <LoginLink>Join the wait list</LoginLink>
-            </Button>
-          )}
-          <Button variant="outline" asChild size="lg">
-            <Link href="/agenda">Explore agenda</Link>
-          </Button>
-        </div>
+          </div>
+        </BlurFade>
       </section>
       <section
         className="flex flex-col justify-center items-center h-screen gap-4"
