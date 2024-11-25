@@ -3,13 +3,10 @@ import StatsCard from "@/components/lading-page/stats-card";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { Button } from "@/components/ui/button";
 import { TypingAnimation } from "@/components/ui/typing-animation";
-import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Link } from "next-view-transitions";
 import React from "react";
 
 const Page = async () => {
-  const { isAuthenticated } = await getKindeServerSession();
   const text = `Welcome to the Event App, your one-stop solution for managing and attending events.`;
   const eventDate = new Date("2025-05-30T06:00:00Z");
 
@@ -29,15 +26,6 @@ const Page = async () => {
         />
         <BlurFade inView duration={1}>
           <div className="flex flex-wrap justify-center gap-4">
-            {(await isAuthenticated()) ? (
-              <Button asChild size="lg">
-                <LogoutLink>Log out</LogoutLink>
-              </Button>
-            ) : (
-              <Button asChild size="lg">
-                <LoginLink>Join the wait list</LoginLink>
-              </Button>
-            )}
             <Button variant="outline" asChild size="lg">
               <Link href="/agenda">Explore agenda</Link>
             </Button>

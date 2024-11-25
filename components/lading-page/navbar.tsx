@@ -1,41 +1,13 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { ModeToggle } from "../mode-toggle";
 import { Link } from "next-view-transitions";
-const NavLink = ({
-  href,
-  children,
-  prefetch,
-}: {
-  href: string;
-  children: React.ReactNode;
-  prefetch: boolean;
-}) => {
-  const pathname = usePathname();
-  const isActive = pathname === href;
-
-  return (
-    <Link
-      href={href}
-      className={`text-sm font-medium transition-colors hover:text-primary ${
-        isActive ? "text-primary" : "text-muted-foreground"
-      }`}
-      prefetch={prefetch}
-    >
-      {children}
-    </Link>
-  );
-};
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isAuthenticated, getPermission } = useKindeBrowserClient();
-  const isAdmin = getPermission("admin");
 
   return (
     <nav className="fixed top-0 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50 border-b border-border">
@@ -50,28 +22,13 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex md:items-center md:gap-6">
-          <NavLink prefetch href="/">
+          <Link prefetch href="/">
             Home
-          </NavLink>
-          <NavLink prefetch href="/agenda">
+          </Link>
+          <Link prefetch href="/agenda">
             Agenda
-          </NavLink>
-          {isAdmin?.isGranted ? (
-            <NavLink prefetch href="/admin">
-              Admin panel
-            </NavLink>
-          ) : (
-            <></>
-          )}
-          {isAuthenticated ? (
-            <NavLink href="/api/auth/logout" prefetch={false}>
-              Log out
-            </NavLink>
-          ) : (
-            <NavLink href="/api/auth/login" prefetch={false}>
-              Login
-            </NavLink>
-          )}
+          </Link>
+
           <ModeToggle />
         </div>
 
@@ -93,28 +50,13 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="container md:hidden">
           <div className="flex flex-col space-y-4 pb-4 ms-4">
-            <NavLink prefetch href="/agenda">
+            <Link prefetch href="/agenda">
               Agenda
-            </NavLink>
-            <NavLink prefetch href="/about">
+            </Link>
+            <Link prefetch href="/about">
               About
-            </NavLink>
-            {isAdmin ? (
-              <NavLink prefetch href="/admin">
-                Admin panel
-              </NavLink>
-            ) : (
-              <></>
-            )}
-            {isAuthenticated ? (
-              <NavLink href="/api/auth/logout" prefetch={false}>
-                Log out
-              </NavLink>
-            ) : (
-              <NavLink href="/api/auth/login" prefetch={false}>
-                Log out
-              </NavLink>
-            )}
+            </Link>
+
             <ModeToggle />
           </div>
         </div>

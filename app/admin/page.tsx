@@ -1,5 +1,5 @@
 import React from "react";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+
 import { SidebarMain } from "@/components/navbar/sidebar-main";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
@@ -7,8 +7,6 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { TypingAnimation } from "@/components/ui/typing-animation";
 
 const Page = async () => {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10 flex flex-col justify-center items-center relative overflow-hidden">
       <AnimatedGridPattern
@@ -21,9 +19,8 @@ const Page = async () => {
           "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12"
         )}
       />
-      <h1 className="text-4xl md:text-6xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive mb-8">
-        Hello, {user?.given_name}!
-      </h1>
+      <h1 className="text-4xl md:text-6xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive mb-8"></h1>
+      Hello!
       <TypingAnimation
         text=" Here you can manage all of the things. Choose must suitable option from
         menu below."
