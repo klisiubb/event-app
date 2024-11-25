@@ -11,7 +11,7 @@ export async function GET() {
 
   if (!user || user == null || !user.id)
     throw new Error("something went wrong with authentication" + user);
-
+  const URL = process.env.NEXT_PUBLIC_WEBSITE_URL || "http://localhost:3000/";
   let dbUser = await prisma.user.findUnique({
     where: { id: user.id },
   });
@@ -27,5 +27,5 @@ export async function GET() {
     });
   }
 
-  return NextResponse.redirect("http://localhost:3000/");
+  return NextResponse.redirect(URL);
 }
