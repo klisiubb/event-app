@@ -36,6 +36,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, getPermission } = useKindeBrowserClient();
   const isAdmin = getPermission("admin");
+
   return (
     <nav className="fixed top-0 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50 border-b border-border">
       <div className="container flex h-16 items-center justify-between">
@@ -55,7 +56,7 @@ export default function Navbar() {
           <NavLink prefetch href="/agenda">
             Agenda
           </NavLink>
-          {isAdmin ? (
+          {isAdmin?.isGranted ? (
             <NavLink prefetch href="/admin">
               Admin panel
             </NavLink>
@@ -68,7 +69,7 @@ export default function Navbar() {
             </NavLink>
           ) : (
             <NavLink href="/api/auth/login" prefetch={false}>
-              Log out
+              Login
             </NavLink>
           )}
           <ModeToggle />
