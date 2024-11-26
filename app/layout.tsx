@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { StackProvider, StackTheme } from "@stackframe/stack";
+import { stackServerApp } from "../stack";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme";
@@ -44,7 +46,7 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={inter.className}><StackProvider app={stackServerApp}><StackTheme>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -55,7 +57,7 @@ export default function RootLayout({
             {children}
             <Toaster richColors />
           </ThemeProvider>
-        </body>
+        </StackTheme></StackProvider></body>
       </html>
     </ViewTransitions>
   );
