@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/providers/theme";
 import { Toaster } from "sonner";
 import { ViewTransitions } from "next-view-transitions";
 import Navbar from "@/components/lading-page/navbar";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,18 +47,27 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en">
-        <body className={inter.className}><StackProvider app={stackServerApp}><StackTheme>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
-            {children}
-            <Toaster richColors />
-          </ThemeProvider>
-        </StackTheme></StackProvider></body>
+        <Script
+          async
+          src="https://umami.klisiu.me/script.js"
+          data-website-id="64d2e6f4-90a8-424f-882e-6a05eb93024c"
+        />
+        <body className={inter.className}>
+          <StackProvider app={stackServerApp}>
+            <StackTheme>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <Navbar />
+                {children}
+                <Toaster richColors />
+              </ThemeProvider>
+            </StackTheme>
+          </StackProvider>
+        </body>
       </html>
     </ViewTransitions>
   );
