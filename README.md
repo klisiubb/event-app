@@ -7,18 +7,15 @@ The **Event App** was my engineering thesis project, developed to manage and str
 - Engage participants through rewards for active involvement.
 - Generate customized/branded QR codes.
 - Showcase sponsors and partners.
-- Manage volunteers.
+- Manage users, volunteers and lecturers.
 
-In this rewrite, I am modernizing the original version from the ground up. Once the web application is complete, I will begin redevelopment of the mobile application (scanning QR codes & drawing rewards) from scratch.
+In this rewrite, I am modernizing the original version from the ground up. Once the web application is complete, I will begin redevelopment of the mobile application (scanning QR codes & drawing rewards) from scratch after I finish this project..
 
 The original code is securely stored in private repositories.
 
 For more details, feel free to ask during interviews.
 
 **This project is currently a work in progress.**
-
-Mobile app repository:
-[Click here](https://github.com/klisiubb/event-app-mobile)
 
 ## Demo
 
@@ -58,12 +55,10 @@ Some screenshots of website, mostly of hidden admin panel. Video showing every f
 
 To run this project, you will need to add the following environment variables to your `.env` file:
 
-- `KINDE_CLIENT_ID`: Your Kinde application's client ID used for authentication.
-- `KINDE_CLIENT_SECRET`: Your Kinde application's client secret used for authentication.
-- `KINDE_ISSUER_URL`: The URL for your Kinde issuer, which handles the OpenID Connect (OIDC) authorization flow.
-- `KINDE_SITE_URL`: The base URL of your application (usually `http://localhost:3000` for local development).
-- `KINDE_POST_LOGOUT_REDIRECT_URL`: The URL to redirect users to after logging out of the application. Should end in `/success` to grab user data.
-- `KINDE_POST_LOGIN_REDIRECT_URL`: The URL to redirect users to after a successful login.
+- `NEXT_PUBLIC_STACK_PROJECT_ID`: Obtained from Stack-Auth dashboard when creating app.
+- `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`: Obtained from Stack-Auth dashboard when creating app.
+- `STACK_SECRET_SERVER_KEY`: Obtained from Stack-Auth dashboard when creating app.
+- `SVIX_WEBHOOK_SIGNING_SECRET`: Secret used to sign webhooks. Obtained from Stack-Auth dashboard.
 - `DATABASE_URL`: The URL to connect to your PostgreSQL database (contains credentials, host, and port information).
 - `UPLOADTHING_SECRET`: Your secret key for using the UploadThing API.
 - `UPLOADTHING_APP_ID`: Your application ID for using the UploadThing API.
@@ -97,7 +92,7 @@ cd event-app
 
 Fill out the `.env` file with the necessary environment variables.
 
-You need Kinde & UploadThing accounts and PostgreSQL db.
+You need Stack-Auth & UploadThing accounts and PostgreSQL db.
 
 **Install dependencies:**
 
@@ -123,8 +118,6 @@ bun dev
 localhost:3000
 ```
 
-> **Note:** Ensure you assign the admin role to your account in Kinde to access full features.
-
 ## Lessons Learned
 
 Throughout this project, I gained valuable experience with new technologies, including Next.js 14, Zod, and React Hook Form. This was my first significant project built from the ground up, diverging from the typical approach of following a tutorial-based project. It presented numerous challenges commonly associated with large-scale applications, such as debugging and managing complexity.
@@ -144,8 +137,11 @@ These experiences have greatly enhanced my problem-solving skills and understand
 - [x] Build a statistics page for overall performance metrics.
 - [ ] Enhance email and notification features.
 - [x] Implement a countdown timer for the start of events.
+- [ ] Build outstanding landing page.
+- [ ] Change default QR codes with branding images.
+- [ ] Add sponsors/partners and rewards to landing page.
+- [ ] Create stunning landing page.
 - [ ] Explore additional features and improvements.
-- [ ] Build outstanding landing page
 
 ## License
 
