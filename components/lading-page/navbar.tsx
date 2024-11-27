@@ -28,7 +28,9 @@ export default function Navbar() {
           <Link prefetch href="/agenda">
             Agenda
           </Link>
-
+          <Link prefetch href="/admin">
+            Admin panel
+          </Link>
           <ModeToggle />
         </div>
 
@@ -52,9 +54,6 @@ export default function Navbar() {
           <div className="flex flex-col space-y-4 pb-4 ms-4">
             <Link prefetch href="/agenda">
               Agenda
-            </Link>
-            <Link prefetch href="/about">
-              About
             </Link>
 
             <ModeToggle />

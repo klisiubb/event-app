@@ -1,3 +1,4 @@
+"use client";
 import Countdown from "@/components/lading-page/countdown";
 import StatsCard from "@/components/lading-page/stats-card";
 import { BlurFade } from "@/components/ui/blur-fade";
@@ -6,10 +7,12 @@ import { TypingAnimation } from "@/components/ui/typing-animation";
 import { Link } from "next-view-transitions";
 import React from "react";
 
-const Page = async () => {
+import { useStackApp, useUser } from "@stackframe/stack";
+const Page = () => {
   const text = `Welcome to the Event App, your one-stop solution for managing and attending events.`;
   const eventDate = new Date("2025-05-30T06:00:00Z");
-
+  const user = useUser();
+  const app = useStackApp();
   return (
     <div className="flex flex-col">
       <section
@@ -26,9 +29,28 @@ const Page = async () => {
         />
         <BlurFade inView duration={1}>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button variant="outline" asChild size="lg">
+            <Button variant="default" asChild size="lg">
               <Link href="/agenda">Explore agenda</Link>
             </Button>
+            {user ? (
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={async () => await user.signOut()}
+              >
+                Sign out
+              </Button>
+            ) : (
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={async () => {
+                  await app.signInWithOAuth("google");
+                }}
+              >
+                Sign in
+              </Button>
+            )}
           </div>
         </BlurFade>
       </section>
