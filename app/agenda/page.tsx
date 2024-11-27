@@ -2,6 +2,9 @@ import { prisma } from "@/lib/db";
 import React from "react";
 import Agenda from "@/components/lading-page/agenda";
 
+export const revalidate = 30;
+export const dynamic = "force-dynamic";
+
 const Page = async () => {
   const workshops = await prisma.workshop.findMany({
     where: {
