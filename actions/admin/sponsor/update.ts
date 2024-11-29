@@ -3,6 +3,7 @@
 import { ActionReturnType } from "@/interfaces/actionReturnType";
 import { prisma } from "@/lib/db";
 import { SponsorFormSchema } from "@/schemas/admin/sponsor";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Prisma, Sponsor } from "@prisma/client";
 import { ZodError } from "zod";
 
@@ -10,6 +11,16 @@ export async function UpdateSponsor(
   id: string,
   data: Partial<Sponsor>
 ): Promise<ActionReturnType> {
+  const { getUser, getRoles } = getKindeServerSession();
+  const user = await getUser();
+  const roles = await getRoles();
+  const isAdmin = roles?.some((role) => role.key === "admin") || false;
+  if (!isAdmin || !user) {
+    return {
+      message: "Not authorized.",
+      status: 401,
+    };
+  }
   try {
     await SponsorFormSchema.partial().safeParseAsync(data);
 
