@@ -1,12 +1,20 @@
 import { prisma } from "@/lib/db";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import React from "react";
 import GoBackButton from "@/components/admin/go-back-button";
 import DeleteDialog from "@/components/admin/delete-dialog";
 import { DeleteUser } from "@/actions/admin/user/delete";
 import { UserEditView } from "@/components/admin/user/edit-view";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const Page = async ({ params }: { params: { userId: string } }) => {
+  const { getUser, getRoles } = getKindeServerSession();
+  const userKinde = await getUser();
+  const roles = await getRoles();
+  const isAdmin = roles?.some((role) => role.key === "admin") || false;
+  if (!isAdmin || !userKinde) {
+    return redirect("/");
+  }
   const { userId } = params;
   const user = await prisma.user.findUnique({
     where: { id: userId },

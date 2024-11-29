@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/db";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import React from "react";
 
 import PublishButton from "@/components/admin/form/publish-button";
@@ -9,8 +9,16 @@ import LectureView from "@/components/admin/lecture/lecture-view";
 import DeleteDialog from "@/components/admin/delete-dialog";
 import { DeleteLecture } from "@/actions/admin/lecture/delete";
 import { LectureEditView } from "@/components/admin/lecture/edit-view";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const Page = async ({ params }: { params: { lectureId: string } }) => {
+  const { getUser, getRoles } = getKindeServerSession();
+  const userKinde = await getUser();
+  const roles = await getRoles();
+  const isAdmin = roles?.some((role) => role.key === "admin") || false;
+  if (!isAdmin || !userKinde) {
+    return redirect("/");
+  }
   const { lectureId } = params;
   const lecture = await prisma.lecture.findUnique({
     where: { id: lectureId },

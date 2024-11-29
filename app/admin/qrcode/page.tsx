@@ -8,8 +8,21 @@ import { QRCodeFormSchema } from "@/schemas/admin/qrcode";
 import { CreateQRCode } from "@/actions/admin/qrcode/create";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { redirect } from "next/navigation";
 
 const Page = () => {
+  const { getUser, getAccessToken, isLoading } = useKindeBrowserClient();
+  const user = getUser();
+  const token = getAccessToken();
+  const isAdmin = token?.roles?.some((role) => role.key === "admin") || false;
+
+  if (isLoading) {
+    <>Loading...</>;
+  }
+  if (!user || !isAdmin) {
+    redirect("/");
+  }
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10 flex flex-col justify-center items-center relative overflow-hidden">
       <AnimatedGridPattern

@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/db";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import React from "react";
 import PublishButton from "@/components/admin/form/publish-button";
 import GoBackButton from "@/components/admin/go-back-button";
@@ -8,8 +8,16 @@ import { UpdateReward } from "@/actions/admin/reward/update";
 import { DeleteReward } from "@/actions/admin/reward/delete";
 import RewardView from "@/components/admin/reward/reward-view";
 import { RewardEditView } from "@/components/admin/reward/edit-view";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const Page = async ({ params }: { params: { rewardId: string } }) => {
+  const { getUser, getRoles } = getKindeServerSession();
+  const userKinde = await getUser();
+  const roles = await getRoles();
+  const isAdmin = roles?.some((role) => role.key === "admin") || false;
+  if (!isAdmin || !userKinde) {
+    return redirect("/");
+  }
   const { rewardId } = params;
   const reward = await prisma.reward.findUnique({
     where: { id: rewardId },

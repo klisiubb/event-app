@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/db";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import React from "react";
 import PublishButton from "@/components/admin/form/publish-button";
 import GoBackButton from "@/components/admin/go-back-button";
@@ -9,8 +9,16 @@ import { UpdateQRcode } from "@/actions/admin/qrcode/update";
 import { DeleteQRCode } from "@/actions/admin/qrcode/delete";
 import QRCodeView from "@/components/admin/qrcode/qrcode-view";
 import { QRCodeEditView } from "@/components/admin/qrcode/edit-view";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const Page = async ({ params }: { params: { qrcodeId: string } }) => {
+  const { getUser, getRoles } = getKindeServerSession();
+  const userKinde = await getUser();
+  const roles = await getRoles();
+  const isAdmin = roles?.some((role) => role.key === "admin") || false;
+  if (!isAdmin || !userKinde) {
+    return redirect("/");
+  }
   const { qrcodeId } = params;
   const qrcode = await prisma.qrCode.findUnique({
     where: { id: qrcodeId },

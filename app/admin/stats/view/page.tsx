@@ -1,12 +1,20 @@
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import UserStats from "@/components/admin/stats/attendance-stats";
 import WorkshopStats from "@/components/admin/stats/workshop-stats";
 import LecturesStats from "@/components/admin/stats/lectures-stats";
 import AttendanceStats from "@/components/admin/stats/attendance-stats";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { redirect } from "next/navigation";
 export const dynamic = "force-dynamic";
 
-const Page = () => {
+const Page = async () => {
+  const { getUser, getRoles } = getKindeServerSession();
+  const userKinde = await getUser();
+  const roles = await getRoles();
+  const isAdmin = roles?.some((role) => role.key === "admin") || false;
+  if (!isAdmin || !userKinde) {
+    return redirect("/");
+  }
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10">
       <div className="max-w-3xl mx-auto mb-10 text-center">
