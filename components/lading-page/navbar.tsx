@@ -5,10 +5,17 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { ModeToggle } from "../mode-toggle";
 import { Link } from "next-view-transitions";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { isAuthenticated, getAccessToken, isLoading } =
+    useKindeBrowserClient();
+  const token = getAccessToken();
+  const isAdmin = token?.roles?.some((role) => role.key === "admin") || false;
+  if (isLoading) {
+    <>Loading...</>;
+  }
   return (
     <nav className="fixed top-0 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50 border-b border-border">
       <div className="container flex h-16 items-center justify-between">
@@ -28,9 +35,30 @@ export default function Navbar() {
           <Link prefetch href="/agenda">
             Agenda
           </Link>
-          <Link prefetch href="/admin">
-            Admin panel
-          </Link>
+          {isAdmin ? (
+            <Link prefetch href="/admin">
+              Admin panel
+            </Link>
+          ) : (
+            <></>
+          )}
+          {isAuthenticated ? (
+            <Link
+              href="/api/auth/logout"
+              className="hover:text-primary"
+              prefetch={false}
+            >
+              Log out
+            </Link>
+          ) : (
+            <Link
+              href="/api/auth/login"
+              className="hover:text-primary"
+              prefetch={false}
+            >
+              Log in
+            </Link>
+          )}
           <ModeToggle />
         </div>
 
@@ -52,10 +80,36 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="container md:hidden">
           <div className="flex flex-col space-y-4 pb-4 ms-4">
+            <Link prefetch href="/">
+              Home
+            </Link>
             <Link prefetch href="/agenda">
               Agenda
             </Link>
-
+            {isAdmin ? (
+              <Link prefetch href="/admin">
+                Admin panel
+              </Link>
+            ) : (
+              <></>
+            )}
+            {isAuthenticated ? (
+              <Link
+                href="/api/auth/logout"
+                className="hover:text-primary"
+                prefetch={false}
+              >
+                Log out
+              </Link>
+            ) : (
+              <Link
+                href="/api/auth/login"
+                className="hover:text-primary"
+                prefetch={false}
+              >
+                Log in
+              </Link>
+            )}
             <ModeToggle />
           </div>
         </div>
