@@ -4,7 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme";
 import { Toaster } from "sonner";
 import { ViewTransitions } from "next-view-transitions";
-import Navbar from "@/components/lading-page/navbar";
+import Navbar from "@/components/landing-page/navbar";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
