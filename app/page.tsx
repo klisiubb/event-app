@@ -1,24 +1,26 @@
 "use client";
-import Countdown from "@/components/lading-page/countdown";
-import StatsCard from "@/components/lading-page/stats-card";
-import { BlurFade } from "@/components/ui/blur-fade";
-import { Button } from "@/components/ui/button";
-import { TypingAnimation } from "@/components/ui/typing-animation";
-import {
-  LoginLink,
-  LogoutLink,
-  useKindeBrowserClient,
-} from "@kinde-oss/kinde-auth-nextjs";
-import { Link } from "next-view-transitions";
+
+import { DiscordSection } from "@/components/landing-page/discord";
+import { FAQSection } from "@/components/landing-page/faq";
+import HeroSection from "@/components/landing-page/hero";
+import NewEditionSection from "@/components/landing-page/new-edition";
+
+import PercsSection from "@/components/landing-page/percs";
+
 import React from "react";
+import Footer from "@/components/landing-page/footer";
 
 const Page = () => {
-  const text = `Welcome to the Event App, your one-stop solution for managing and attending events.`;
-  const eventDate = new Date("2025-05-30T06:00:00Z");
-  const { isAuthenticated } = useKindeBrowserClient();
-
   return (
-    <div className="flex flex-col">
+    <>
+      <HeroSection />
+      <NewEditionSection />
+      <PercsSection />
+      <DiscordSection />
+      <FAQSection />
+      <Footer />
+    </>
+    /* <div className="flex flex-col">
       <section
         className="h-screen flex flex-col justify-center items-center px-4"
         id="landing"
@@ -78,6 +80,7 @@ const Page = () => {
         </BlurFade>
       </section>
     </div>
+  */
   );
 };
 

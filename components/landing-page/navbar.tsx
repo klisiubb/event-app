@@ -30,14 +30,14 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex md:items-center md:gap-6">
-          <Link prefetch href="/">
+          <Link className="hover:text-primary" prefetch href="/">
             Home
           </Link>
-          <Link prefetch href="/agenda">
+          <Link className="hover:text-primary" prefetch href="/agenda">
             Agenda
           </Link>
           {isAdmin ? (
-            <Link prefetch href="/admin">
+            <Link className="hover:text-primary" prefetch href="/admin">
               Admin panel
             </Link>
           ) : (
@@ -81,14 +81,14 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="container md:hidden">
           <div className="flex flex-col space-y-4 pb-4 ms-4">
-            <Link prefetch href="/">
+            <Link className="hover:text-primary" prefetch href="/">
               Home
             </Link>
-            <Link prefetch href="/agenda">
+            <Link className="hover:text-primary" prefetch href="/agenda">
               Agenda
             </Link>
             {isAdmin ? (
-              <Link prefetch href="/admin">
+              <Link className="hover:text-primary" prefetch href="/admin">
                 Admin panel
               </Link>
             ) : (

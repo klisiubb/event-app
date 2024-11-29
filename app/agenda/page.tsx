@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/db";
 import React from "react";
-import Agenda from "@/components/lading-page/agenda";
+import Agenda from "@/components/landing-page/agenda";
 
 export const revalidate = 30;
 export const dynamic = "force-dynamic";
