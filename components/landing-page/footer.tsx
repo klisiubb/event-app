@@ -1,5 +1,4 @@
 import { Link } from "next-view-transitions";
-import { Separator } from "../ui/separator";
 
 const sections = [
   {
@@ -29,7 +28,7 @@ const sections = [
   },
 ];
 
-const Footer2 = () => {
+const Footer = () => {
   return (
     <section className="py-16 mx-4 border-primary border">
       <div className="container">
@@ -76,4 +75,4 @@ const Footer2 = () => {
   );
 };
 
-export default Footer2;
+export default Footer;

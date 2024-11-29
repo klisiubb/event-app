@@ -13,7 +13,7 @@ export default function HeroSection() {
   const { isAuthenticated } = useKindeBrowserClient();
   return (
     <section className="container w-full">
-      <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
+      <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-24">
         <div className="text-center space-y-8">
           <Badge variant="outline" className="text-sm py-2 gap-x-2">
             <span className="relative flex h-4 w-4 ">
@@ -38,7 +38,7 @@ export default function HeroSection() {
             well-suited workshops. Scan QR codes to win rewards in our game!
           </p>
 
-          <div className="space-y-4 md:space-y-0 md:space-x-4">
+          <div className="space-y-4 md:space-y-0 space-x-4">
             <Button variant="gooeyRight" asChild size="lg">
               <Link href="/agenda">Explore agenda</Link>
             </Button>

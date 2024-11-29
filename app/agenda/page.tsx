@@ -1,11 +1,17 @@
 import { prisma } from "@/lib/db";
 import React from "react";
 import Agenda from "@/components/landing-page/agenda";
+import { Button } from "@/components/ui/button";
+
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export const revalidate = 30;
 export const dynamic = "force-dynamic";
 
 const Page = async () => {
+  const { isAuthenticated } = getKindeServerSession();
+
   const workshops = await prisma.workshop.findMany({
     where: {
       isPublished: true,
@@ -23,13 +29,60 @@ const Page = async () => {
     },
   });
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center gap-8 pt-24">
-      <h1 className="font-bold text-6xl md:text-7xl  bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive pb-2 mt-16 md:mt-12">
-        Event agenda
-      </h1>
+    <section id="agenda" className="container w-full">
+      <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
+        <div className="space-y-8">
+          <div className="flex flex-col max-w-screen-xl mx-auto text-center text-4xl md:text-6xl font-bold">
+            <h1>
+              Check out this edition{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
+                agenda!
+              </span>
+            </h1>
+          </div>
 
-      <Agenda workshops={workshops} lectures={lectures} />
-    </div>
+          <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground text-center">
+            If you still don&apos;t know if you want to come - please check our
+            agenda, maybe you&apos;ll find something for you!
+          </p>
+
+          <div className="space-y-4 md:space-y-0 md:space-x-4">
+            <Agenda lectures={lectures} workshops={workshops} />
+          </div>
+
+          {(await isAuthenticated()) ? (
+            <></>
+          ) : (
+            <>
+              <div className="space-y-8">
+                <div className="flex flex-col max-w-screen-xl mx-auto text-center  gap-8">
+                  <h1 className="text-4xl md:text-6xl font-bold">
+                    Still not
+                    <span className="bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
+                      {" "}
+                      decided?
+                    </span>
+                  </h1>
+                  <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground ">
+                    We will give awesome rewards for active users. Make sure you
+                    don&apos;t miss this chance.
+                  </p>
+
+                  <Button
+                    variant="secondary"
+                    size="lg"
+                    asChild
+                    className="mx-96"
+                  >
+                    <LoginLink>Join us today!</LoginLink>
+                  </Button>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </section>
   );
 };
 

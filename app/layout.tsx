@@ -6,6 +6,8 @@ import { Toaster } from "sonner";
 import { ViewTransitions } from "next-view-transitions";
 import Navbar from "@/components/landing-page/navbar";
 import Script from "next/script";
+import Footer2 from "@/components/landing-page/footer";
+import Footer from "@/components/landing-page/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,6 +62,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Toaster richColors />
+            <Footer />
           </ThemeProvider>
         </body>
       </html>

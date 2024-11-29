@@ -9,7 +9,7 @@ const NewEditionSection = () => {
   );
   return (
     <section id="new-edition" className="container md:py-24 ">
-      <h2 className="text-3xl text-primary text-center mb-4 tracking-wider font-bold uppercase">
+      <h2 className="text-3xl text-primary text-center mb-8 tracking-wider font-bold uppercase">
         New edition is comming in...
       </h2>
       <Separator className="bg-primary" />
