@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 
 const NewEditionSection = () => {
   const eventDate = new Date(
-    process.env.NEXT_PUBLIC_WEBSITE_URL || "2025-05-30T06:00:00Z"
+    process.env.NEXT_PUBLIC_EVENT_DATE || "2025-05-30T06:00:00Z"
   );
   return (
     <section id="new-edition" className="container md:py-24 ">
