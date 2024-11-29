@@ -1,6 +1,10 @@
 ## Event App (Engineering Thesis)
 
-The **Event App** was my engineering thesis project, developed to manage and streamline IT conferences. It was successfully used during one of the largest IT conferences in my region, showcasing its real-world application and scalability. The app allows to:
+The **Event App** was my engineering thesis project, developed to create & manage IT conferences. It was successfully used during [one of the largest IT conferences in my region](https://bitad.ubb.edu.pl).
+
+**Attention** - this version is being rewritten from scratch, but I still have original code stored in private repository.
+
+### The app allows to:
 
 - Create, edit, and manage lectures and workshops.
 - Sign up for event and receive news about it.
@@ -8,16 +12,11 @@ The **Event App** was my engineering thesis project, developed to manage and str
 - Generate customized/branded QR codes.
 - Showcase sponsors and partners.
 - Manage users, volunteers and lecturers.
-
-In this rewrite, I am modernizing the original version from the ground up. Once the web application is complete, I will begin redevelopment of the mobile application (scanning QR codes & drawing rewards) from scratch after I finish this project..
-
-The original code is securely stored in private repositories.
-
-For more details, feel free to ask during interviews.
+- Display stats about event attendance.
 
 **This project is currently a work in progress.**
 
-## Demo
+## Live Demo
 
 Explore the live demo [click here](https://event.klisiu.me).
 
@@ -26,6 +25,18 @@ Please note that most of the content requires an admin role for full access. Fee
 ## Screenshots
 
 Some screenshots of website, mostly of hidden admin panel. Video showing every functionality is coming soon.
+
+### Landing page:
+
+[![Screenshot-1.png](https://i.postimg.cc/0jrT4Cqx/Screenshot-1.png)](https://postimg.cc/xNDpJMCF)
+
+### Event countdown:
+
+[![Screenshot-2.png](https://i.postimg.cc/90S6HqW9/Screenshot-2.png)](https://postimg.cc/5QB7wyQ9)
+
+### Percs section:
+
+[![Screenshot-3.png](https://i.postimg.cc/05BRwhpN/Screenshot-3.png)](https://postimg.cc/w3LGKf4K)
 
 ### Animated agenda for users:
 
@@ -141,15 +152,16 @@ These experiences have greatly enhanced my problem-solving skills and understand
 
 ## Roadmap
 
-- [x] Finish project to restore the previous version state.
+- [ ] Finish project to restore the previous version state.
 - [ ] Add quizzes for workshops.
+- [ ] Add signing up for workshops.
+- [ ] Add user portal.
 - [x] Build a statistics page for overall performance metrics.
 - [ ] Enhance email and notification features.
 - [x] Implement a countdown timer for the start of events.
-- [ ] Build outstanding landing page.
 - [ ] Change default QR codes with branding images.
 - [ ] Add sponsors/partners and rewards to landing page.
-- [ ] Create stunning landing page.
+- [x] Create stunning landing page.
 - [ ] Explore additional features and improvements.
 
 ## License
