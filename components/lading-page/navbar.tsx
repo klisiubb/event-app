@@ -13,6 +13,7 @@ export default function Navbar() {
     useKindeBrowserClient();
   const token = getAccessToken();
   const isAdmin = token?.roles?.some((role) => role.key === "admin") || false;
+
   if (isLoading) {
     <>Loading...</>;
   }
@@ -48,7 +49,7 @@ export default function Navbar() {
               className="hover:text-primary"
               prefetch={false}
             >
-              Log out
+              Logout
             </Link>
           ) : (
             <Link
@@ -56,7 +57,7 @@ export default function Navbar() {
               className="hover:text-primary"
               prefetch={false}
             >
-              Log in
+              Login
             </Link>
           )}
           <ModeToggle />
@@ -99,7 +100,7 @@ export default function Navbar() {
                 className="hover:text-primary"
                 prefetch={false}
               >
-                Log out
+                Logout
               </Link>
             ) : (
               <Link
@@ -107,7 +108,7 @@ export default function Navbar() {
                 className="hover:text-primary"
                 prefetch={false}
               >
-                Log in
+                Login
               </Link>
             )}
             <ModeToggle />
