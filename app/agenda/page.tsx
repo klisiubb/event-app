@@ -47,7 +47,7 @@ const Page = async () => {
             agenda, maybe you&apos;ll find something for you!
           </p>
 
-          <div className="space-y-4 md:space-y-0 md:space-x-4">
+          <div className="space-y-4 md:space-y-0 md:space-x-4 py-4">
             <Agenda lectures={lectures} workshops={workshops} />
           </div>
 

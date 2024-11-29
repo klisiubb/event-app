@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useRef } from "react";
 import { format, isSameDay } from "date-fns";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -92,12 +92,12 @@ function renderSessions(
       <TypingAnimation
         text={format(new Date(date), "EEEE, MMMM d, yyyy")}
         className="text-2xl font-semibold mb-6 text-center mt-8 text-primary"
-        duration={50}
+        duration={25}
       />
       <div className="relative">
         <div
           ref={timelineRef}
-          className="absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-gray-200 hidden lg:block"
+          className="absolute left-1/2 transform -translate-x-1/2 h-full w-px 2xl:w-[5px] bg-muted-foreground/50 hidden lg:block"
         >
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-primary rounded-full"></div>
           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-primary rounded-full"></div>
@@ -132,7 +132,7 @@ function renderSessions(
                     <div className="absolute inset-0 bg-primary rounded-full"></div>
                   </div>
                   <Card
-                    className={`w-full md:max-w-[calc(50%-2rem)] ${
+                    className={`w-full md:max-w-[calc(50%-2rem)] shadow-lg shadow-primary ${
                       index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
                     }`}
                   >
