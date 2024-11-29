@@ -3,6 +3,7 @@
 import { ActionReturnType } from "@/interfaces/actionReturnType";
 import { prisma } from "@/lib/db";
 import { WorkshopFormSchema } from "@/schemas/admin/workshop";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Prisma } from "@prisma/client";
 import { ZodError } from "zod";
 var QRCode = require("qrcode");
@@ -12,6 +13,17 @@ export async function CreateWorkshop({
 }: {
   topic: string;
 }): Promise<ActionReturnType> {
+  const { getUser, getRoles } = getKindeServerSession();
+  const user = await getUser();
+  const roles = await getRoles();
+  const isAdmin = roles?.some((role) => role.key === "admin") || false;
+  if (!isAdmin || !user) {
+    return {
+      message: "Not authorized.",
+      status: 401,
+    };
+  }
+
   let workshop;
   let qrcode;
   let base64;

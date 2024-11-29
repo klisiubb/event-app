@@ -5,11 +5,24 @@ import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { RewardFormSchema } from "@/schemas/admin/reward";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { List } from "lucide-react";
 import { Link } from "next-view-transitions";
+import { redirect } from "next/navigation";
 import React from "react";
 
 const Page = () => {
+  const { getUser, getAccessToken, isLoading } = useKindeBrowserClient();
+  const user = getUser();
+  const token = getAccessToken();
+  const isAdmin = token?.roles?.some((role) => role.key === "admin") || false;
+
+  if (isLoading) {
+    <>Loading...</>;
+  }
+  if (!user || !isAdmin) {
+    redirect("/");
+  }
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10 flex flex-col justify-center items-center relative overflow-hidden">
       <AnimatedGridPattern

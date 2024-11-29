@@ -55,10 +55,12 @@ Some screenshots of website, mostly of hidden admin panel. Video showing every f
 
 To run this project, you will need to add the following environment variables to your `.env` file:
 
-- `NEXT_PUBLIC_STACK_PROJECT_ID`: Obtained from Stack-Auth dashboard when creating app.
-- `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`: Obtained from Stack-Auth dashboard when creating app.
-- `STACK_SECRET_SERVER_KEY`: Obtained from Stack-Auth dashboard when creating app.
-- `SVIX_WEBHOOK_SIGNING_SECRET`: Secret used to sign webhooks. Obtained from Stack-Auth dashboard.
+- `KINDE_CLIENT_ID`: Your Kinde application's client ID used for authentication.
+- `KINDE_CLIENT_SECRET`: Your Kinde application's client secret used for authentication.
+- `KINDE_ISSUER_URL`: The URL for your Kinde issuer, which handles the OpenID Connect (OIDC) authorization flow.
+- `KINDE_SITE_URL`: The base URL of your application (usually `http://localhost:3000` for local development).
+- `KINDE_POST_LOGOUT_REDIRECT_URL`: The URL to redirect users to after logging out of the application. Should end in `/success` to grab user data.
+- `KINDE_POST_LOGIN_REDIRECT_URL`: The URL to redirect users to after a successful login.
 - `DATABASE_URL`: The URL to connect to your PostgreSQL database (contains credentials, host, and port information).
 - `UPLOADTHING_SECRET`: Your secret key for using the UploadThing API.
 - `UPLOADTHING_APP_ID`: Your application ID for using the UploadThing API.
@@ -92,7 +94,13 @@ cd event-app
 
 Fill out the `.env` file with the necessary environment variables.
 
-You need Stack-Auth & UploadThing accounts and PostgreSQL db.
+You need Kinde & UploadThing accounts and PostgreSQL db.
+
+Also in Kinde you need to create `Admin` role with `admin` key.
+
+Then you need to add `Roles` to `AccessToken`. It's important for Admin Panel to work.
+
+This role is not assigned by default, so assign it to yourself and refresh token by loging out.
 
 **Install dependencies:**
 

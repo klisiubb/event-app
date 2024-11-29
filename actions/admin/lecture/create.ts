@@ -3,6 +3,7 @@
 import { ActionReturnType } from "@/interfaces/actionReturnType";
 import { prisma } from "@/lib/db";
 import { LectureFormSchema } from "@/schemas/admin/lecture";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Prisma } from "@prisma/client";
 import { ZodError } from "zod";
 var QRCode = require("qrcode");
@@ -12,6 +13,16 @@ export async function CreateLecture({
 }: {
   topic: string;
 }): Promise<ActionReturnType> {
+  const { getUser, getRoles } = getKindeServerSession();
+  const user = await getUser();
+  const roles = await getRoles();
+  const isAdmin = roles?.some((role) => role.key === "admin") || false;
+  if (!isAdmin || !user) {
+    return {
+      message: "Not authorized.",
+      status: 401,
+    };
+  }
   let lecture;
   let qrcode;
   let base64;

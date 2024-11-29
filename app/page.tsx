@@ -4,15 +4,19 @@ import StatsCard from "@/components/lading-page/stats-card";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { Button } from "@/components/ui/button";
 import { TypingAnimation } from "@/components/ui/typing-animation";
+import {
+  LoginLink,
+  LogoutLink,
+  useKindeBrowserClient,
+} from "@kinde-oss/kinde-auth-nextjs";
 import { Link } from "next-view-transitions";
 import React from "react";
 
-import { useStackApp, useUser } from "@stackframe/stack";
 const Page = () => {
   const text = `Welcome to the Event App, your one-stop solution for managing and attending events.`;
   const eventDate = new Date("2025-05-30T06:00:00Z");
-  const user = useUser();
-  const app = useStackApp();
+  const { isAuthenticated } = useKindeBrowserClient();
+
   return (
     <div className="flex flex-col">
       <section
@@ -32,23 +36,13 @@ const Page = () => {
             <Button variant="default" asChild size="lg">
               <Link href="/agenda">Explore agenda</Link>
             </Button>
-            {user ? (
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={async () => await user.signOut()}
-              >
-                Sign out
+            {isAuthenticated ? (
+              <Button variant="outline" size="lg" asChild>
+                <LogoutLink>Logout</LogoutLink>
               </Button>
             ) : (
-              <Button
-                variant="secondary"
-                size="lg"
-                onClick={async () => {
-                  await app.signInWithOAuth("google");
-                }}
-              >
-                Sign in
+              <Button variant="secondary" size="lg" asChild>
+                <LoginLink>Login</LoginLink>
               </Button>
             )}
           </div>

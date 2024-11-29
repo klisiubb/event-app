@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/db";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import React from "react";
 import PublishButton from "@/components/admin/form/publish-button";
 import GoBackButton from "@/components/admin/go-back-button";
@@ -8,8 +8,16 @@ import { WorkshopEditView } from "@/components/admin/workshop/edit-view";
 import WorkshopView from "@/components/admin/workshop/workshop-view";
 import { DeleteWorkshop } from "@/actions/admin/workshop/delete";
 import { UpdateWorkshop } from "@/actions/admin/workshop/update";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const Page = async ({ params }: { params: { workshopId: string } }) => {
+  const { getUser, getRoles } = getKindeServerSession();
+  const user = await getUser();
+  const roles = await getRoles();
+  const isAdmin = roles?.some((role) => role.key === "admin") || false;
+  if (!isAdmin || !user) {
+    return redirect("/");
+  }
   const { workshopId } = params;
   const workshop = await prisma.workshop.findUnique({
     where: { id: workshopId },
