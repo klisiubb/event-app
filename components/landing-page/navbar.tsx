@@ -30,8 +30,8 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex md:items-center md:gap-6">
-          <Link className="hover:text-primary" prefetch href="/">
-            Home
+          <Link className="hover:text-primary" prefetch href="/dashboard">
+            Dashboard
           </Link>
           <Link className="hover:text-primary" prefetch href="/agenda">
             Agenda
@@ -75,14 +75,15 @@ export default function Navbar() {
               <Menu className="h-6 w-6" />
             )}
           </Button>
+          <ModeToggle />
         </div>
       </div>
 
       {isMenuOpen && (
         <div className="container md:hidden">
           <div className="flex flex-col space-y-4 pb-4 ms-4">
-            <Link className="hover:text-primary" prefetch href="/">
-              Home
+            <Link className="hover:text-primary" prefetch href="/dashboard">
+              Dashboard
             </Link>
             <Link className="hover:text-primary" prefetch href="/agenda">
               Agenda
@@ -111,7 +112,6 @@ export default function Navbar() {
                 Login
               </Link>
             )}
-            <ModeToggle />
           </div>
         </div>
       )}
