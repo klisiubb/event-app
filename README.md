@@ -55,6 +55,7 @@ Some screenshots of website, mostly of hidden admin panel. Video showing every f
 
 To run this project, you will need to add the following environment variables to your `.env` file:
 
+- `NEXT_PUBLIC_EVENT_DATE`: Event start date for countdown.
 - `KINDE_CLIENT_ID`: Your Kinde application's client ID used for authentication.
 - `KINDE_CLIENT_SECRET`: Your Kinde application's client secret used for authentication.
 - `KINDE_ISSUER_URL`: The URL for your Kinde issuer, which handles the OpenID Connect (OIDC) authorization flow.

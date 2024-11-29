@@ -4,7 +4,9 @@ import Countdown from "@/components/landing-page/countdown";
 import { Separator } from "@/components/ui/separator";
 
 const NewEditionSection = () => {
-  const eventDate = new Date("2025-05-30T06:00:00Z");
+  const eventDate = new Date(
+    process.env.NEXT_PUBLIC_WEBSITE_URL || "2025-05-30T06:00:00Z"
+  );
   return (
     <section id="new-edition" className="container md:py-24 ">
       <h2 className="text-3xl text-primary text-center mb-4 tracking-wider font-bold uppercase">
