@@ -30,27 +30,37 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex md:items-center md:gap-6">
-          <Link className="hover:text-primary" prefetch href="/dashboard">
-            Dashboard
-          </Link>
           <Link className="hover:text-primary" prefetch href="/agenda">
             Agenda
           </Link>
           {isAdmin ? (
-            <Link className="hover:text-primary" prefetch href="/admin">
+            <Link
+              className="text-destructive font-semibold hover:text-primary"
+              prefetch
+              href="/admin"
+            >
               Admin panel
             </Link>
           ) : (
             <></>
           )}
           {isAuthenticated ? (
-            <Link
-              href="/api/auth/logout"
-              className="hover:text-primary"
-              prefetch={false}
-            >
-              Logout
-            </Link>
+            <>
+              <Link
+                className=" font-semibold hover:text-primary"
+                prefetch
+                href="/dashboard"
+              >
+                Dashboard
+              </Link>
+              <Link
+                href="/api/auth/logout"
+                className="hover:text-primary"
+                prefetch={false}
+              >
+                Logout
+              </Link>
+            </>
           ) : (
             <Link
               href="/api/auth/login"
@@ -82,27 +92,40 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="container md:hidden">
           <div className="flex flex-col space-y-4 pb-4 ms-4">
-            <Link className="hover:text-primary" prefetch href="/dashboard">
+            <Link
+              className="font-semibold hover:text-primary"
+              prefetch
+              href="/dashboard"
+            >
               Dashboard
             </Link>
             <Link className="hover:text-primary" prefetch href="/agenda">
               Agenda
             </Link>
             {isAdmin ? (
-              <Link className="hover:text-primary" prefetch href="/admin">
+              <Link
+                className="text-destructive font-semibold hover:text-primary"
+                prefetch
+                href="/admin"
+              >
                 Admin panel
               </Link>
             ) : (
               <></>
             )}
             {isAuthenticated ? (
-              <Link
-                href="/api/auth/logout"
-                className="hover:text-primary"
-                prefetch={false}
-              >
-                Logout
-              </Link>
+              <>
+                <Link className="hover:text-primary" prefetch href="/dashboard">
+                  Dashboard
+                </Link>
+                <Link
+                  href="/api/auth/logout"
+                  className="hover:text-primary"
+                  prefetch={false}
+                >
+                  Logout
+                </Link>
+              </>
             ) : (
               <Link
                 href="/api/auth/login"
