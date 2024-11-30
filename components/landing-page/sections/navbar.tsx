@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { ModeToggle } from "../mode-toggle";
+import { ModeToggle } from "../../mode-toggle";
 import { Link } from "next-view-transitions";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 

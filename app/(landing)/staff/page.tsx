@@ -1,4 +1,4 @@
-import { StaffSection } from "@/components/landing-page/staff";
+import { StaffSection } from "@/components/landing-page/sections/staff";
 import { prisma } from "@/lib/db";
 import { Role } from "@prisma/client";
 import React from "react";

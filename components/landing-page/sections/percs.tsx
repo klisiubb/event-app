@@ -1,5 +1,5 @@
 import React from "react";
-import InfoCard from "./info-card";
+import InfoCard from "../info-card";
 import {
   HeartHandshakeIcon,
   JoystickIcon,
@@ -8,7 +8,7 @@ import {
   QrCodeIcon,
   TrophyIcon,
 } from "lucide-react";
-import { Separator } from "../ui/separator";
+import { Separator } from "../../ui/separator";
 
 const PercsSection = () => {
   return (

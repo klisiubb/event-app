@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import { BlurFade } from "../ui/blur-fade";
+import { BlurFade } from "../../ui/blur-fade";
 import { Building2, Clock, Mail, Phone } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { Link } from "next-view-transitions";
 
 const AboutSection = () => {

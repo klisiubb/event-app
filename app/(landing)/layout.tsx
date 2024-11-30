@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-import Navbar from "@/components/landing-page/navbar";
+import Navbar from "@/components/landing-page/sections/navbar";
 
-import Footer from "@/components/landing-page/footer";
+import Footer from "@/components/landing-page/sections/footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_WEBSITE_URL as string),
