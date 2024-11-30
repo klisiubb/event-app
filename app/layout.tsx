@@ -4,9 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme";
 import { Toaster } from "sonner";
 import { ViewTransitions } from "next-view-transitions";
-import Navbar from "@/components/landing-page/navbar";
 import Script from "next/script";
-import Footer from "@/components/landing-page/footer";
 import { AuthProvider } from "@/components/providers/auth";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -60,10 +58,8 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              <Navbar />
               {children}
               <Toaster richColors />
-              <Footer />
             </ThemeProvider>
           </body>
         </html>
