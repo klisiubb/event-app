@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { BlurFade } from "../ui/blur-fade";
 import { Building2, Clock, Mail, Phone } from "lucide-react";
+import { Button } from "../ui/button";
+import { Link } from "next-view-transitions";
 
 const AboutSection = () => {
   const eventDate = new Date(
@@ -16,7 +18,7 @@ const AboutSection = () => {
               About this edition
             </h2>
           </div>
-          <p className="mb-8 lg:w-5/6 md:text-lg italic">
+          <p className="mb-8 lg:w-5/6 md:text-lg">
             This is 14 edition of our event. You can expect many surprises, good
             quality lectures and awesome workshops.
           </p>
@@ -50,9 +52,21 @@ const AboutSection = () => {
               <div>event@gexample.com</div>
             </div>
           </div>
+          <h2 className="text-3xl text-primary text-center mt-16 tracking-wider font-bold uppercase">
+            Meet our volunteers
+          </h2>
+          <p className="mt-4 lg:w-5/6 md:text-lg">
+            We couldn&apos;t make it happen without them. We appreciate theirs
+            awesome help. We would like you to take a minute to meet them!
+          </p>
+          <div className="flex mt-8 justify-center">
+            <Button variant="gooeyRight" asChild size="lg">
+              <Link href="/staff">Take me there</Link>
+            </Button>
+          </div>
         </div>
 
-        <BlurFade inView duration={2}>
+        <BlurFade inView duration={2} className="hidden lg:block">
           <div className="w-full bg-primary shadow-lg shadow-primary/30 rounded-lg">
             <Image
               width={1900}
