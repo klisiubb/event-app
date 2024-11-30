@@ -162,6 +162,8 @@ These experiences have greatly enhanced my problem-solving skills and understand
 - [ ] Change default QR codes with branding images.
 - [ ] Add sponsors/partners and rewards to landing page.
 - [x] Create stunning landing page.
+- [ ] Add volunteers to landing page (with subroles and photos).
+- [ ] Role/Permissions sync with Kinde.
 - [ ] Explore additional features and improvements.
 
 ## License
