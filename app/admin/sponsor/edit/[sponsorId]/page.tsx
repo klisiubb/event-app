@@ -10,6 +10,7 @@ import { UpdateSponsor } from "@/actions/admin/sponsor/update";
 import { DeleteSponsor } from "@/actions/admin/sponsor/delete";
 import SponsorView from "@/components/admin/sponsor/sponsor-view";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+
 const Page = async ({ params }: { params: { sponsorId: string } }) => {
   const { getUser, getRoles } = getKindeServerSession();
   const userKinde = await getUser();
@@ -19,9 +20,11 @@ const Page = async ({ params }: { params: { sponsorId: string } }) => {
     return redirect("/");
   }
   const { sponsorId } = params;
+
   const sponsor = await prisma.sponsor.findUnique({
     where: { id: sponsorId },
   });
+
   if (!sponsor) {
     notFound();
   }
