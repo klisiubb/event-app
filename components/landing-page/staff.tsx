@@ -3,6 +3,9 @@ import Image from "next/image";
 
 import { User } from "@prisma/client";
 import { User as UserIcon } from "lucide-react";
+import { BlurFade } from "../ui/blur-fade";
+import { Button } from "../ui/button";
+import { Link } from "next-view-transitions";
 
 export const StaffSection = async ({ team }: { team: User[] }) => {
   return (
@@ -20,36 +23,53 @@ export const StaffSection = async ({ team }: { team: User[] }) => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {team.map(({ imageUrl, firstName, lastName, position }, index) => (
-          <Card
-            key={index}
-            className="flex flex-col h-full overflow-hidden group/hoverimg shadow-lg shadow-primary/30"
-          >
-            <CardHeader className="p-0 gap-0 ">
-              <div className="h-full overflow-hidden  border-primary border-b">
-                {imageUrl ? (
-                  <Image
-                    src={imageUrl}
-                    alt={`${firstName} ${lastName}`}
-                    width={300}
-                    height={300}
-                    className="w-full aspect-square object-cover saturate-0 transition-all duration-200 ease-linear size-full group-hover/hoverimg:saturate-100 group-hover/hoverimg:scale-[1.01]"
-                  />
-                ) : (
-                  <div className="w-full aspect-square flex items-center justify-center bg-muted">
-                    <UserIcon className="h-24 w-24 text-muted-foreground" />
-                  </div>
-                )}
-              </div>
-              <CardTitle className="py-6 pb-4 px-6 font-extrabold tracking-wider text-lg text-primary ">
-                {firstName + " " + lastName}
-              </CardTitle>
-            </CardHeader>
+          <BlurFade inView duration={1} key={index}>
+            <Card className="flex flex-col h-full overflow-hidden group/hoverimg shadow-lg shadow-primary/30">
+              <CardHeader className="p-0 gap-0 ">
+                <div className="h-full overflow-hidden  border-primary border-b">
+                  {imageUrl ? (
+                    <Image
+                      src={imageUrl}
+                      alt={`${firstName} ${lastName}`}
+                      width={300}
+                      height={300}
+                      className="w-full aspect-square object-cover saturate-0 transition-all duration-200 ease-linear size-full group-hover/hoverimg:saturate-100 group-hover/hoverimg:scale-[1.01]"
+                    />
+                  ) : (
+                    <div className="w-full aspect-square flex items-center justify-center bg-muted">
+                      <UserIcon className="h-24 w-24 text-muted-foreground" />
+                    </div>
+                  )}
+                </div>
+                <CardTitle className="py-6 pb-4 px-6 font-extrabold tracking-wider text-lg text-primary ">
+                  {firstName + " " + lastName}
+                </CardTitle>
+              </CardHeader>
 
-            <CardContent className="pb-8 text-muted-foreground">
-              {position}
-            </CardContent>
-          </Card>
+              <CardContent className="pb-8 text-muted-foreground">
+                {position}
+              </CardContent>
+            </Card>
+          </BlurFade>
         ))}
+      </div>
+      <div className="py-12">
+        <div className="flex flex-col max-w-screen-xl mx-auto text-center items-center   gap-8">
+          <h1 className="text-4xl md:text-6xl font-bold">
+            What about
+            <span className="bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
+              sponsors?
+            </span>
+          </h1>
+          <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground ">
+            Sponsors are important part of our event. We could&apos;t give you
+            amazing rewards without them!
+          </p>
+
+          <Button variant="secondary" size="lg" asChild className="mx-96">
+            <Link href="/sponsors">Check out sponsors!</Link>
+          </Button>
+        </div>
       </div>
     </section>
   );
