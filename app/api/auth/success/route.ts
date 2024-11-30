@@ -22,6 +22,7 @@ export async function GET() {
         firstName: user.given_name ?? "",
         lastName: user.family_name ?? "",
         email: user.email ?? "",
+        imageUrl: user.picture ?? "",
       },
     });
   }
