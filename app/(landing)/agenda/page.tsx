@@ -50,64 +50,53 @@ const Page = async () => {
           <div className="space-y-4 md:space-y-0 md:space-x-4 py-4">
             <Agenda lectures={lectures} workshops={workshops} />
           </div>
-
-          {(await isAuthenticated()) ? (
-            <>
-              <div className="space-y-8">
-                <div className="flex flex-col max-w-screen-xl mx-auto text-center  gap-8">
-                  <h1 className="text-4xl md:text-6xl font-bold">
-                    Go to your
-                    <span className="bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
-                      {" "}
-                      user panel
-                    </span>
-                  </h1>
-                  <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground ">
-                    You can check your stats, setup your profile and check your
-                    workshop.
-                  </p>
-
-                  <Button
-                    variant="secondary"
-                    size="lg"
-                    asChild
-                    className="mx-96"
-                  >
-                    <Link href="/dashboard">Go to dashboard</Link>
-                  </Button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="space-y-8">
-                <div className="flex flex-col max-w-screen-xl mx-auto text-center  gap-8">
-                  <h1 className="text-4xl md:text-6xl font-bold">
-                    Still not
-                    <span className="bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
-                      {" "}
-                      decided?
-                    </span>
-                  </h1>
-                  <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground ">
-                    We will give awesome rewards for active users. Make sure you
-                    don&apos;t miss this chance.
-                  </p>
-
-                  <Button
-                    variant="secondary"
-                    size="lg"
-                    asChild
-                    className="mx-96"
-                  >
-                    <LoginLink>Join us today!</LoginLink>
-                  </Button>
-                </div>
-              </div>
-            </>
-          )}
         </div>
       </div>
+      {(await isAuthenticated()) ? (
+        <>
+          <div className="space-y-8">
+            <div className="flex flex-col items-center max-w-screen-xl pb-16 mx-auto text-center  gap-8">
+              <h1 className="text-4xl md:text-6xl font-bold">
+                Go to your
+                <span className="bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
+                  {" "}
+                  user panel
+                </span>
+              </h1>
+              <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground ">
+                You can check your stats, setup your profile and check your
+                workshop.
+              </p>
+
+              <Button variant="secondary" size="lg" asChild className="mx-96">
+                <Link href="/dashboard">Go to dashboard</Link>
+              </Button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="space-y-8">
+            <div className="flex flex-col items-center max-w-screen-xl pb-16 mx-auto text-center  gap-8">
+              <h1 className="text-4xl md:text-6xl font-bold">
+                Still not
+                <span className="bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
+                  {" "}
+                  decided?
+                </span>
+              </h1>
+              <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground ">
+                We will give awesome rewards for active users. Make sure you
+                don&apos;t miss this chance.
+              </p>
+
+              <Button variant="secondary" size="lg" asChild className="mx-96">
+                <LoginLink>Join us today!</LoginLink>
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 };
