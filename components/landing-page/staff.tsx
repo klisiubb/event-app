@@ -56,7 +56,7 @@ export const StaffSection = async ({ team }: { team: User[] }) => {
       <div className="py-12">
         <div className="flex flex-col max-w-screen-xl mx-auto text-center items-center   gap-8">
           <h1 className="text-4xl md:text-6xl font-bold">
-            What about
+            What about{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive">
               sponsors?
             </span>
