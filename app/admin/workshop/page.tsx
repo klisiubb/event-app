@@ -13,17 +13,18 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 const Page = () => {
-    const { getUser, getAccessToken, isLoading } = useKindeBrowserClient();
-    const user = getUser();
-    const token = getAccessToken();
-    const isAdmin = token?.roles?.some((role) => role.key === "admin") || false;
+  const { getAccessToken, isLoading } = useKindeBrowserClient();
 
-    if (isLoading) {
-      <>Loading...</>;
-    }
-    if (!user || !isAdmin) {
-      redirect("/api/auth/login");
-    }
+  const token = getAccessToken();
+  const isAdmin = token?.roles?.some((role) => role.key === "admin");
+
+  if (isLoading || token === null || isAdmin === undefined) {
+    <>Loading...</>;
+  }
+  if (isAdmin === false) {
+    redirect("/dashboard");
+  }
+
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10 flex flex-col justify-center items-center relative overflow-hidden">
       <AnimatedGridPattern

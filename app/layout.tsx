@@ -6,8 +6,8 @@ import { Toaster } from "sonner";
 import { ViewTransitions } from "next-view-transitions";
 import Navbar from "@/components/landing-page/navbar";
 import Script from "next/script";
-import Footer2 from "@/components/landing-page/footer";
 import Footer from "@/components/landing-page/footer";
+import { AuthProvider } from "@/components/providers/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,27 +45,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ViewTransitions>
-      <html lang="en">
-        <Script
-          async
-          src="https://umami.klisiu.me/script.js"
-          data-website-id="64d2e6f4-90a8-424f-882e-6a05eb93024c"
-        />
-        <body className={inter.className}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
-            {children}
-            <Toaster richColors />
-            <Footer />
-          </ThemeProvider>
-        </body>
-      </html>
-    </ViewTransitions>
+    <AuthProvider>
+      <ViewTransitions>
+        <html lang="en">
+          <Script
+            async
+            src="https://umami.klisiu.me/script.js"
+            data-website-id="64d2e6f4-90a8-424f-882e-6a05eb93024c"
+          />
+          <body className={inter.className}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Navbar />
+              {children}
+              <Toaster richColors />
+              <Footer />
+            </ThemeProvider>
+          </body>
+        </html>
+      </ViewTransitions>
+    </AuthProvider>
   );
 }
