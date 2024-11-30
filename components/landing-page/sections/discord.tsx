@@ -9,7 +9,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { DiscordLogoIcon } from "@radix-ui/react-icons";
 import { Link } from "next-view-transitions";
-import { BlurFade } from "../ui/blur-fade";
+import { BlurFade } from "@/components/ui/blur-fade";
 
 export const DiscordSection = () => {
   return (

@@ -7,8 +7,8 @@ import {
 import { Link } from "next-view-transitions";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { BlurFade } from "../ui/blur-fade";
-import { TypingAnimation } from "../ui/typing-animation";
+import { BlurFade } from "@/components/ui/blur-fade";
+import { TypingAnimation } from "@/components/ui/typing-animation";
 export default function HeroSection() {
   const { isAuthenticated } = useKindeBrowserClient();
   return (

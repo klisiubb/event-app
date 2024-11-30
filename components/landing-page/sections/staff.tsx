@@ -3,8 +3,8 @@ import Image from "next/image";
 
 import { User } from "@prisma/client";
 import { User as UserIcon } from "lucide-react";
-import { BlurFade } from "../../ui/blur-fade";
-import { Button } from "../../ui/button";
+import { BlurFade } from "@/components/ui/blur-fade";
+import { Button } from "@/components/ui/button";
 import { Link } from "next-view-transitions";
 
 export const StaffSection = async ({ team }: { team: User[] }) => {

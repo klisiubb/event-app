@@ -9,8 +9,8 @@ import Image from "next/image";
 
 import { LectureWithLecturers } from "@/types/lecture-types";
 import { WorkshopWithLectures } from "@/types/workshop-types";
-import { BlurFade } from "../ui/blur-fade";
-import { TypingAnimation } from "../ui/typing-animation";
+import { BlurFade } from "@/components/ui/blur-fade";
+import { TypingAnimation } from "@/components/ui/typing-animation";
 
 type AgendaProps = {
   lectures: LectureWithLecturers[];

@@ -1,6 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Link } from "next-view-transitions";
 import type { Metadata } from "next";
 import { useTransitionRouter } from "next-view-transitions";
 

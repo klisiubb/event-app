@@ -1,6 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { TypingAnimation } from "../ui/typing-animation";
-import { NumberTicker } from "../ui/number-ticker";
+import { NumberTicker } from "@/components/ui/number-ticker";
 
 const StatsCard = ({
   name,

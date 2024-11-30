@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Separator } from "../ui/separator";
+import { Separator } from "@/components/ui/separator";
 
 interface FAQProps {
   question: string;
