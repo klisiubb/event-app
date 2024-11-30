@@ -50,6 +50,9 @@ export const UserFormSchema = z.object({
     })
     .trim(),
   role: z.enum([Role.ADMIN, Role.USER, Role.VOLUNTEER, Role.LECTURER]),
+  imageUrl: z.string().url().optional(),
+  position: z.string().optional(),
+  website: z.string().url().optional(),
 });
 
 export type UserFormSchemaType = z.infer<typeof UserFormSchema>;
