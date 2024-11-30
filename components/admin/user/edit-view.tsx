@@ -7,6 +7,7 @@ import { UpdateUser } from "@/actions/admin/user/update";
 import { SelectForm } from "../form/universal-select";
 import { MultipleSelectForm } from "../form/multi-select";
 import { UserLW } from "@/types/user-types";
+import { ImageForm } from "../form/image-form";
 
 export const UserEditView = ({
   user,
@@ -53,6 +54,11 @@ export const UserEditView = ({
         validationSchema={UserFormSchema.pick({ role: true })}
         updateAction={UpdateUser}
         placeholderText="Select role from list..."
+      />
+      <ImageForm
+        imageUrl={user.imageUrl}
+        objectId={user.id}
+        updateAction={UpdateUser}
       />
 
       {user.role === Role.USER ? (
@@ -101,6 +107,32 @@ export const UserEditView = ({
             validationSchema={UserFormSchema.pick({ workshopToLecture: true })}
             updateAction={UpdateUser}
             placeholderText="Select workshops..."
+          />
+          <TextForm
+            textFieldName="Website:"
+            editText="Edit website"
+            fieldName="website"
+            textValue={user.website}
+            objectId={user.id}
+            validationSchema={UserFormSchema.pick({ website: true })}
+            updateAction={UpdateUser}
+            placeholderText="https://github.com`"
+          />
+        </>
+      ) : (
+        <></>
+      )}
+      {user.role === Role.VOLUNTEER ? (
+        <>
+          <TextForm
+            textFieldName="Position:"
+            editText="Edit position"
+            fieldName="position"
+            textValue={user.position}
+            objectId={user.id}
+            validationSchema={UserFormSchema.pick({ position: true })}
+            updateAction={UpdateUser}
+            placeholderText="E.g. `Programmer`"
           />
         </>
       ) : (
