@@ -95,10 +95,20 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="container md:hidden">
           <div className="flex flex-col space-y-4 pb-4 ms-4">
-            <Link className="hover:text-primary" prefetch href="/staff">
+            <Link
+              className="hover:text-primary"
+              prefetch
+              href="/staff"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Staff
             </Link>
-            <Link className="hover:text-primary" prefetch href="/agenda">
+            <Link
+              className="hover:text-primary"
+              prefetch
+              href="/agenda"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Agenda
             </Link>
             {isAdmin ? (
@@ -106,6 +116,7 @@ export default function Navbar() {
                 className="text-destructive font-semibold hover:text-primary"
                 prefetch
                 href="/admin"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Admin panel
               </Link>
@@ -114,13 +125,19 @@ export default function Navbar() {
             )}
             {isAuthenticated ? (
               <>
-                <Link className="hover:text-primary" prefetch href="/dashboard">
+                <Link
+                  className="hover:text-primary"
+                  prefetch
+                  href="/dashboard"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   Dashboard
                 </Link>
                 <Link
                   href="/api/auth/logout"
                   className="hover:text-primary"
                   prefetch={false}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Logout
                 </Link>
@@ -130,6 +147,7 @@ export default function Navbar() {
                 href="/api/auth/login"
                 className="hover:text-primary"
                 prefetch={false}
+                onClick={() => setIsMenuOpen(false)}
               >
                 Login
               </Link>
