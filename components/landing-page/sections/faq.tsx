@@ -37,7 +37,7 @@ const FAQList: FAQProps[] = [
   {
     question: "How do you choose winers?",
     answer:
-      "Imagine 1 point = 1 ticket. Our system randomly chooses valid tickets.",
+      "Imagine one point equals one ticket. Our system randomly chooses ticket from users present at Event.",
     value: "item-5",
   },
 ];
@@ -46,7 +46,7 @@ export const FAQSection = () => {
   return (
     <section
       id="faq"
-      className="container md:w-[700px] pb-12 md:pt-12 md:pb-24"
+      className="container md:w-[900px] pb-12 md:pt-12 md:pb-24"
     >
       <h2 className="text-3xl text-primary text-center mb-4 tracking-wider font-bold uppercase">
         Frequently Asked Questions
@@ -64,7 +64,7 @@ export const FAQSection = () => {
               {question}
             </AccordionTrigger>
 
-            <AccordionContent className="italic">{answer}</AccordionContent>
+            <AccordionContent>{answer}</AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>
