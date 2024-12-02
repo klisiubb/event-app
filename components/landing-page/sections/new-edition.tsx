@@ -22,7 +22,7 @@ const NewEditionSection = () => {
       </h2>
       <Separator className="bg-primary" />
 
-      <BlurFade inView duration={1} className="mt-8">
+      <BlurFade inView duration={1} className="mt-16">
         <div
           role="timer"
           aria-live="polite"

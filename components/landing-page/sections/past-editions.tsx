@@ -99,7 +99,7 @@ const PastEditionSection = () => {
               </span>
             </h1>
             <p
-              className="max-w-screen-sm mx-auto text-xl text-muted-foreground"
+              className="w-3/4 mx-auto text-xl text-muted-foreground"
               id="auth-desc"
             >
               Let&apos;s go to the dashboard and check your points, scanned QR
