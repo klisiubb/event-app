@@ -24,10 +24,9 @@ const Page = async () => {
     <>
       <HeroSection />
       <NewEditionSection />
-      <AboutSection />
       <PercsSection />
-      <SponsorsSection sponsors={sponsors} />
       <PastEditionSection />
+      <SponsorsSection sponsors={sponsors} />
       <DiscordSection />
       <FAQSection />
     </>
