@@ -82,7 +82,7 @@ function SessionCard({
 
   return (
     <Card
-      className={`w-full md:max-w-[calc(50%-2rem)] shadow-lg shadow-primary ${
+      className={`w-full md:max-w-[calc(50%-2rem)] my-16 shadow-lg shadow-primary ${
         isEven ? "md:mr-auto" : "md:ml-auto"
       }`}
     >

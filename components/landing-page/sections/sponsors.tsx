@@ -1,6 +1,5 @@
 "use client";
 import Autoplay from "embla-carousel-autoplay";
-
 import {
   Carousel,
   CarouselContent,
@@ -9,20 +8,30 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Sponsor } from "@prisma/client";
-import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Link } from "next-view-transitions";
+import { Separator } from "@/components/ui/separator";
 
 export const SponsorsSection = ({ sponsors }: { sponsors: Sponsor[] }) => {
   return (
-    <section id="sponsors" className="max-w-[75%] mx-auto pb-12">
-      <h2 className="text-3xl text-primary text-center mb-4 tracking-wider font-bold uppercase">
+    <section
+      id="sponsors"
+      className="max-w-[75%] mx-auto pt-4"
+      role="region"
+      aria-labelledby="sponsors-heading"
+    >
+      <h2
+        id="sponsors-heading"
+        className="text-3xl text-primary text-center mb-4 tracking-wider font-bold uppercase"
+      >
         Our sponsors
       </h2>
-
-      <h3 className=" mx-auto text-lg text-center text-muted-foreground mt-4">
-        This event couldn&apos;t be possible without them. Thank you.
+      <Separator className="bg-primary" />
+      <h3
+        className="mx-auto text-lg text-center text-muted-foreground mt-8"
+        aria-describedby="sponsors-description"
+      >
+        This event couldn&apos;t be possible without them. Thank you for your
+        financial help.
       </h3>
 
       <div className="mx-auto">
@@ -30,18 +39,23 @@ export const SponsorsSection = ({ sponsors }: { sponsors: Sponsor[] }) => {
           opts={{
             align: "start",
           }}
-          className="w-[80-vw] my-16"
+          className="w-[80-vw] my-4"
           plugins={[
             Autoplay({
               delay: 2000,
             }),
           ]}
+          aria-label="Sponsors carousel"
+          role="region"
         >
           <CarouselContent>
             {sponsors.map((sponsor) => (
               <CarouselItem
                 className="md:basis-1/2 lg:basis-1/3 flex flex-col align-middle justify-between items-center"
                 key={sponsor.id}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`Sponsor ${sponsor.name}`}
               >
                 <div className="w-[350px] h-[250px] flex justify-center">
                   <Image
@@ -55,17 +69,9 @@ export const SponsorsSection = ({ sponsors }: { sponsors: Sponsor[] }) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious aria-label="Previous sponsors" role="button" />
+          <CarouselNext aria-label="Next sponsors" role="button" />
         </Carousel>
-      </div>
-      <h3 className=" mx-auto text-lg text-center text-muted-foreground my-4">
-        You can read more about our sponsors on dedicated sponsor page.
-      </h3>
-      <div className="flex justify-center pt-4">
-        <Button variant="secondary" size="lg" asChild className="mx-96">
-          <Link href="#sponsors">Take me there</Link>
-        </Button>
       </div>
     </section>
   );

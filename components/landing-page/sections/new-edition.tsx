@@ -8,20 +8,38 @@ const NewEditionSection = () => {
     process.env.NEXT_PUBLIC_EVENT_DATE || "2025-05-30T06:00:00Z"
   );
   return (
-    <section id="new-edition" className="container md:py-24 ">
-      <h2 className="text-3xl text-primary text-center mb-8 tracking-wider font-bold uppercase">
-        New edition is comming in...
+    <section
+      id="new-edition"
+      className="container"
+      role="region"
+      aria-labelledby="new-edition-section-title"
+    >
+      <h2
+        id="new-edition-section-title"
+        className="text-3xl text-primary text-center mb-8 tracking-wider font-bold uppercase"
+      >
+        New edition is coming in...
       </h2>
       <Separator className="bg-primary" />
 
-      <h3 className="md:w-1/2 mx-auto text-lg text-center text-muted-foreground my-8">
-        This year we shift focus to lecture you about newest AI trends,
+      <BlurFade inView duration={1} className="mt-8">
+        <div
+          role="timer"
+          aria-live="polite"
+          aria-atomic="true"
+          aria-describedby="countdown-description"
+        >
+          <Countdown targetDate={eventDate} />
+        </div>
+      </BlurFade>
+
+      <h3
+        id="countdown-description"
+        className="md:w-1/2 mx-auto text-lg text-center text-muted-foreground mt-8"
+      >
+        This year we shift focus to lecture you about the newest AI trends,
         including awesome workshops from well-known researchers.
       </h3>
-
-      <BlurFade inView duration={1} className="mt-16">
-        <Countdown targetDate={eventDate} />
-      </BlurFade>
     </section>
   );
 };

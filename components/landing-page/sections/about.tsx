@@ -10,52 +10,43 @@ const AboutSection = () => {
     process.env.NEXT_PUBLIC_EVENT_DATE || "2025-05-30T06:00:00Z"
   );
   return (
-    <section id="contact" className="container pt-12">
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <section id="contact" className="container">
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
           <div className="mb-4">
             <h2 className="text-3xl text-primary text-center mb-4 tracking-wider font-bold uppercase">
               About this edition
             </h2>
           </div>
-          <p className="mb-8 lg:w-5/6 md:text-lg">
+          <p className="mb-8 lg:w-5/6 md:text-lg text-center lg:text-left">
             This is 14 edition of our event. You can expect many surprises, good
             quality lectures and awesome workshops.
           </p>
-          <div className="flex md:flex-col gap-4 md:text-lg flex-row">
+          <div className="flex flex-col gap-4 md:text-lg   items-center justify-center">
             <div>
               <div className="flex gap-2 text-primary">
                 <Building2 />
-                <div className="font-bold md:text-xl mb-2">Where?</div>
+                <div className="font-bold md:text-xl mb-2">Where:</div>
               </div>
 
-              <div>742 Street Street, City, SL 23704</div>
+              <div>742 Street, Bielsko-Biała</div>
             </div>
 
             <div>
               <div className="flex gap-2 text-primary">
                 <Clock />
-                <div className="font-bold  md:text-xl mb-2">When?</div>
+                <div className="font-bold  md:text-xl mb-2">When:</div>
               </div>
 
               <div>
                 <div>{eventDate.toDateString()}</div>
               </div>
             </div>
-
-            <div>
-              <div className="flex gap-2 text-primary ">
-                <Mail />
-                <div className="font-bold  md:text-xl mb-2">Any questions?</div>
-              </div>
-
-              <div>event@gexample.com</div>
-            </div>
           </div>
           <h2 className="text-3xl text-primary text-center mt-16 tracking-wider font-bold uppercase">
             Meet our volunteers
           </h2>
-          <p className="mt-4 lg:w-5/6 md:text-lg">
+          <p className="mt-4 lg:w-5/6 md:text-lg text-center lg:text-left">
             We couldn&apos;t make it happen without them. We appreciate theirs
             awesome help. We would like you to take a minute to meet them!
           </p>

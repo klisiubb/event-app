@@ -17,7 +17,6 @@ const sections = [
       { name: "Sponsors", href: "#" },
     ],
   },
-
   {
     title: "Social",
     links: [
@@ -30,7 +29,7 @@ const sections = [
 
 const Footer = () => {
   return (
-    <section className="py-16 mx-4 border-primary border">
+    <section className="py-8  border-primary border">
       <div className="container">
         <footer>
           <div className="grid grid-cols-2 gap-8 lg:grid-cols-6">
