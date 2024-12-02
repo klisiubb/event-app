@@ -7,6 +7,6 @@ export type WorkshopWithQRCode = Prisma.WorkshopGetPayload<{
 }>;
 export type WorkshopWithLectures = Prisma.WorkshopGetPayload<{
   include: {
-    workshopLecturers: true;
+    lecturers: true;
   };
 }>;

@@ -54,7 +54,7 @@ model Lecture {
     imageUrl     String?
     qrcode       QrCode @relation(fields: [ qrCodeId], references: [id], onDelete: Cascade)
     qrCodeId     String @unique
-    lectureLecturers User[] @relation(name: "LectureLecturers")
+    lecturers User[] @relation(name: "LectureLecturers")
 }
 model Workshop {
     id           String     @id @default(uuid())
@@ -71,7 +71,7 @@ model Workshop {
     qrcode       QrCode @relation(fields: [ qrCodeId], references: [id], onDelete: Cascade)
     qrCodeId     String @unique
     attenders    User[]     @relation(name: "WorkshopAttenders")
-    workshopLecturers User[] @relation(name: "WorkshopLecturers")
+    lecturers User[] @relation(name: "WorkshopLecturers")
 }
 model QrCode {
   id          String    @id @default(uuid())

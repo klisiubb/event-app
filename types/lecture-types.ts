@@ -7,6 +7,6 @@ export type LectureWithQRCode = Prisma.LectureGetPayload<{
 }>;
 export type LectureWithLecturers = Prisma.LectureGetPayload<{
   include: {
-    lectureLecturers: true;
+    lecturers: true;
   };
 }>;
