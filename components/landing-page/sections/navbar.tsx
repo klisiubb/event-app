@@ -30,30 +30,18 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex md:items-center md:gap-6">
+          <Link className="hover:text-primary" prefetch href="/">
+            Home
+          </Link>
           <Link className="hover:text-primary" prefetch href="/staff">
             Staff
           </Link>
           <Link className="hover:text-primary" prefetch href="/agenda">
             Agenda
           </Link>
-          {isAdmin ? (
-            <Link
-              className="text-destructive font-semibold hover:text-primary"
-              prefetch
-              href="/admin"
-            >
-              Admin panel
-            </Link>
-          ) : (
-            <></>
-          )}
           {isAuthenticated ? (
             <>
-              <Link
-                className=" font-semibold hover:text-primary"
-                prefetch
-                href="/dashboard"
-              >
+              <Link className="hover:text-primary" prefetch href="/dashboard">
                 Dashboard
               </Link>
               <Link
@@ -73,19 +61,25 @@ export default function Navbar() {
               Login
             </Link>
           )}
+          {isAdmin && (
+            <Link className="hover:text-primary" prefetch href="/admin">
+              Admin panel
+            </Link>
+          )}
           <ModeToggle />
         </div>
 
-        <div className="md:hidden">
+        <div className="md:hidden flex gap-2">
           <Button
             variant="ghost"
             size="icon"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-6 w-6" aria-hidden="true" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6" aria-hidden="true" />
             )}
           </Button>
           <ModeToggle />
@@ -95,6 +89,14 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="container md:hidden">
           <div className="flex flex-col space-y-4 pb-4 ms-4">
+            <Link
+              className="hover:text-primary"
+              prefetch
+              href="/"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Home
+            </Link>
             <Link
               className="hover:text-primary"
               prefetch
@@ -111,18 +113,6 @@ export default function Navbar() {
             >
               Agenda
             </Link>
-            {isAdmin ? (
-              <Link
-                className="text-destructive font-semibold hover:text-primary"
-                prefetch
-                href="/admin"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Admin panel
-              </Link>
-            ) : (
-              <></>
-            )}
             {isAuthenticated ? (
               <>
                 <Link
@@ -150,6 +140,16 @@ export default function Navbar() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Login
+              </Link>
+            )}
+            {isAdmin && (
+              <Link
+                className="hover:text-primary"
+                prefetch
+                href="/admin"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Admin panel
               </Link>
             )}
           </div>
