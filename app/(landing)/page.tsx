@@ -9,6 +9,7 @@ import PercsSection from "@/components/landing-page/sections/percs";
 import React from "react";
 import { prisma } from "@/lib/db";
 import { SponsorsSection } from "@/components/landing-page/sections/sponsors";
+import PastEditionSection from "@/components/landing-page/sections/past-editions";
 
 export const revalidate = 30;
 export const dynamic = "force-dynamic";
@@ -26,6 +27,7 @@ const Page = async () => {
       <AboutSection />
       <PercsSection />
       <SponsorsSection sponsors={sponsors} />
+      <PastEditionSection />
       <DiscordSection />
       <FAQSection />
     </>
