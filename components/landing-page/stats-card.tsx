@@ -19,10 +19,11 @@ const StatsCard = ({ name, value, description }: StatsCardProps) => {
               {name}
             </h3>
             <div className="mt-2 bg-primary/10 p-2 rounded-md inline-block group-hover:bg-primary/20 transition-colors duration-300">
-              <NumberTicker
-                value={value}
-                className="text-3xl font-bold text-primary"
-              />
+              {value > 0 ? (
+                <NumberTicker value={value} className="text-3xl font-bold" />
+              ) : (
+                <span className="text-3xl font-bold ">0</span>
+              )}
             </div>
           </div>
           <p className="text-sm text-muted-foreground flex-grow">
