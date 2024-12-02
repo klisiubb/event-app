@@ -14,7 +14,7 @@ const PercsSection = () => {
   return (
     <section
       id="percs"
-      className="flex flex-col items-center justify-center py-24 sm:py-32"
+      className="flex flex-col items-center justify-center py-24"
     >
       <h2 className="text-3xl text-primary text-center mb-4 tracking-wider font-bold uppercase">
         Awesome percs are waiting for you...*

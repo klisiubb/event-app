@@ -10,7 +10,7 @@ const AboutSection = () => {
     process.env.NEXT_PUBLIC_EVENT_DATE || "2025-05-30T06:00:00Z"
   );
   return (
-    <section id="contact" className="container py-12">
+    <section id="contact" className="container pt-12">
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <div className="mb-4">

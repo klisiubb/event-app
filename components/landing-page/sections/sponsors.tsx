@@ -16,12 +16,12 @@ import { Link } from "next-view-transitions";
 
 export const SponsorsSection = ({ sponsors }: { sponsors: Sponsor[] }) => {
   return (
-    <section id="sponsors" className="max-w-[75%] mx-auto pb-24 sm:pb-32">
+    <section id="sponsors" className="max-w-[75%] mx-auto pb-12">
       <h2 className="text-3xl text-primary text-center mb-4 tracking-wider font-bold uppercase">
         Our sponsors
       </h2>
 
-      <h3 className=" mx-auto text-lg text-center text-muted-foreground my-4">
+      <h3 className=" mx-auto text-lg text-center text-muted-foreground mt-4">
         This event couldn&apos;t be possible without them. Thank you.
       </h3>
 

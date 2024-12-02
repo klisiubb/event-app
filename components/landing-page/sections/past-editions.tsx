@@ -26,7 +26,7 @@ const PastEditionSection = () => {
       </h3>
       <Separator className="bg-primary w-3/4" />
 
-      <div className="grid sm:grid-cols-2 mt-16 lg:grid-cols-4 gap-8">
+      <div className="grid sm:grid-cols-2 mt-16 mb-4 lg:grid-cols-4 gap-8">
         <StatsCard
           name="Editions:"
           value={14}
@@ -48,7 +48,7 @@ const PastEditionSection = () => {
           description="Hope you learned something!"
         />
       </div>
-      <h2 className="text-3xl text-primary text-center mt-4 tracking-wider font-bold uppercase">
+      <h2 className="text-3xl text-primary text-center  mt-8 tracking-wider font-bold uppercase">
         Still not decided?
       </h2>
       <h3 className=" mx-auto text-lg text-center text-muted-foreground my-4">

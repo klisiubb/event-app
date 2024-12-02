@@ -13,10 +13,10 @@ import { BlurFade } from "@/components/ui/blur-fade";
 
 export const DiscordSection = () => {
   return (
-    <section id="discord" className="md:py-12 ">
+    <section id="discord">
       <BlurFade inView duration={1}>
         <Separator className="bg-primary w-3/4 mx-auto" />
-        <div className="container py-20 sm:py-20">
+        <div className="container py-10 md:py-20">
           <div className="lg:w-[60%] mx-auto">
             <Card className="bg-background border-none shadow-none text-center flex flex-col items-center justify-center">
               <CardHeader>
