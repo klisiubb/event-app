@@ -81,7 +81,7 @@ const Page = async () => {
                 workshop.
               </p>
 
-              <Button variant="secondary" size="lg" asChild className="mx-96">
+              <Button variant="shine" size="lg" asChild className="mx-96">
                 <Link href="/dashboard">Go to dashboard</Link>
               </Button>
             </div>
@@ -103,7 +103,7 @@ const Page = async () => {
                 don&apos;t miss this chance.
               </p>
 
-              <Button variant="secondary" size="lg" asChild className="mx-96">
+              <Button variant="shine" size="lg" asChild className="mx-96">
                 <LoginLink>Join us today!</LoginLink>
               </Button>
             </div>
