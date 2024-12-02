@@ -36,37 +36,31 @@ const PercsSection = () => {
           name="Lectures"
           icon={PresentationIcon}
           description="Attend awesome lectures presented by well-known speakers in our community."
-          aria-role="listitem"
         />
         <InfoCard
           name="Workshops"
           icon={PencilRulerIcon}
           description="Take part in our best workshops, focused on learning by doing."
-          aria-role="listitem"
         />
         <InfoCard
           name="Gaming zone"
           icon={JoystickIcon}
           description="Chill out zone where you can play some board or VR games with friends."
-          aria-role="listitem"
         />
         <InfoCard
           name="Sponsors"
           icon={HeartHandshakeIcon}
           description="Get in touch with local companies. Meet your future employers."
-          aria-role="listitem"
         />
         <InfoCard
           name="QR Code game"
           icon={QrCodeIcon}
           description="Scan QR codes, earn points and take part in our game."
-          aria-role="listitem"
         />
         <InfoCard
           name="Rewards"
           icon={TrophyIcon}
           description="At the end of the event, we will draw winners from our QR code game."
-          aria-role="listitem"
         />
       </div>
       <h3
