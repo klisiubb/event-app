@@ -2,12 +2,12 @@ import { prisma } from "@/lib/db";
 import React from "react";
 import Agenda from "@/components/landing-page/agenda";
 import { Button } from "@/components/ui/button";
-
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Link } from "next-view-transitions";
 
-export const revalidate = 30;
+export const revalidate = 120;
 export const dynamic = "force-dynamic";
 
 const Page = async () => {
@@ -18,7 +18,7 @@ const Page = async () => {
       isPublished: true,
     },
     include: {
-      workshopLecturers: true,
+      lecturers: true,
     },
   });
   const lectures = await prisma.lecture.findMany({
@@ -26,7 +26,7 @@ const Page = async () => {
       isPublished: true,
     },
     include: {
-      lectureLecturers: true,
+      lecturers: true,
     },
   });
   return (
@@ -48,7 +48,20 @@ const Page = async () => {
           </p>
 
           <div className="space-y-4 md:space-y-0 md:space-x-4 py-4">
-            <Agenda lectures={lectures} workshops={workshops} />
+            <div className="w-full">
+              <Tabs defaultValue="lectures">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="lectures">Lectures</TabsTrigger>
+                  <TabsTrigger value="workshops">Workshops</TabsTrigger>
+                </TabsList>
+                <TabsContent value="lectures">
+                  <Agenda data={lectures} />
+                </TabsContent>
+                <TabsContent value="workshops">
+                  <Agenda data={workshops} />
+                </TabsContent>
+              </Tabs>
+            </div>
           </div>
         </div>
       </div>
