@@ -17,18 +17,33 @@ export function ModeToggle() {
   }, []);
 
   if (!mounted) {
-    return <Button variant="secondary" size="icon" disabled={true}></Button>;
+    return (
+      <Button
+        aria-label="Loading theme switcher"
+        variant="secondary"
+        size="icon"
+        disabled={true}
+      ></Button>
+    );
   }
+
   return (
     <Button
       variant="secondary"
       size="icon"
-      onClick={() => setTheme(`${dark ? "light" : "dark"}`)}
+      onClick={() => setTheme(dark ? "light" : "dark")}
+      aria-label={`Switch to ${dark ? "light" : "dark"} mode`}
     >
       {dark ? (
-        <Sun className="hover:cursor-pointer hover:text-primary" />
+        <Sun
+          className="hover:cursor-pointer hover:text-primary"
+          aria-hidden="true"
+        />
       ) : (
-        <Moon className="hover:cursor-pointer hover:text-primary" />
+        <Moon
+          className="hover:cursor-pointer hover:text-primary"
+          aria-hidden="true"
+        />
       )}
     </Button>
   );
