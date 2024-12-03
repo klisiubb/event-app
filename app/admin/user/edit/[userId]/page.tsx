@@ -7,7 +7,8 @@ import { DeleteUser } from "@/actions/admin/user/delete";
 import { UserEditView } from "@/components/admin/user/edit-view";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-const Page = async ({ params }: { params: { userId: string } }) => {
+const Page = async (props: { params: Promise<{ userId: string }> }) => {
+  const params = await props.params;
   const { getUser, getRoles } = getKindeServerSession();
   const userKinde = await getUser();
   const roles = await getRoles();

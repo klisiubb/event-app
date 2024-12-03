@@ -11,7 +11,8 @@ import { DeleteLecture } from "@/actions/admin/lecture/delete";
 import { LectureEditView } from "@/components/admin/lecture/edit-view";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-const Page = async ({ params }: { params: { lectureId: string } }) => {
+const Page = async (props: { params: Promise<{ lectureId: string }> }) => {
+  const params = await props.params;
   const { getUser, getRoles } = getKindeServerSession();
   const userKinde = await getUser();
   const roles = await getRoles();

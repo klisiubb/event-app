@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Event App",
   },
 };
-export default function RootLayout({
+export default function LandingLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

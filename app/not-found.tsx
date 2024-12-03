@@ -1,12 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import type { Metadata } from "next";
 import { useTransitionRouter } from "next-view-transitions";
-
-export const metadata: Metadata = {
-  title: "Event App - 404",
-  description: "The page you are looking for does not exist",
-};
 
 export default function NotFound() {
   const router = useTransitionRouter();

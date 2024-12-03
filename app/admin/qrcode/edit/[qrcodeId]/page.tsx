@@ -11,7 +11,8 @@ import QRCodeView from "@/components/admin/qrcode/qrcode-view";
 import { QRCodeEditView } from "@/components/admin/qrcode/edit-view";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-const Page = async ({ params }: { params: { qrcodeId: string } }) => {
+const Page = async (props: { params: Promise<{ qrcodeId: string }> }) => {
+  const params = await props.params;
   const { getUser, getRoles } = getKindeServerSession();
   const userKinde = await getUser();
   const roles = await getRoles();
