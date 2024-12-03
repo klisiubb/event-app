@@ -4,10 +4,8 @@ import { prisma } from "@/lib/db";
 import { Role } from "@prisma/client";
 import { corsHeaders } from "../../options";
 
-export async function GET(
-  req: Request,
-  { params }: { params: { userId: string } }
-) {
+export async function GET(req: Request, props: { params: Promise<{ userId: string }> }) {
+  const params = await props.params;
   const { userId } = params;
 
   const token = req.headers.get("Authorization")?.split(" ")[1] as string;

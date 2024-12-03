@@ -37,7 +37,7 @@ export function BlurFade({
   inViewMargin = "-50px",
   blur = "6px",
 }: BlurFadeProps) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const inViewResult = useInView(ref, { once: true, margin: inViewMargin });
   const isInView = !inView || inViewResult;
   const defaultVariants: Variants = {
@@ -48,7 +48,7 @@ export function BlurFade({
   return (
     <AnimatePresence>
       <motion.div
-        ref={ref}
+        ref={ref} // Pass the typed ref here
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         exit="hidden"

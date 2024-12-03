@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <ViewTransitions>
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
           <Script
             async
             src="https://umami.klisiu.me/script.js"

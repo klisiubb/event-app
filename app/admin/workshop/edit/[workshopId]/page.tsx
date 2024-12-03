@@ -10,7 +10,8 @@ import { DeleteWorkshop } from "@/actions/admin/workshop/delete";
 import { UpdateWorkshop } from "@/actions/admin/workshop/update";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-const Page = async ({ params }: { params: { workshopId: string } }) => {
+const Page = async (props: { params: Promise<{ workshopId: string }> }) => {
+  const params = await props.params;
   const { getUser, getRoles } = getKindeServerSession();
   const user = await getUser();
   const roles = await getRoles();

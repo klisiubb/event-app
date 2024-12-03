@@ -10,7 +10,8 @@ import RewardView from "@/components/admin/reward/reward-view";
 import { RewardEditView } from "@/components/admin/reward/edit-view";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-const Page = async ({ params }: { params: { rewardId: string } }) => {
+const Page = async (props: { params: Promise<{ rewardId: string }> }) => {
+  const params = await props.params;
   const { getUser, getRoles } = getKindeServerSession();
   const userKinde = await getUser();
   const roles = await getRoles();
