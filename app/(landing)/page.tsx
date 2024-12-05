@@ -1,4 +1,3 @@
-import AboutSection from "@/components/landing-page/sections/about";
 import { DiscordSection } from "@/components/landing-page//sections/discord";
 import { FAQSection } from "@/components/landing-page/sections/faq";
 import HeroSection from "@/components/landing-page/sections/hero";
