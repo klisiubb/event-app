@@ -1,8 +1,8 @@
 ## Event App (Engineering Thesis)
 
-The **Event App** was my engineering thesis project, developed to create & manage IT conferences. It was successfully used during [one of the largest IT conferences in my region](https://bitad.ubb.edu.pl).
+The **Event App** was my engineering thesis project, developed to create & manage IT conferences. It was successfully used during [one of the largest IT conferences for students in my region](https://bitad.ubb.edu.pl).
 
-**Attention** - this version is being rewritten from scratch, but I still have original code stored in private repository.
+**Attention** - this version is being rewritten from scratch (with different UI), but I still have original code stored in private repository.
 
 ### The app allows to:
 
@@ -14,13 +14,11 @@ The **Event App** was my engineering thesis project, developed to create & manag
 - Manage users, volunteers and lecturers.
 - Display stats about event attendance.
 
-**This project is currently a work in progress.**
-
 ## Live Demo
 
 Explore the live demo [click here](https://event.klisiu.me).
 
-Please note that most of the content requires an admin role for full access. Feel free to request access. Additionally, a YouTube project showcase will be available soon, or you can view the app during an interview.
+Please note that most of the content requires an admin role for full access. Feel free to request access. Additionally, a YouTube project showcase will be available soon.
 
 ## Screenshots
 
@@ -155,12 +153,12 @@ These experiences have greatly enhanced my problem-solving skills and understand
 - [ ] Finish project to restore the previous version state.
 - [ ] Add quizzes for workshops.
 - [ ] Add signing up for workshops.
-- [ ] Add user portal.
+- [x] Add user portal.
 - [x] Build a statistics page for overall performance metrics.
 - [ ] Enhance email and notification features.
 - [x] Implement a countdown timer for the start of events.
 - [ ] Change default QR codes with branding images.
-- [ ] Add sponsors/partners and rewards to landing page.
+- [x] Add sponsors/partners and rewards to landing page.
 - [x] Create stunning landing page.
 - [x] Add volunteers to landing page (with subroles and photos).
 - [ ] Role/Permissions sync with Kinde.
