@@ -10,6 +10,7 @@ import {
 import { Sponsor } from "@prisma/client";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
+import { Link } from "next-view-transitions";
 
 export const SponsorsSection = ({ sponsors }: { sponsors: Sponsor[] }) => {
   return (
@@ -57,14 +58,19 @@ export const SponsorsSection = ({ sponsors }: { sponsors: Sponsor[] }) => {
                 aria-roledescription="slide"
                 aria-label={`Sponsor ${sponsor.name}`}
               >
-                <div className="w-[350px] h-[250px] flex justify-center">
-                  <Image
-                    src={sponsor.imageUrl || ""}
-                    alt={sponsor.name}
-                    width={600}
-                    height={600}
-                    className="sm:max-w-[350px] lg:max-w-[325px] max-h-[250px] max-w-[250px] object-scale-down self-center align-middle"
-                  />
+                <div className="w-[350px] h-[250px] flex flex-col items-center justify-center">
+                  <Link
+                    href={`/sponsors#${sponsor.name}`}
+                    aria-label={`Link to sponor ${sponsor.name} section.`}
+                  >
+                    <Image
+                      src={sponsor.imageUrl || ""}
+                      alt={sponsor.name}
+                      width={600}
+                      height={600}
+                      className="sm:max-w-[350px] lg:max-w-[325px] max-h-[250px] max-w-[250px] object-scale-down self-center align-middle"
+                    />
+                  </Link>
                 </div>
               </CarouselItem>
             ))}
