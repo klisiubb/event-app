@@ -8,20 +8,22 @@ import { QRCodeFormSchema } from "@/schemas/admin/qrcode";
 import { CreateQRCode } from "@/actions/admin/qrcode/create";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { redirect } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
-  const { getAccessToken, isLoading } = useKindeBrowserClient();
+  const router = useRouter();
+  const { data: session, isPending } = authClient.useSession();
+  const isAdmin = session?.user.role === "ADMIN";
 
-  const token = getAccessToken();
-  const isAdmin = token?.roles?.some((role) => role.key === "admin");
+  React.useEffect(() => {
+    if (!isPending && !isAdmin) {
+      router.push("/dashboard");
+    }
+  }, [isPending, isAdmin, router]);
 
-  if (isLoading || token === null || isAdmin === undefined) {
-    <>Loading...</>;
-  }
-  if (isAdmin === false) {
-    redirect("/dashboard");
+  if (isPending || !isAdmin) {
+    return <>Loading...</>;
   }
   return (
     <div className="min-h-[calc(100vh-160px)] p-6 md:p-10 flex flex-col justify-center items-center relative overflow-hidden">

@@ -4,7 +4,7 @@ import { ActionReturnType } from "@/interfaces/actionReturnType";
 import { prisma } from "@/lib/db";
 import { UserFormSchema } from "@/schemas/admin/user";
 import { UserLW } from "@/types/user-types";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { requireAdmin } from "@/lib/auth";
 import { Prisma, Role } from "@prisma/client";
 import { ZodError } from "zod";
 
@@ -12,11 +12,8 @@ export async function UpdateUser(
   id: string,
   data: Partial<UserLW>
 ): Promise<ActionReturnType> {
-  const { getUser, getRoles } = getKindeServerSession();
-  const user = await getUser();
-  const roles = await getRoles();
-  const isAdmin = roles?.some((role) => role.key === "admin") || false;
-  if (!isAdmin || !user) {
+  const session = await requireAdmin();
+  if (!session) {
     return {
       message: "Not authorized.",
       status: 401,

@@ -9,15 +9,12 @@ import { UpdateQRcode } from "@/actions/admin/qrcode/update";
 import { DeleteQRCode } from "@/actions/admin/qrcode/delete";
 import QRCodeView from "@/components/admin/qrcode/qrcode-view";
 import { QRCodeEditView } from "@/components/admin/qrcode/edit-view";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { requireAdmin } from "@/lib/auth";
 
 const Page = async (props: { params: Promise<{ qrcodeId: string }> }) => {
   const params = await props.params;
-  const { getUser, getRoles } = getKindeServerSession();
-  const userKinde = await getUser();
-  const roles = await getRoles();
-  const isAdmin = roles?.some((role) => role.key === "admin") || false;
-  if (!isAdmin || !userKinde) {
+  const session = await requireAdmin();
+  if (!session) {
     return redirect("/");
   }
   const { qrcodeId } = params;

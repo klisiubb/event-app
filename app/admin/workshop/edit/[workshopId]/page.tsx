@@ -8,15 +8,12 @@ import { WorkshopEditView } from "@/components/admin/workshop/edit-view";
 import WorkshopView from "@/components/admin/workshop/workshop-view";
 import { DeleteWorkshop } from "@/actions/admin/workshop/delete";
 import { UpdateWorkshop } from "@/actions/admin/workshop/update";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { requireAdmin } from "@/lib/auth";
 
 const Page = async (props: { params: Promise<{ workshopId: string }> }) => {
   const params = await props.params;
-  const { getUser, getRoles } = getKindeServerSession();
-  const user = await getUser();
-  const roles = await getRoles();
-  const isAdmin = roles?.some((role) => role.key === "admin") || false;
-  if (!isAdmin || !user) {
+  const session = await requireAdmin();
+  if (!session) {
     return redirect("/");
   }
   const { workshopId } = params;

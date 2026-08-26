@@ -63,13 +63,19 @@ export const SponsorsSection = ({ sponsors }: { sponsors: Sponsor[] }) => {
                     href={`/sponsors#${sponsor.name}`}
                     aria-label={`Link to sponor ${sponsor.name} section.`}
                   >
-                    <Image
-                      src={sponsor.imageUrl || ""}
-                      alt={sponsor.name}
-                      width={600}
-                      height={600}
-                      className="sm:max-w-[350px] lg:max-w-[325px] max-h-[250px] max-w-[250px] object-scale-down self-center align-middle"
-                    />
+                    {sponsor.imageUrl ? (
+                      <Image
+                        src={sponsor.imageUrl}
+                        alt={sponsor.name}
+                        width={600}
+                        height={600}
+                        className="sm:max-w-[350px] lg:max-w-[325px] max-h-[250px] max-w-[250px] object-scale-down self-center align-middle"
+                      />
+                    ) : (
+                      <span className="text-4xl font-bold text-muted-foreground/40 uppercase tracking-wider text-center px-4">
+                        {sponsor.name}
+                      </span>
+                    )}
                   </Link>
                 </div>
               </CarouselItem>

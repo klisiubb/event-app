@@ -10,7 +10,9 @@ import { AuthProvider } from "@/components/providers/auth";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_WEBSITE_URL as string),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_WEBSITE_URL ?? "http://localhost:3000"
+  ),
   title: "Event App",
   description:
     "Event App - sign up for your local event. Create and manage your workshops and lectures!",

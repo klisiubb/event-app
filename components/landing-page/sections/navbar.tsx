@@ -5,18 +5,13 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Link } from "next-view-transitions";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { authClient } from "@/lib/auth-client";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isAuthenticated, getAccessToken, isLoading } =
-    useKindeBrowserClient();
-  const token = getAccessToken();
-  const isAdmin = token?.roles?.some((role) => role.key === "admin") || false;
-
-  if (isLoading) {
-    <>Loading...</>;
-  }
+  const { data: session, isPending } = authClient.useSession();
+  const isAuthenticated = !!session;
+  const isAdmin = session?.user.role === "ADMIN";
   return (
     <nav className="fixed top-0 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50 border-b border-border">
       <div className="container flex h-16 items-center justify-between">
@@ -45,16 +40,20 @@ export default function Navbar() {
                 Dashboard
               </Link>
               <Link
-                href="/api/auth/logout"
+                href="#"
                 className="hover:text-primary"
                 prefetch={false}
-              >
-                Logout
-              </Link>
+                onClick={async () => {
+                  await authClient.signOut();
+                  window.location.href = "/";
+                }}
+                >
+                  Logout
+                </Link>
             </>
           ) : (
             <Link
-              href="/api/auth/login"
+              href="/login"
               className="hover:text-primary"
               prefetch={false}
             >
@@ -124,17 +123,20 @@ export default function Navbar() {
                   Dashboard
                 </Link>
                 <Link
-                  href="/api/auth/logout"
+                  href="#"
                   className="hover:text-primary"
                   prefetch={false}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Logout
-                </Link>
+                  onClick={async () => {
+                    await authClient.signOut();
+                    window.location.href = "/";
+                  }}
+                  >
+                    Logout
+                  </Link>
               </>
             ) : (
               <Link
-                href="/api/auth/login"
+                href="/login"
                 className="hover:text-primary"
                 prefetch={false}
                 onClick={() => setIsMenuOpen(false)}

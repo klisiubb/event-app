@@ -1,10 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import {
-  LoginLink,
-  LogoutLink,
-  useKindeBrowserClient,
-} from "@kinde-oss/kinde-auth-nextjs";
+import { authClient } from "@/lib/auth-client";
 import { Link } from "next-view-transitions";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
@@ -12,7 +8,8 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { TypingAnimation } from "@/components/ui/typing-animation";
 
 export default function HeroSection() {
-  const { isAuthenticated } = useKindeBrowserClient();
+  const { data: session } = authClient.useSession();
+  const isAuthenticated = !!session;
   return (
     <section
       className="container w-full my-24"
@@ -57,12 +54,19 @@ export default function HeroSection() {
               <Link href="/agenda">Explore agenda</Link>
             </Button>
             {isAuthenticated ? (
-              <Button variant="secondary" size="lg" asChild>
-                <LogoutLink>Logout</LogoutLink>
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={async () => {
+                  await authClient.signOut();
+                  window.location.href = "/";
+                }}
+              >
+                Logout
               </Button>
             ) : (
               <Button variant="secondary" size="lg" asChild>
-                <LoginLink>Login</LoginLink>
+                <Link href="/login">Login</Link>
               </Button>
             )}
           </div>

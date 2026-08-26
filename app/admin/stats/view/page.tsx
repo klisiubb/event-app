@@ -3,16 +3,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import WorkshopStats from "@/components/admin/stats/workshop-stats";
 import LecturesStats from "@/components/admin/stats/lectures-stats";
 import AttendanceStats from "@/components/admin/stats/attendance-stats";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { requireAdmin } from "@/lib/auth";
 import { redirect } from "next/navigation";
 export const dynamic = "force-dynamic";
 
 const Page = async () => {
-  const { getUser, getRoles } = getKindeServerSession();
-  const userKinde = await getUser();
-  const roles = await getRoles();
-  const isAdmin = roles?.some((role) => role.key === "admin") || false;
-  if (!isAdmin || !userKinde) {
+  const session = await requireAdmin();
+  if (!session) {
     return redirect("/");
   }
   return (

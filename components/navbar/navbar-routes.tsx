@@ -1,6 +1,7 @@
 "use client";
 import { Link } from "next-view-transitions";
 import { ModeToggle } from "@/components/mode-toggle";
+import { authClient } from "@/lib/auth-client";
 
 export const NavbarRoutes = () => {
   return (
@@ -9,13 +10,17 @@ export const NavbarRoutes = () => {
         <Link href="/" className="hover:text-primary">
           Go home
         </Link>
-        <Link
-          href="/api/auth/logout"
+        <a
+          href="#"
           className="hover:text-primary"
-          prefetch={false}
+          onClick={async (e) => {
+            e.preventDefault();
+            await authClient.signOut();
+            window.location.href = "/";
+          }}
         >
           Logout
-        </Link>
+        </a>
         <ModeToggle />
       </div>
     </>

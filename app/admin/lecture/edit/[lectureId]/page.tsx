@@ -9,15 +9,12 @@ import LectureView from "@/components/admin/lecture/lecture-view";
 import DeleteDialog from "@/components/admin/delete-dialog";
 import { DeleteLecture } from "@/actions/admin/lecture/delete";
 import { LectureEditView } from "@/components/admin/lecture/edit-view";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { requireAdmin } from "@/lib/auth";
 
 const Page = async (props: { params: Promise<{ lectureId: string }> }) => {
   const params = await props.params;
-  const { getUser, getRoles } = getKindeServerSession();
-  const userKinde = await getUser();
-  const roles = await getRoles();
-  const isAdmin = roles?.some((role) => role.key === "admin") || false;
-  if (!isAdmin || !userKinde) {
+  const session = await requireAdmin();
+  if (!session) {
     return redirect("/");
   }
   const { lectureId } = params;

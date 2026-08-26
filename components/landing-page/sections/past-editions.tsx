@@ -3,11 +3,12 @@ import React from "react";
 import { Separator } from "@/components/ui/separator";
 import StatsCard from "@/components/landing-page/stats-card";
 import { Button } from "@/components/ui/button";
-import { LoginLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { authClient } from "@/lib/auth-client";
 import { Link } from "next-view-transitions";
 
 const PastEditionSection = () => {
-  const { isAuthenticated } = useKindeBrowserClient();
+  const { data: session } = authClient.useSession();
+  const isAuthenticated = !!session;
   return (
     <section
       id="past-editions"
@@ -83,7 +84,7 @@ const PastEditionSection = () => {
               asChild
               aria-label="Register for the event"
             >
-              <LoginLink>Join us today!</LoginLink>
+              <Link href="/login">Join us today!</Link>
             </Button>
           </>
         ) : (

@@ -1,25 +1,23 @@
 import { NextResponse } from "next/server";
-import * as jwt from "jsonwebtoken";
 import { prisma } from "@/lib/db";
 import { corsHeaders } from "../../options";
+import { auth } from "@/lib/auth";
 
 export async function GET(req: Request) {
-  const token = req.headers.get("Authorization")?.split(" ")[1] as string;
+  const session = await auth.api.getSession({ headers: req.headers });
 
-  if (!token) {
+  if (!session) {
     return NextResponse.json(
       { message: "Access denied." },
       { headers: corsHeaders, status: 401 }
     );
   }
 
-  let decoded = jwt.decode(token, { complete: true });
-
-  const decodedSub = decoded?.payload.sub as string;
+  const userId = session.user.id;
 
   const user = await prisma.user.findUnique({
     where: {
-      id: decodedSub,
+      id: userId,
     },
     include: {
       QrCode: true,
@@ -36,7 +34,7 @@ export async function GET(req: Request) {
     where: {
       scannedBy: {
         some: {
-          id: decodedSub,
+          id: userId,
         },
       },
     },

@@ -5,24 +5,26 @@ import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { WorkshopFormSchema } from "@/schemas/admin/workshop";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { authClient } from "@/lib/auth-client";
 
 import { List } from "lucide-react";
 import { Link } from "next-view-transitions";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Page = () => {
-  const { getAccessToken, isLoading } = useKindeBrowserClient();
+  const router = useRouter();
+  const { data: session, isPending } = authClient.useSession();
+  const isAdmin = session?.user.role === "ADMIN";
 
-  const token = getAccessToken();
-  const isAdmin = token?.roles?.some((role) => role.key === "admin");
+  React.useEffect(() => {
+    if (!isPending && !isAdmin) {
+      router.push("/dashboard");
+    }
+  }, [isPending, isAdmin, router]);
 
-  if (isLoading || token === null || isAdmin === undefined) {
-    <>Loading...</>;
-  }
-  if (isAdmin === false) {
-    redirect("/dashboard");
+  if (isPending || !isAdmin) {
+    return <>Loading...</>;
   }
 
   return (

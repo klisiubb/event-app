@@ -9,15 +9,12 @@ import { SponsorEditView } from "@/components/admin/sponsor/edit-view";
 import { UpdateSponsor } from "@/actions/admin/sponsor/update";
 import { DeleteSponsor } from "@/actions/admin/sponsor/delete";
 import SponsorView from "@/components/admin/sponsor/sponsor-view";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { requireAdmin } from "@/lib/auth";
 
 const Page = async (props: { params: Promise<{ sponsorId: string }> }) => {
   const params = await props.params;
-  const { getUser, getRoles } = getKindeServerSession();
-  const userKinde = await getUser();
-  const roles = await getRoles();
-  const isAdmin = roles?.some((role) => role.key === "admin") || false;
-  if (!isAdmin || !userKinde) {
+  const session = await requireAdmin();
+  if (!session) {
     return redirect("/");
   }
   const { sponsorId } = params;

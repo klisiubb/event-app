@@ -8,15 +8,12 @@ import { UpdateReward } from "@/actions/admin/reward/update";
 import { DeleteReward } from "@/actions/admin/reward/delete";
 import RewardView from "@/components/admin/reward/reward-view";
 import { RewardEditView } from "@/components/admin/reward/edit-view";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { requireAdmin } from "@/lib/auth";
 
 const Page = async (props: { params: Promise<{ rewardId: string }> }) => {
   const params = await props.params;
-  const { getUser, getRoles } = getKindeServerSession();
-  const userKinde = await getUser();
-  const roles = await getRoles();
-  const isAdmin = roles?.some((role) => role.key === "admin") || false;
-  if (!isAdmin || !userKinde) {
+  const session = await requireAdmin();
+  if (!session) {
     return redirect("/");
   }
   const { rewardId } = params;

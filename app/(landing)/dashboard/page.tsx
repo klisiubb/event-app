@@ -2,7 +2,7 @@ import StatsCard from "@/components/landing-page/stats-card";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { prisma } from "@/lib/db";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { getServerSession } from "@/lib/auth";
 import { MapPin } from "lucide-react";
 import { Link } from "next-view-transitions";
 import { notFound, redirect } from "next/navigation";
@@ -15,16 +15,15 @@ export const revalidate = 30;
 export const dynamic = "force-dynamic";
 
 const Page = async () => {
-  const { getUser } = getKindeServerSession();
-  const kindeUser = await getUser();
+  const session = await getServerSession();
 
-  if (!kindeUser) {
-    return redirect("/api/auth/login");
+  if (!session) {
+    return redirect("/login");
   }
 
   const user = await prisma.user.findUnique({
     where: {
-      id: kindeUser.id,
+      id: session.user.id,
     },
     include: {
       _count: {
@@ -82,13 +81,19 @@ const Page = async () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="relative z-10">
                       <div className="relative h-64 w-full">
-                        <Image
-                          src={user.workshopToAttend!.imageUrl!}
-                          alt={user.workshopToAttend!.topic}
-                          layout="fill"
-                          objectFit="cover"
-                          className="border-b-4 border-primary/20 group-hover:border-primary/40 transition-colors duration-300"
-                        />
+                        {user.workshopToAttend!.imageUrl ? (
+                          <Image
+                            src={user.workshopToAttend!.imageUrl}
+                            alt={user.workshopToAttend!.topic}
+                            layout="fill"
+                            objectFit="cover"
+                            className="border-b-4 border-primary/20 group-hover:border-primary/40 transition-colors duration-300"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center bg-primary/10 text-6xl">
+                            🛠
+                          </div>
+                        )}
                       </div>
                       <CardHeader>
                         <CardTitle className="text-2xl text-foreground/80 group-hover:text-primary transition-colors duration-300 tracking-wide">

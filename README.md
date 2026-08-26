@@ -65,12 +65,10 @@ Some screenshots of website, mostly of hidden admin panel. Video showing every f
 To run this project, you will need to add the following environment variables to your `.env` file:
 
 - `NEXT_PUBLIC_EVENT_DATE`: Event start date for countdown.
-- `KINDE_CLIENT_ID`: Your Kinde application's client ID used for authentication.
-- `KINDE_CLIENT_SECRET`: Your Kinde application's client secret used for authentication.
-- `KINDE_ISSUER_URL`: The URL for your Kinde issuer, which handles the OpenID Connect (OIDC) authorization flow.
-- `KINDE_SITE_URL`: The base URL of your application (usually `http://localhost:3000` for local development).
-- `KINDE_POST_LOGOUT_REDIRECT_URL`: The URL to redirect users to after logging out of the application. Should end in `/success` to grab user data.
-- `KINDE_POST_LOGIN_REDIRECT_URL`: The URL to redirect users to after a successful login.
+- `BETTER_AUTH_SECRET`: Secret used by Better Auth to sign sessions (generate with `openssl rand -base64 32`).
+- `BETTER_AUTH_URL`: The base URL of your application (usually `http://localhost:3000` for local development).
+- `GOOGLE_CLIENT_ID`: Google OAuth client ID (redirect URI: `$BETTER_AUTH_URL/api/auth/callback/google`).
+- `GOOGLE_CLIENT_SECRET`: Google OAuth client secret.
 - `DATABASE_URL`: The URL to connect to your PostgreSQL database (contains credentials, host, and port information).
 - `UPLOADTHING_SECRET`: Your secret key for using the UploadThing API.
 - `UPLOADTHING_APP_ID`: Your application ID for using the UploadThing API.

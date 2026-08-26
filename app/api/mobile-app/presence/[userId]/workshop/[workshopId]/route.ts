@@ -1,29 +1,26 @@
 import { NextResponse } from "next/server";
-import * as jwt from "jsonwebtoken";
 import { prisma } from "@/lib/db";
 import { Role } from "@prisma/client";
 import { corsHeaders } from "@/app/api/mobile-app/options";
+import { auth } from "@/lib/auth";
 
 export async function GET(req: Request, props: { params: Promise<{ userId: string }> }) {
   const params = await props.params;
   const { userId } = params;
 
-  const token = req.headers.get("Authorization")?.split(" ")[1] as string;
+  const session = await auth.api.getSession({ headers: req.headers });
 
-  if (!token) {
+  if (!session) {
     return NextResponse.json(
       { message: "Access denied." },
       { headers: corsHeaders, status: 401 }
     );
   }
 
-  let decoded = jwt.decode(token, { complete: true });
-  const decodedSub = decoded?.payload.sub as string;
-
   //Scanner volunteer
   const volunteer = await prisma.user.findUnique({
     where: {
-      id: decodedSub,
+      id: session.user.id,
     },
   });
 

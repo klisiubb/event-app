@@ -12,12 +12,18 @@ export const RewardCard = ({ reward }: { reward: Reward }) => {
       >
         <CardContent className="p-0 h-full flex flex-col">
           <div className="relative aspect-video overflow-hidden">
-            <Image
-              src={reward.imageUrl!}
-              alt={reward.name}
-              fill
-              className="object-cover transition-transform duration-500 ease-in-out hover:scale-110"
-            />
+            {reward.imageUrl ? (
+              <Image
+                src={reward.imageUrl}
+                alt={reward.name}
+                fill
+                className="object-cover transition-transform duration-500 ease-in-out hover:scale-110"
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center bg-primary/20 text-5xl">
+                🎁
+              </div>
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
           </div>
           <div className="bg-gradient-to-br from-primary/40 to-primary/70 flex-1 flex items-center justify-center text-center p-4">

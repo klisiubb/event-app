@@ -1,25 +1,23 @@
 import { NextResponse } from "next/server";
-import * as jwt from "jsonwebtoken";
 import { prisma } from "@/lib/db";
 import { corsHeaders } from "../../options";
+import { auth } from "@/lib/auth";
 import { Role } from "@prisma/client";
 
 export async function GET(req: Request, props: { params: Promise<{ qrCodeId: string }> }) {
   const params = await props.params;
   const { qrCodeId } = params;
 
-  const token = req.headers.get("Authorization")?.split(" ")[1] as string;
+  const session = await auth.api.getSession({ headers: req.headers });
 
-  if (!token) {
+  if (!session) {
     return NextResponse.json(
       { success: false, message: "Access denied." },
       { headers: corsHeaders, status: 401 }
     );
   }
 
-  let decoded = jwt.decode(token, { complete: true });
-
-  const userId = decoded?.payload.sub as string;
+  const userId = session.user.id;
 
   const user = await prisma.user.findUnique({
     where: {

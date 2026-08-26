@@ -3,15 +3,14 @@ import React from "react";
 import Agenda from "@/components/landing-page/agenda";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { getServerSession } from "@/lib/auth";
 import { Link } from "next-view-transitions";
 
 export const revalidate = 120;
 export const dynamic = "force-dynamic";
 
 const Page = async () => {
-  const { isAuthenticated } = getKindeServerSession();
+  const session = await getServerSession();
 
   const workshops = await prisma.workshop.findMany({
     where: {
@@ -65,7 +64,7 @@ const Page = async () => {
           </div>
         </div>
       </div>
-      {(await isAuthenticated()) ? (
+      {session ? (
         <>
           <div className="space-y-8">
             <div className="flex flex-col items-center max-w-screen-xl pb-16 mx-auto text-center  gap-8">
@@ -104,7 +103,7 @@ const Page = async () => {
               </p>
 
               <Button variant="shine" size="lg" asChild className="mx-96">
-                <LoginLink>Join us today!</LoginLink>
+                <Link href="/login">Join us today!</Link>
               </Button>
             </div>
           </div>

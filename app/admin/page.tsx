@@ -5,15 +5,12 @@ import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { TypingAnimation } from "@/components/ui/typing-animation";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { requireAdmin } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 const Page = async () => {
-  const { getUser, getRoles } = getKindeServerSession();
-  const user = await getUser();
-  const roles = await getRoles();
-  const isAdmin = roles?.some((role) => role.key === "admin") || false;
-  if (!isAdmin || !user) {
+  const session = await requireAdmin();
+  if (!session) {
     return redirect("/");
   }
   return (
@@ -29,7 +26,7 @@ const Page = async () => {
         )}
       />
       <h1 className="text-4xl md:text-6xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive mb-8">
-        Hello, {user.given_name}!
+        Hello, {session.user.firstName}!
       </h1>
 
       <TypingAnimation
